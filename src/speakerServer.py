@@ -32,6 +32,5 @@ class Organization:
 		this.meetings = {}
 
 @route('/')
-def taler_add()
-
-run(host='localhost', port=8080, debug=True)
+def taler_add():
+	return "Hello world"
