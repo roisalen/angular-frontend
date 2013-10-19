@@ -1,3 +1,5 @@
+var Speaker = require("speakerModel");
+
 // Retrieve the object from storage
 var talere = [];
 //window.onbeforeunload = storeTalere;
