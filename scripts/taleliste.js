@@ -1,6 +1,6 @@
 // Retrieve the object from storage
-var todos = [];
-window.onbeforeunload = storeTodos;
+var talere = [];
+//window.onbeforeunload = storeTalere;
 var id = 0;
 var i = -1;
 
@@ -53,59 +53,60 @@ representanter[202] = "Norsk Studentorganisasjon";
 
  
 
-if (localStorage.getItem('todos')) 
-	todos = JSON.parse(localStorage.getItem('todos'));
+if (localStorage.getItem('talere')) 
+	talere = JSON.parse(localStorage.getItem('talere'));
 
-function storeTodos() {
-	localStorage.setItem('todos', JSON.stringify(todos))
+function storeTalere() {
+	localStorage.setItem('talere', JSON.stringify(talere));
+	console.log("talere stored")
 }
 
 function getId() {
 	return id++;
 }
 
-function Todo(s) {
+function Taler(s) {
 	this.streng = s;
 	this.replikker = [];	
 }
 
 function addReplikk(replikk) {
-	if (todos.length > 0) {
-		todos[0].replikker.splice(todos[0].replikker.length, 0, replikk);
-		renderTodos();
+	if (talere.length > 0) {
+		talere[0].replikker.splice(talere[0].replikker.length, 0, replikk);
+		renderTalere();
 	}
 }
 
-function addTodo(todo) {
-	if(todo.streng[0] == "r") {
-		todo.streng = todo.streng.slice(1, todo.streng.length);
-		addReplikk(todo);
+function addTaler(taler) {
+	if(taler.streng[0] == "r") {
+		taler.streng = taler.streng.slice(1, taler.streng.length);
+		addReplikk(taler);
 		return;
 	}
 	if  (i != -1) {
-		todos.splice(i, 0, todo);
+		talere.splice(i, 0, taler);
 		i = -1;
 	}
 	else {
-		todos.push(todo);
+		talere.push(taler);
 	}
 	
-	renderTodos();
+	renderTalere();
 }
 
-function removeFromTodo(index) {
+function removeFromTaler(index) {
 	if (index < 0) 
-		todos[0].splice((index*-1)+1, 1);
+		talere[0].splice((index*-1)+1, 1);
 	else
-		todos.splice(index, 1);
-	renderTodos();
+		talere.splice(index, 1);
+	rendertalere();
 }
 
-function changeTodo(index) {
+function changeTaler(index) {
 	if (index < 0)
-	var t = todos[index];
+	var t = talere[index];
 	$("input#itemName").val(t.streng);
-	removeFromTodo(index);
+	removeFromtaler(index);
 	i = index;
 }
 
@@ -120,13 +121,13 @@ function textRepresentant(rep) {
 }
 
 function renderTaler(t, id) {
-	var item = $(document.createElement("li")).addClass("todoitem");
+	var item = $(document.createElement("li")).addClass("taleritem");
 	var slettKnapp = $(document.createElement("a")).addClass("slettKnapp");
 	var endreKnapp = $(document.createElement("a")).addClass("endreKnapp");
 	var replikker = "";
 
-	slettKnapp.attr("onclick","removeFromTodo("+id+")");
-	endreKnapp.attr("onclick","changeTodo("+id+")");
+	slettKnapp.attr("onclick","removeFromTaler("+id+")");
+	endreKnapp.attr("onclick","changeTaler("+id+")");
 
 	console.log(t);
 	slettKnapp.text("Slett");
@@ -154,22 +155,24 @@ function renderTaler(t, id) {
 }
 
 
-function renderTodos() {
+function renderTalere() {
 	var items = $("ul.item-list");
 	items.html("");
-	var slettKnappStart = "<a class='slettKnapp' onclick='removeFromTodo(";
+	var slettKnappStart = "<a class='slettKnapp' onclick='removeFromTaler(";
 	var slettKnappSlutt = ")'>Slett</a>";
-	var endreKnappStart = "<a class='endreKnapp' onclick='changeTodo(";
+	var endreKnappStart = "<a class='endreKnapp' onclick='changeTaler(";
 	var endreKnappSlutt = ")'>Endre</a>";
 	
-	if (todos.length === 0) {
-		$("ul.item-list").append("<img src='aadne.png' width='400px'/> <br />SI NOE DA");
+	console.log(talere.length);
+	if (talere.length === 0) {
+		$("ul.item-list").append("<img src='./img/aadne.png' width='400px'/> <br />SI NOE DA");
 	}
-	for(var t in todos){
-		items.append(renderTaler(todos[t], t));
+	for(var t in talere){
+		items.append(renderTaler(talere[t], t));
 	};
 
-	storeTodos();
+
+	storeTalere();
 
 }
 
@@ -178,12 +181,13 @@ function renderTodos() {
 
 $("#addItemForm").on("submit", function (event) {
 	event.preventDefault();
+	console.log("got event");
 	var text = $("input#itemName").val();
 	$("input#itemName").val("");
 	if (text.length > 0) { 
-		var todo = new Todo(text);
-		addTodo(todo);
+		var taler = new Taler(text);
+		addTaler(taler);
 	};
 });
 
-renderTodos();
+renderTalere();

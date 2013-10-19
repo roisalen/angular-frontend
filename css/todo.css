@@ -3,7 +3,7 @@
 
 
 @media all and (max-width: 3046px) {
-	#todoApp {
+	#taleApp {
 		width: 56.25%;
 		font-size: 2rem;
 	}
@@ -14,7 +14,7 @@
 }
 
 @media all and (max-width: 1046px) {
-	#todoApp {
+	#taleApp {
 		font-size: 1.5rem;
 	}
 	h1.app-title {
@@ -23,7 +23,7 @@
 }
 
 @media all and (max-width: 726px) {
-	#todoApp {
+	#taleApp {
 		font-size: 1.3rem;
 	}
 	h1.app-title {
@@ -31,7 +31,7 @@
 	}
 }
 @media all and (max-width: 480px) {
-	#todoApp {
+	#taleApp {
 		width: 270px;
 		font-size: 1em;
 	}
@@ -45,7 +45,7 @@ body {
 }
 
 
-#todoApp {
+#taleApp {
 	margin: auto;
 	background-color: white;
 }
