@@ -1,0 +1,12 @@
+{
+  "name": "RoISalen",
+  "version": "0.1.0",
+  "author": "Torkil <torkilv@gmail.com>",
+  "description": "app for keeping large meetings in order",
+  "license": "BSD",
+  "dependencies": {
+  	"require"	: "*",
+  	"backbone"	: "*"
+  } 
+
+}
