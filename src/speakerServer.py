@@ -1,6 +1,7 @@
 import os
 from bottle import route, run
 
+
 class Speaker:
 	def __init__(name, party, sex):
 		this.name = name
