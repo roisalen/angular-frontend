@@ -1,6 +1,6 @@
 
 
-var speakers = [];
+var speakers = {};
 
 function getSpeakers() {
 	if (speakers.size === 0) {
@@ -9,13 +9,10 @@ function getSpeakers() {
 	return speakers;
 }
 
-function add(speaker, index) {
-	speakers.splice(index, 0, speaker);
+function add(speaker, key) {
+	speakers[key] = speaker;
 } 
 
-function removeSpeakerAt(index) {
-	speakers.splice(index, 1);
-}
 
 
 function storeSpeakers() {
