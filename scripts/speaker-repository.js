@@ -21,6 +21,7 @@ function SpeakerRepository() {
 
 	function add(speaker) {
 		_speakersList[speaker.number] = speaker;
+		storeSpeakers();
 	}	 
 
 	function storeSpeakers() {
