@@ -7,9 +7,9 @@
 
 
 
-function speakerlistView(speakerListRoot) {
+function SpeakerQueueView(rootHTMLelement) {
 
-    this.lista = speakerlistView;
+    this.rootHTMLelement = rootHTMLelement;
     this.countSpeakers = 0;
     this.suffix = ;
 
@@ -24,11 +24,11 @@ function speakerlistView(speakerListRoot) {
                          "</span> <span class=\"name\"" + speaker.name + \
                          "</span>" + "<span onclick=\"undrawSpeaker(" + \
                          countSpeakers + ")\">X</span>";
-        document.getElementById("lista").appendChild( temp );
+        this.rootHTMLelement.appendChild( temp );
     }
 
     function undrawSpeaker( id ) {
-        this.lista.removeChild( document.getElementById( id ) );
+        this.rootHTMLelement.removeChild( document.getElementById( id ) );
     }
 
 }
