@@ -14,13 +14,13 @@ function addSpeaker() {
 		var sr = new SpeakerRepository();
 		sr.add(speaker);
 		
-		//update speakerlist below
-		/*var items = $("ul.item-list");
+		//show speakerlist below
+		var items = $("ul.item-list");
 		items.html("");
 		var speakers = SpeakerRepository.getSpeakers();
 		for(var s in speakers){
-			items.append(showSpeaker(talere[t], t));
-		};*/
+			items.append();
+		};
 	};
 	
 	console.log(sr.getSpeakers());

@@ -28,7 +28,7 @@ function SpeakerRepository() {
 
 	function storeSpeakers() {
 		localStorage.setItem('speakers', JSON.stringify(_speakersList));
-		console.log("speakers stored")
+		console.log("speakers stored");
 	}
 	
 	function size() { 
