@@ -1,17 +1,18 @@
 
 
-var speakers = {};
+var _speakersList = {};
 
 function getSpeakers() {
-	if (speakers.size === 0) {
-		speakers = JSON.parse(localStorage.getItem('speakers'));
+	if (_speakersList.size === 0) {
+		_speakersList = JSON.parse(localStorage.getItem('speakers'));
 	}
-	return speakers;
+	return _speakersList;
 }
 
 function add(speaker) {
-	speakers[speaker.number] = speaker;
+	_speakersList[speaker.number] = speaker;
 } 
+
 
 
 
@@ -20,6 +21,9 @@ function storeSpeakers() {
 	console.log("speakers stored")
 }
 
-exports.getSpeakers = getSpeakers;
-exports.add = add
-exports.storeSpeakers =storeSpeakers;
+var speakerRepository = {
+	getSpeakers: getSpeakers,
+	storeSpeakers: storeSpeakers,
+	add: add,
+	size: function() { return _speakersList.length;}
+}
