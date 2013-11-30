@@ -1,3 +1,11 @@
+// this renders the speakerlist queue. 
+// it needs a reference to a root <ul> or <ol> element to work.
+//
+// typically, you'd initialize it like this:
+//
+// var myQueue = new speakerlistView( document.getElementById("myList") )
+
+
 
 function speakerlistView(speakerListRoot) {
 
