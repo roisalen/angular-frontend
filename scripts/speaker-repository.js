@@ -16,7 +16,7 @@ function SpeakerRepository() {
 		if (size() === 0) {
 			_speakersList = JSON.parse(localStorage.getItem('speakers'));
 		}
-		return _speakersList;
+		return $.extend({},_speakersList);
 	}
 
 	function add(speaker) {
