@@ -1,7 +1,15 @@
+// this renders the speakerlist queue. 
+// it needs a reference to a root <ul> or <ol> element to work.
+//
+// typically, you'd initialize it like this:
+//
+// var myQueue = new speakerlistView( document.getElementById("myList") )
 
-function speakerlistView(speakerListRoot) {
 
-    this.lista = speakerlistView;
+
+function SpeakerQueueView(rootHTMLelement) {
+
+    this.rootHTMLelement = rootHTMLelement;
     this.countSpeakers = 0;
     this.suffix = ;
 
@@ -16,11 +24,11 @@ function speakerlistView(speakerListRoot) {
                          "</span> <span class=\"name\"" + speaker.name + \
                          "</span>" + "<span onclick=\"undrawSpeaker(" + \
                          countSpeakers + ")\">X</span>";
-        document.getElementById("lista").appendChild( temp );
+        this.rootHTMLelement.appendChild( temp );
     }
 
     function undrawSpeaker( id ) {
-        this.lista.removeChild( document.getElementById( id ) );
+        this.rootHTMLelement.removeChild( document.getElementById( id ) );
     }
 
 }
