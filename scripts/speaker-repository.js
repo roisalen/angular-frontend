@@ -9,6 +9,7 @@ function SpeakerRepository() {
 	this.getSpeakers = getSpeakers;
 	this.size = size;
 	this.storeSpeakers = storeSpeakers;
+    this.getSpeakerByNum = getSpeakerByNum;
 
 
 
@@ -31,4 +32,14 @@ function SpeakerRepository() {
 	function size() { 
 		return Object.keys(_speakersList).length;
 	}
+
+    function getSpeakerByNum(number) {
+        try {
+            return _speakersList[ number ];
+        } finally {
+            console.log("Error: Speaker number " + number + " does not exist.");
+            return null;
+        }
+    }
+
 }
