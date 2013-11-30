@@ -25,5 +25,5 @@ var speakerRepository = {
 	getSpeakers: getSpeakers,
 	storeSpeakers: storeSpeakers,
 	add: add,
-	size: function() { return _speakersList.length;}
+	size: function() { return Object.keys(_speakersList).length}
 }
