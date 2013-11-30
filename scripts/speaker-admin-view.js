@@ -1,7 +1,6 @@
 //$("#speakerName").on("submit", function (event) { //old with jquery didnt get it to work
 function addSpeaker() {
-	event.preventDefault();
-	console.log("got event");
+	event.preventDefault(); //to stop autorefresh
 	
 	var no = $("input#speakerNo").val();
 	$("input#speakerNo").val("");
@@ -9,24 +8,29 @@ function addSpeaker() {
 	var name = $("input#speakerName").val();
 	$("input#speakerName").val("");
 	
-	if (name.length > 0 && isNumber(no)) { 
-		var speaker = new Speaker(no,name);
+	if (name.length > 0 && isNumber(no)) {
+		var speaker = new Speaker(name,no);
 		var sr = new SpeakerRepository();
 		sr.add(speaker);
 		
-		//show speakerlist below
-		var items = $("ul.item-list");
-		items.html("");
-		var speakers = SpeakerRepository.getSpeakers();
-		for(var s in speakers){
-			items.append();
-		};
-	};
-	
-	console.log(sr.getSpeakers());
-	console.log(sr.size());
-};
+		updateSpeakerList();
+	}
+}
 
 function isNumber(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function updateSpeakerList() {
+		var sr = new SpeakerRepository();
+		var items = $("#speakerList");
+		console.log(items);
+		items.html("");
+		var speakers = sr.getSpeakers();
+		for(var s in sr.getSpeakers()) {
+			var template = "<li>{{number}}. {{name}}</li>";
+			var output = Mustache.render(template, sr.getSpeakers()[s]);
+			items.append(output);
+			//console.log(output);
+		}
 }
