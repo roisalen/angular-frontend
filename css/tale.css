@@ -1,51 +1,51 @@
-
-
-
-
 @media all and (max-width: 3046px) {
-	#taleApp {
+	#speakerApp {
 		width: 56.25%;
 		font-size: 2rem;
 	}
-
+	
 	h1.app-title {
 		font-size: 4rem;
 	}
 }
 
 @media all and (max-width: 1046px) {
-	#taleApp {
+	#speakerApp {
 		font-size: 1.5rem;
 	}
+	
 	h1.app-title {
 		font-size: 3.75rem;
 	}
 }
 
 @media all and (max-width: 726px) {
-	#taleApp {
+	#speakerApp {
 		font-size: 1.3rem;
 	}
+	
 	h1.app-title {
 		font-size: 3.7rem;
 	}
 }
+
 @media all and (max-width: 480px) {
-	#taleApp {
+	#speakerApp {
 		width: 270px;
 		font-size: 1em;
 	}
+	
 	h1.app-title {
 		font-size: 3.5rem;
 	}
 }
+
 body {
 	background: url('../img/stripe.png');
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
-
-#taleApp {
+#speakerApp {
 	margin: auto;
 	background-color: white;
 }
@@ -60,8 +60,8 @@ input.input-text {
 	margin: 10px;
 	font-size: 1.5em;
 	box-sizing: border-box;
-
 }
+
 ul.item-list {
 	text-align: left;
 	list-style: none;

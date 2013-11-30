@@ -9,8 +9,8 @@ function getSpeakers() {
 	return speakers;
 }
 
-function add(speaker, key) {
-	speakers[key] = speaker;
+function add(speaker) {
+	speakers[speaker.number] = speaker;
 } 
 
 
@@ -19,3 +19,7 @@ function storeSpeakers() {
 	localStorage.setItem('speakers', JSON.stringify(speakers));
 	console.log("speakers stored")
 }
+
+exports.getSpeakers = getSpeakers;
+exports.add = add
+exports.storeSpeakers =storeSpeakers;
