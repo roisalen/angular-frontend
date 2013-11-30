@@ -14,7 +14,7 @@ function addSpeaker() {
 		var sr = new SpeakerRepository();
 		sr.add(speaker);
 		
-		//update speakerlist below
+		//show speakerlist below
 		/*var items = $("ul.item-list");
 		items.html("");
 		var speakers = SpeakerRepository.getSpeakers();
