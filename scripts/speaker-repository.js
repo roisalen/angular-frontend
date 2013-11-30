@@ -10,6 +10,7 @@ function SpeakerRepository() {
 	this.size = size;
 	this.storeSpeakers = storeSpeakers;
     this.getSpeakerByNum = getSpeakerByNum;
+    this.removeSpeakerByNum = removeSpeakerByNum;
 
 
 
@@ -26,7 +27,7 @@ function SpeakerRepository() {
 	}	 
 
 	function storeSpeakers() {
-		localStorage.setItem('speakers', JSON.stringify(speakers));
+		localStorage.setItem('speakers', JSON.stringify(_speakersList));
 		console.log("speakers stored")
 	}
 	
@@ -38,8 +39,14 @@ function SpeakerRepository() {
         try {
             return _speakersList[ number ];
         } finally {
-            console.log("Error: Speaker number " + number + " does not exist.");
+            console.log("Error: Tried to get speaker number " + number + ", but it does not exist.");
             return null;
+        }
+    }
+
+    function removeSpeakerByNum(number) {
+        if(!(delete _speakersList[ number ])) {
+        	console.log("Error: Tried to remove speaker number " + number +", but it does not exist.");
         }
     }
 
