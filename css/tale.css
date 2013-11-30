@@ -1,5 +1,5 @@
 @media all and (max-width: 3046px) {
-	#taleApp {
+	#speakerApp {
 		width: 56.25%;
 		font-size: 2rem;
 	}
@@ -10,7 +10,7 @@
 }
 
 @media all and (max-width: 1046px) {
-	#taleApp {
+	#speakerApp {
 		font-size: 1.5rem;
 	}
 	
@@ -20,7 +20,7 @@
 }
 
 @media all and (max-width: 726px) {
-	#taleApp {
+	#speakerApp {
 		font-size: 1.3rem;
 	}
 	
@@ -30,7 +30,7 @@
 }
 
 @media all and (max-width: 480px) {
-	#taleApp {
+	#speakerApp {
 		width: 270px;
 		font-size: 1em;
 	}
@@ -45,7 +45,7 @@ body {
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
-#taleApp {
+#speakerApp {
 	margin: auto;
 	background-color: white;
 }
