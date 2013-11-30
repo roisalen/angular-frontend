@@ -9,8 +9,8 @@ function getSpeakers() {
 	return speakers;
 }
 
-function add(speaker, key) {
-	speakers[key] = speaker;
+function add(speaker) {
+	speakers[speaker.number] = speaker;
 } 
 
 
