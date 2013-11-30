@@ -15,12 +15,12 @@ function addSpeaker() {
 		sr.add(speaker);
 		
 		//show speakerlist below
-		/*var items = $("ul.item-list");
+		var items = $("ul.item-list");
 		items.html("");
 		var speakers = SpeakerRepository.getSpeakers();
 		for(var s in speakers){
-			items.append(showSpeaker(talere[t], t));
-		};*/
+			items.append();
+		};
 	};
 	
 	console.log(sr.getSpeakers());
