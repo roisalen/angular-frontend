@@ -9,6 +9,7 @@ function SpeakerQueue() {
 
     function add(who) {
         this.list.push(who);
+        console.log("Queue is now: "+JSON.stringify(this.list));
     }
 
     function next() {

@@ -4,13 +4,14 @@ var _speakersList = {};
 
 
 
-function SpeakerRepository() {
+function SpeakerRepository(view) {
 	this.add = add;
 	this.getSpeakers = getSpeakers;
 	this.size = size;
 	this.storeSpeakers = storeSpeakers;
     this.getSpeakerByNum = getSpeakerByNum;
     this.removeSpeakerByNum = removeSpeakerByNum;
+    this.view = view;
 
 
 
@@ -36,9 +37,11 @@ function SpeakerRepository() {
 	}
 
     function getSpeakerByNum(number) {
-        try {
-            return _speakersList[ number ];
-        } finally {
+    	console.log("Getting speaker number "+number + " from "+JSON.stringify(_speakersList));
+        if (number in _speakersList) {
+        	console.log("Found: "+JSON.stringify(_speakersList[number]));
+			return _speakersList[ number ];
+        } else {
             console.log("Error: Tried to get speaker number " + number + ", but it does not exist.");
             return null;
         }

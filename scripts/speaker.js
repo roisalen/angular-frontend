@@ -1,6 +1,8 @@
-function Speaker(name, number) {
+function Speaker(name, number, sex, group) {
 	this.name = name;
 	this.number = number;
+	this.sex = sex;
+	this.group = group;
 	this.replies = new SpeakerQueue();
 
 	function addReply(speaker) {
