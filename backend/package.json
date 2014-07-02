@@ -1,0 +1,18 @@
+{
+  "name": "roisalen-server",
+  "version": "0.0.1",
+  "description": "Rest web-server for speakerlist and administration",
+  "main": "server.js",
+  "dependencies": {
+    "restify": "^2.7.0",
+    "mongojs": "^0.12.1",
+    "mongodb": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Torkil Vederhus",
+  "license": "ISC"
+}
