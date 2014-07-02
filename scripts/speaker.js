@@ -24,4 +24,6 @@ module.exports = function(name, number, sex, group) {
 	function hasReply() {
 		return this.replies.size() > 0;
 	}
-}
+
+	return this;
+};

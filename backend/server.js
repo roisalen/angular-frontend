@@ -46,7 +46,7 @@ function getAllSpeakers(req, res, next) {
 }
 
 function getSpeaker(req, res, next) {
-	req.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Origin", "*");
 	speakers.findOne({number: req.params.speakerId}, function(err, success) {
 		console.log("Response success "+success);
 		console.log("Response error "+err);
@@ -59,7 +59,10 @@ function getSpeaker(req, res, next) {
 }
 
 function createNewSpeaker(req, res, next) {
-	var speaker = new Speaker(req.params.name, req.params.number, req.params.sex, req.params.group);
+	console.log("in new speaker");
+	console.log(req.body);
+	var speakerJson = JSON.parse(req.body);
+	var speaker = new Speaker(speakerJson.name, speakerJson.number, speakerJson.sex, speakerJson.group);
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.save(speaker, function(err, success) {
 		console.log("Response success "+success);
