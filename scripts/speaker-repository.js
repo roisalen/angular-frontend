@@ -47,5 +47,4 @@ function SpeakerRepository(view) {
 		}
 		storeSpeakers();
 	}
-
 }
