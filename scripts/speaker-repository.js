@@ -1,19 +1,13 @@
-
-
 var _speakersList = {};
-
-
 
 function SpeakerRepository(view) {
 	this.add = add;
 	this.getSpeakers = getSpeakers;
 	this.size = size;
 	this.storeSpeakers = storeSpeakers;
-    this.getSpeakerByNum = getSpeakerByNum;
-    this.removeSpeakerByNum = removeSpeakerByNum;
-    this.view = view;
-
-
+	this.getSpeakerByNum = getSpeakerByNum;
+	this.removeSpeakerByNum = removeSpeakerByNum;
+	this.view = view;
 
 	function getSpeakers() {
 		if (size() === 0) {
@@ -33,25 +27,26 @@ function SpeakerRepository(view) {
 		console.log("speakers stored");
 	}
 	
-	function size() { 
+	function size() {
 		return Object.keys(_speakersList).length;
 	}
 
-    function getSpeakerByNum(number) {
-    	console.log("Getting speaker number "+number + " from "+JSON.stringify(_speakersList));
-        if (number in _speakersList) {
-        	console.log("Found: "+JSON.stringify(_speakersList[number]));
+	function getSpeakerByNum(number) {
+		console.log("Getting speaker number "+number + " from "+JSON.stringify(_speakersList));
+		if (number in _speakersList) {
+			console.log("Found: "+JSON.stringify(_speakersList[number]));
 			return _speakersList[ number ];
-        } else {
-            console.log("Error: Tried to get speaker number " + number + ", but it does not exist.");
-            return null;
-        }
-    }
+		} else {
+			console.log("Error: Tried to get speaker number " + number + ", but it does not exist.");
+			return null;
+		}
+	}
 
-    function removeSpeakerByNum(number) {
-        if(!(delete _speakersList[ number ])) {
-        	console.log("Error: Tried to remove speaker number " + number +", but it does not exist.");
-        }
-    }
+	function removeSpeakerByNum(number) {
+		if(!(delete _speakersList[ number ])) {
+			console.log("Error: Tried to remove speaker number " + number +", but it does not exist.");
+		}
+		storeSpeakers();
+	}
 
 }
