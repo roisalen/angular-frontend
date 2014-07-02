@@ -26,7 +26,7 @@ function SpeakerRepository(view) {
 		_speakersList[speaker.number] = speaker;
 		storeSpeakers();
 
-	}	 
+	}
 
 	function storeSpeakers() {
 		localStorage.setItem('speakers', JSON.stringify(_speakersList));
