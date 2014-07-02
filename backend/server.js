@@ -20,7 +20,7 @@ var connection_string = '127.0.0.1:27017/myapp';
 var db = mongojs(connection_string, ['myapp']);
 var speakers = db.collection("speakers");
 
-var PATH = "/speakers"
+var PATH = "/speakers";
 
 server.get({path: "/speakers", version: "0.0.1"}, getAllSpeakers);
 server.get({path: "/speakers/:speakerId", version: "0.0.1"}, getSpeaker);
@@ -42,7 +42,7 @@ function getAllSpeakers(req, res, next) {
 			return next(err);
 		}
 
-	})
+	});
 }
 
 function getSpeaker(req, res, next) {
@@ -55,7 +55,7 @@ function getSpeaker(req, res, next) {
 			return next();
 		}
 		return next(err);
-	})
+	});
 }
 
 function createNewSpeaker(req, res, next) {
@@ -77,7 +77,7 @@ function createNewSpeaker(req, res, next) {
 
 
 
-} 
+}
 
 function getSpeakerList() {
 
