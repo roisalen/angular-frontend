@@ -3,12 +3,14 @@ function SpeakerQueue() {
 
     // this is just a simple wrapping around an array
 
-    this.list = new Array();
+    this.list = [];
     this.next = next;
     this.add = add;
     console.log("in queue");
 
-    function add(who) {
+    function add(who, num) {
+        // put speaker into list at index num
+        if(typeof(num) === 'number') this.list.splice(num, 0, who);
         this.list.push(who);
         console.log("Queue is now: "+JSON.stringify(this.list));
     }

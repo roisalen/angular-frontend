@@ -11,7 +11,7 @@ module.exports = function(name, number, sex, group) {
 
 	function addReply(speaker) {
 		this.replies.add(speaker);
-	}	
+	}
 
 	function removeReply(speaker) {
 		this.replies.remove(speaker);
