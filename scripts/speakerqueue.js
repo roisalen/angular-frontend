@@ -6,6 +6,7 @@ function SpeakerQueue() {
     this.list = new Array();
     this.next = next;
     this.add = add;
+    console.log("in queue");
 
     function add(who) {
         this.list.push(who);
@@ -30,3 +31,5 @@ function SpeakerQueue() {
     }
 
 }
+
+module.exports = SpeakerQueue;
