@@ -8,6 +8,13 @@ function SpeakerQueue() {
     this.add = add;
     console.log("in queue");
 
+    function add(who, num) {
+        // new speaker has a saksopplysning:
+        if(typeof num !== undefined && num === 0) this.list.unshift(who);
+        this.list.push(who);
+        console.log("Queue is now: "+JSON.stringify(this.list));
+    }
+
     function add(who) {
         this.list.push(who);
         console.log("Queue is now: "+JSON.stringify(this.list));
