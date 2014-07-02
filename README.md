@@ -11,4 +11,4 @@ Simple apps for managing large meetings
 5. Todo: Open index.html
 
 ## ARCHITECTURE: 
-![architecture][roisalenarkitektur.jpg]
+![architecture](https://raw.githubusercontent.com/torkilv/roisalen/master/roisalenarkitektur.jpg)
