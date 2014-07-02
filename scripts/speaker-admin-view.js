@@ -22,15 +22,15 @@ function isNumber(n) {
 }
 
 function updateSpeakerList() {
-		var sr = new SpeakerRepository();
-		var items = $("#speakerList");
-		console.log(items);
-		items.html("");
-		var speakers = sr.getSpeakers();
-		for(var s in sr.getSpeakers()) {
-			var template = "<li>{{number}}. {{name}}</li>";
-			var output = Mustache.render(template, sr.getSpeakers()[s]);
-			items.append(output);
-			//console.log(output);
-		}
+	var sr = new SpeakerRepository();
+	var items = $("#speakerList");
+	console.log(items);
+	items.html("");
+	var speakers = sr.getSpeakers();
+	for(var s in sr.getSpeakers()) {
+		var template = "<li>{{number}}. {{name}}</li>";
+		var output = Mustache.render(template, sr.getSpeakers()[s]);
+		items.append(output);
+		//console.log(output);
+	}
 }
