@@ -1,0 +1,30 @@
+input.speaker-input {
+	width: 95%;
+	margin: 10px;
+	font-size: 1.5em;
+	box-sizing: border-box;
+}
+
+ul.speaker-list {
+	text-align: left;
+	list-style: none;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	padding-right: 10px;
+}
+
+li.speaker {
+	margin-bottom: 10px;
+}
+
+li:first-child {
+	font-size: 1.1em;
+	font-color: "#3F5A17";
+}
+
+a.endreKnapp, a.slettKnapp {
+	float:right;
+	text-decoration: underline;
+	margin-right: 5px;
+	cursor:pointer;
+}

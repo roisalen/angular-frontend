@@ -81,18 +81,21 @@ function createNewSpeaker(req, res, next) {
 
 function getSpeakerList(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.send(200, speakerqueue.list);
+	res.send(200, speakerQueue.list);
 	return next();
 }
 
 function addSpeakerToList(req, res, next) {
+	console.log("adding speaker");
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.findOne({number: req.body}, function(err, success) {
-		console.log("Response success "+success);
+		console.log("Found speaker "+JSON.stringify(success));
 		console.log("Response error "+err);
 		if (success) {
-			speakerqueue.add(success);
-			res.send(200, speakerqueue.list);
+			console.log("adding speaker to queue");
+			speakerQueue.add(success);
+			console.log("speaker added to queue");
+			res.send(200, speakerQueue.list);
 			return next();
 		}
 		res.send(500);
@@ -102,7 +105,7 @@ function addSpeakerToList(req, res, next) {
 
 function removeSpeakerAtPoint(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	speakerqueue.removeAt(req.params.speakerRank);
+	speakerQueue.removeAt(req.params.speakerRank);
 	res.send(200);
 	return next();
 }
