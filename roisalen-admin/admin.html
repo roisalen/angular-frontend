@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Legg til representanter</title>
+	<meta charset="UTF-8">
+	<script src="csvToArray.v2.1.js"></script>
+	<script src="admin.js"></script>
+</head>
+<body>
+	<h1>Registrer representanter</h1>
+	<label for="csv-upload">Last opp fil med representanter</label>
+	<input id="csv-upload" type="file" />
+	<p>Fila må være kommaseparerte verdier i rekkefølgen Nr,Navn,Liste/Gruppe,Kjønn</p>
+
+	
+	<form id="speakers">
+		<legend>Legg til ny representant</legend>
+		<label for="number">Nummer</label>
+		<input id="number" type="tel" size="3" />
+		<label for="name">Navn</label>
+		<input id="name" type="text" size="20" />
+		<label for="group">Liste/gruppe</label>
+		<input id="group" type="text" size="20" />
+		<label for="sex">Kjønn (en bokstav)</label>
+		<input id="sex" type="text" size="1" />
+	</form>
+
+</body>
+</html>

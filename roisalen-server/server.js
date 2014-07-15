@@ -1,6 +1,6 @@
 var restify = require('restify');
 var mongojs = require("mongojs");
-var Speaker = require("../scripts/speaker");
+var Speaker = require("../roisalen-common/models/speaker");
 
 var ip_addr = '127.0.0.1';
 var port    =  '8080';
