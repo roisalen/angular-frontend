@@ -29,8 +29,6 @@ server.get({path: "/speakerList", version: "0.0.1"}, getSpeakerList);
 server.post({path: "/speakerList", version: "0.0.1"}, addSpeakerToList);
 server.del({path: "/speakerList/:speakerRank", version: "0.0.1"}, removeSpeakerAtPoint);
 
-
-
 function getAllSpeakers(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.find().sort({speakerId: -1}, function(err, success){
@@ -74,9 +72,6 @@ function createNewSpeaker(req, res, next) {
 			return next(err);
 		}
 	});
-
-
-
 }
 
 function getSpeakerList() {

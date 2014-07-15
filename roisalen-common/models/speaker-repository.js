@@ -11,7 +11,10 @@ function SpeakerRepository(view) {
 
 	function getSpeakers() {
 		if (size() === 0) {
-			_speakersList = JSON.parse(localStorage.getItem('speakers'));
+			//_speakersList = JSON.parse(localStorage.getItem('speakers')); // used to use localstorage
+			$.get("http://127.0.0.1:8080/speakers", function(data) {
+				_speakersList = data;
+			}); // mongodb
 		}
 		return $.extend({},_speakersList);
 	}
@@ -22,7 +25,8 @@ function SpeakerRepository(view) {
 	}
 
 	function storeSpeakers() {
-		localStorage.setItem('speakers', JSON.stringify(_speakersList));
+		//localStorage.setItem('speakers', JSON.stringify(_speakersList)); // used to use localstorage
+		$.post("http://127.0.0.1:8080/speakers", JSON.stringify(speaker)); // mongodb
 		console.log("speakers stored");
 	}
 	
