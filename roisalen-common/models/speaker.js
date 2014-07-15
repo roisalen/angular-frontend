@@ -7,7 +7,6 @@ module.exports = function(name, number, sex, group) {
 	this.sex = sex;
 	this.group = group;
 	this.replies = new SpeakerQueue();
-	console.log("after queue");
 
 	function addReply(speaker) {
 		this.replies.add(speaker);
