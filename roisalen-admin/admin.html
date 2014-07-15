@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Legg til representanter</title>
+	<title>Administrerrepresentanter</title>
 	<meta charset="UTF-8">
 	<script src="csvToArray.v2.1.js"></script>
+	<script src="jquery.min.js"></script>	
 	<script src="admin.js"></script>
 </head>
 <body>
-	<h1>Registrer representanter</h1>
-	<label for="csv-upload">Last opp fil med representanter</label>
-	<input id="csv-upload" type="file" />
-	<p>Fila må være kommaseparerte verdier i rekkefølgen Nr,Navn,Liste/Gruppe,Kjønn</p>
-
+	<h1>Administrer representanter</h1>
+	<h2>Registrerte representanter</h2>
+	<table id="representatives">
+		<tr>
+			<th>Nummer</th>
+			<th>Navn</th>
+			<th>Gruppe</th>
+			<th>Kjønn</th>
+		</tr>
+	</table>
+	<h2>Registrer representanter</h2>
+	<label for="csv-upload">Last opp fil med representanter. Fila må være kommaseparerte verdier i rekkefølgen Nr,Navn,Liste/Gruppe,Kjønn</label>
+	<input id="csv-upload" type="file" accept=".csv" onchange='readFileToArray(this.files)' />
 	
+	<h2>Legg til ny representant</h2>
 	<form id="speakers">
-		<legend>Legg til ny representant</legend>
 		<label for="number">Nummer</label>
 		<input id="number" type="tel" size="3" />
 		<label for="name">Navn</label>
@@ -23,6 +32,7 @@
 		<input id="group" type="text" size="20" />
 		<label for="sex">Kjønn (en bokstav)</label>
 		<input id="sex" type="text" size="1" />
+		<button type="submit" onclick="postSpeakerFromForm()">Legg til</button>
 	</form>
 
 </body>
