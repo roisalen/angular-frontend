@@ -22,7 +22,8 @@
 	<label for="csv-upload">Last opp fil med representanter. Fila må være kommaseparerte verdier i rekkefølgen Nr,Navn,Liste/Gruppe,Kjønn</label>
 	<input id="csv-upload" type="file" accept=".csv" onchange='readFileToArray(this.files)' />
 	
-	<h2>Legg til ny representant</h2>
+	<h2>Legg til eller rediger representant</h2>
+	<p>Hvis du bruker et nummer som allerede eksisterer vil det bli redigert</p>
 	<form id="speakers">
 		<label for="number">Nummer</label>
 		<input id="number" type="tel" size="3" />
