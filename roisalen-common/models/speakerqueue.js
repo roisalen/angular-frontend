@@ -21,11 +21,17 @@ function SpeakerQueue() {
 
     function remove(who) {
         var index = this.list.indexOf(who);
+        this.removeAt(index);
+        
+    }
+
+    function removeAt(index) {
         if (index > -1) {
-            array.splice(index, 1);
+            this.list.splice(index, 1);
         } else {
             console.log("Error: "+who+" not in list");
         }
+
     }
 
     function size() {

@@ -1,6 +1,7 @@
 var restify = require('restify');
 var mongojs = require("mongojs");
 var Speaker = require("../roisalen-common/models/speaker");
+var SpeakerQueue = require("../roisalen-common/models/speakerqueue");
 
 var ip_addr = '127.0.0.1';
 var port    =  '8080';
@@ -20,6 +21,8 @@ var connection_string = '127.0.0.1:27017/myapp';
 var db = mongojs(connection_string, ['myapp']);
 var speakers = db.collection("speakers");
 
+var speakerQueue = new SpeakerQueue();
+
 var PATH = "/speakers";
 
 server.get({path: "/speakers", version: "0.0.1"}, getAllSpeakers);
@@ -37,9 +40,9 @@ function getAllSpeakers(req, res, next) {
 		if (success){
 			res.send(200, success);
 		} else{
+			res.send(500);
 			return next(err);
 		}
-
 	});
 }
 
@@ -52,6 +55,7 @@ function getSpeaker(req, res, next) {
 			res.send(200, success);
 			return next();
 		}
+		res.send(500);
 		return next(err);
 	});
 }
@@ -69,17 +73,38 @@ function createNewSpeaker(req, res, next) {
 			res.send(201, speaker);
 			return next();
 		} else {
+			res.send(500);
 			return next(err);
 		}
 	});
 }
 
-function getSpeakerList() {
-
+function getSpeakerList(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.send(200, speakerqueue.list);
+	return next();
 }
 
-function addSpeakerToList() {}
+function addSpeakerToList(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	speakers.findOne({number: req.body}, function(err, success) {
+		console.log("Response success "+success);
+		console.log("Response error "+err);
+		if (success) {
+			speakerqueue.add(success);
+			res.send(200, speakerqueue.list);
+			return next();
+		}
+		res.send(500);
+		return next(err);
+	});
+}
 
-function removeSpeakerAtPoint() {}
+function removeSpeakerAtPoint(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	speakerqueue.removeAt(req.params.speakerRank);
+	res.send(200);
+	return next();
+}
 
 
