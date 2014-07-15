@@ -27,9 +27,19 @@ function postSpeakersFromArray(csvAsArray, done) {
 function postSpeakerFromArray(entry) {
 		var speaker = {};
 		speaker.number = entry[0];
-		speaker.name = entry[1];
-		speaker.group = entry[2];
-		speaker.sex = entry[3];
+		if (entry[1]) {
+			speaker.name = entry[1];
+		};
+
+		if (entry[2]) {
+			speaker.group = entry[2];
+		};
+		if (entry[3]) {
+			speaker.sex = entry[3];
+		};
+
+		console.log("posting speaker");
+		
 		$.post("http://127.0.0.1:8080/speakers",JSON.stringify(speaker));
 }
 
