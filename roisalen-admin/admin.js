@@ -38,11 +38,12 @@ function getSpeakers() {
 }
 
 function parseAndShowSpeakers(data) {
+	$("#representatives tr.entry").remove();
 	data.forEach(generateTableRowFromSpeaker);
 }
 
 function generateTableRowFromSpeaker(speaker) {
-	var tableRow = "<tr>";
+	var tableRow = "<tr class='entry'>";
 	tableRow += "<td>"+speaker.number+"</td>";
 	tableRow += "<td>"+speaker.name+"</td>";
 	tableRow += "<td>"+speaker.group+"</td>";
@@ -54,6 +55,8 @@ function generateTableRowFromSpeaker(speaker) {
 
 function postSpeakerFromForm() {
 	var number,name, group, sex;
+	var speakerArray = [];
+
 	number = $("#number").val();
 	name = $("#name").val();
 	group = $("#group").val();

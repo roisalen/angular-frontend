@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrerrepresentanter</title>
+	<title>Administrer representanter</title>
 	<meta charset="UTF-8">
+	<link href="admin.css" type="text/css" rel="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
 	<script src="csvToArray.v2.1.js"></script>
 	<script src="jquery.min.js"></script>	
 	<script src="admin.js"></script>
+
 </head>
 <body>
+	<div id="speakerApp">
 	<h1>Administrer representanter</h1>
 	<h2>Registrerte representanter</h2>
 	<table id="representatives">
 		<tr>
-			<th>Nummer</th>
+			<th>#</th>
 			<th>Navn</th>
 			<th>Gruppe</th>
 			<th>Kjønn</th>
 		</tr>
 	</table>
 	<h2>Registrer representanter</h2>
-	<label for="csv-upload">Last opp fil med representanter. Fila må være kommaseparerte verdier i rekkefølgen Nr,Navn,Liste/Gruppe,Kjønn</label>
+	<label for="csv-upload">Last opp fil med representanter: 
+	</label>
 	<input id="csv-upload" type="file" accept=".csv" onchange='readFileToArray(this.files)' />
+	<p class="help">Fila må ende på .csv og ha følgende format:</p>
+	<pre>1,Torkil Vederhus,Realistlista,M
+2,Grete Godtland Noem,Venstrealliansen,K
+3,Stian Lågstad,Realistlista,M
+4,Ingunn Inge Nordmann,Grønn liste,T</pre> 
 	
-	<h2>Legg til eller rediger representant</h2>
-	<p>Hvis du bruker et nummer som allerede eksisterer vil det bli redigert</p>
+	<h2>Legg til eller rediger enkeltrepresentant</h2>
+	<p class="help">Hvis du bruker et nummer som allerede eksisterer vil du overskrive raden</p>
 	<form id="speakers">
 		<label for="number">Nummer</label>
 		<input id="number" type="tel" size="3" />
@@ -31,10 +41,11 @@
 		<input id="name" type="text" size="20" />
 		<label for="group">Liste/gruppe</label>
 		<input id="group" type="text" size="20" />
-		<label for="sex">Kjønn (en bokstav)</label>
-		<input id="sex" type="text" size="1" />
+		<label for="sex">Kjønn</label>
+		<input id="sex" type="text" size="4" placeholder="K/M/?" />
 		<button type="submit" onclick="postSpeakerFromForm()">Legg til</button>
 	</form>
+</div>
 
 </body>
 </html>
