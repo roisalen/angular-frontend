@@ -1,8 +1,7 @@
-input.speaker-input {
+#subject {
 	width: 95%;
 	margin: 10px;
 	font-size: 1.5em;
-	box-sizing: border-box;
 }
 
 #speakerList {
@@ -29,7 +28,7 @@ h1,h2 {
 	text-decoration: none;
 	color: black;
 }
-#subject {
+.speaker-input {
 	float: right;
 	font-size: 1.5em;
 	margin: 10px;
