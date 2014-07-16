@@ -5,23 +5,33 @@ input.speaker-input {
 	box-sizing: border-box;
 }
 
-ul.speaker-list {
+#speakerList {
 	text-align: left;
-	list-style: none;
-	padding-left: 10px;
+	padding-left: 2%;
 	padding-bottom: 20px;
-	padding-right: 10px;
+	padding-right: 2%;
 }
 
-li.speaker {
+h1 {
+	padding-left: 10px;
+}
+
+tr.entry {
 	margin-bottom: 10px;
 }
 
-li:first-child {
-	font-size: 1.1em;
+tr:first-child {
+	font-size: 2em;
 	font-color: "#3F5A17";
 }
 
+td.delete-link {
+	text-align: right;
+}
+
+td.name {
+	width: 91.5%;
+}
 a.endreKnapp, a.slettKnapp {
 	float:right;
 	text-decoration: underline;

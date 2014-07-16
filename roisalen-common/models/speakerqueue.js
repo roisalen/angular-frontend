@@ -6,6 +6,9 @@ function SpeakerQueue() {
     this.list = [];
     this.next = next;
     this.add = add;
+    this.remove = remove;
+    this.removeAt = removeAt;
+    this.size = size;
     console.log("in queue");
 
     function add(who, num) {
