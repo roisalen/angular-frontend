@@ -18,11 +18,11 @@ h1 {
 
 tr.entry {
 	margin-bottom: 10px;
+	width: 100%;
 }
 
 tr:first-child {
 	font-size: 2em;
-	font-color: "#3F5A17";
 }
 
 td.delete-link {
@@ -30,7 +30,7 @@ td.delete-link {
 }
 
 td.name {
-	width: 91.5%;
+	width: 100%;
 }
 a.endreKnapp, a.slettKnapp {
 	float:right;
