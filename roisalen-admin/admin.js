@@ -1,4 +1,3 @@
-
 function readFileToArray(files) {
 	console.log("in file to array");
 	var reader = new FileReader();
@@ -8,15 +7,13 @@ function readFileToArray(files) {
 		postSpeakersFromArray(csvText.csvToArray(), getSpeakers);
 	};
 	reader.onerror = errorHandler;
-
-
 }
 
 function errorHandler(evt) {
     if(evt.target.error.name == "NotReadableError") {
-        alert("Canno't read file !");
+        alert("Cannot read file !");
     }
-  }
+}
 
 function postSpeakersFromArray(csvAsArray, done) {
 	console.log(csvAsArray)
@@ -38,13 +35,13 @@ function postSpeakerFromArray(entry) {
 			speaker.sex = entry[3];
 		};
 
-		console.log("posting speaker");
+		console.log("posting speaker "+speaker.name);
 		
-		$.post("http://127.0.0.1:8080/speakers",JSON.stringify(speaker));
+		$.post(SERVER_URL + "/speakers",JSON.stringify(speaker));
 }
 
 function getSpeakers() {
-	$.get("http://127.0.0.1:8080/speakers", parseAndShowSpeakers);
+	$.get(SERVER_URL + "/speakers", parseAndShowSpeakers);
 }
 
 function parseAndShowSpeakers(data) {
@@ -71,9 +68,11 @@ function postSpeakerFromForm() {
 	name = $("#name").val();
 	group = $("#group").val();
 	sex = $("#sex").val();
+	
 	postSpeakerFromArray([number, name, group, sex]);
 	getSpeakers();
 };
 
-
-getSpeakers();
+$(document).ready(function() {
+	getSpeakers();
+});

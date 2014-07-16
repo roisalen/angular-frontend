@@ -89,12 +89,8 @@ function addSpeakerToList(req, res, next) {
 	console.log("adding speaker");
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.findOne({number: req.body}, function(err, success) {
-		console.log("Found speaker "+JSON.stringify(success));
-		console.log("Response error "+err);
 		if (success) {
-			console.log("adding speaker to queue");
 			speakerQueue.add(success);
-			console.log("speaker added to queue");
 			res.send(200, speakerQueue.list);
 			return next();
 		}
