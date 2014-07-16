@@ -12,21 +12,29 @@ input.speaker-input {
 	padding-right: 2%;
 }
 
-h1 {
+h1,h2 {
 	padding-left: 10px;
 }
 
 #stopwatch {
-	margin-left: 20px;
+	float: left;
+	margin: 10px;
+	font-size: 1.5em;
 }
 
 #stopwatch a, #stopwatch span {
 	margin: 5px;
 }
 #stopwatch a {
-	text-align: left;
 	text-decoration: none;
 	color: black;
+}
+#subject {
+	float: right;
+	font-size: 1.5em;
+	margin: 10px;
+	margin-right: 4%;
+	width: 60%;
 }
 
 tr.entry {

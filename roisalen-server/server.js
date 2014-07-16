@@ -2,6 +2,7 @@ var restify = require('restify');
 var mongojs = require("mongojs");
 var Speaker = require("../roisalen-common/models/speaker");
 var SpeakerQueue = require("../roisalen-common/models/speakerqueue");
+var preflightEnabler = require('se7ensky-restify-preflight');
 
 var ip_addr = '127.0.0.1';
 var port    =  '8080';
@@ -9,11 +10,14 @@ var port    =  '8080';
 var server = restify.createServer({
     name : "myapp"
 });
+
+
  
 server.listen(port ,ip_addr, function(){
     console.log('%s listening at %s ', server.name , server.url);
 });
 
+preflightEnabler(server);
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
@@ -23,7 +27,10 @@ var speakers = db.collection("speakers");
 
 var speakerQueue = new SpeakerQueue();
 
+var subject = "";
+
 var PATH = "/speakers";
+
 
 server.get({path: "/speakers", version: "0.0.1"}, getAllSpeakers);
 server.get({path: "/speakers/:speakerId", version: "0.0.1"}, getSpeaker);
@@ -31,6 +38,23 @@ server.post({path: "/speakers", version: "0.0.1"}, createNewSpeaker);
 server.get({path: "/speakerList", version: "0.0.1"}, getSpeakerList);
 server.post({path: "/speakerList", version: "0.0.1"}, addSpeakerToList);
 server.del({path: "/speakerList/:speakerRank", version: "0.0.1"}, removeSpeakerAtPoint);
+server.post({path: "/speakerList/:speakerRank/replies", version: "0.0.1"}, addReplyToSpeakerAtPoint);
+server.del({path: "/speakerList/:speakerRank/replies/:replyRank", version: "0.0.1"}, deleteReply);
+server.post({path: "/subject", version: "0.0.1"}, setSubject);
+server.get({path: "/subject", version: "0.0.1"}, getSubject);
+
+function setSubject(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	subject = req.body;
+	res.send(201);
+	return next();
+}
+
+function getSubject(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.send(200, subject);
+	return next();
+}
 
 function getAllSpeakers(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -61,8 +85,7 @@ function getSpeaker(req, res, next) {
 }
 
 function createNewSpeaker(req, res, next) {
-	console.log("in new speaker");
-	console.log(req.body);
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	var speakerJson = JSON.parse(req.body);
 	var speaker = new Speaker(speakerJson.name, speakerJson.number, speakerJson.sex, speakerJson.group);
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -80,6 +103,7 @@ function createNewSpeaker(req, res, next) {
 }
 
 function getSpeakerList(req, res, next) {
+	console.log("getting speaker");
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.send(200, speakerQueue.list);
 	return next();
@@ -96,12 +120,39 @@ function addSpeakerToList(req, res, next) {
 		}
 		res.send(500);
 		return next(err);
+	});	
+}
+
+function addReplyToSpeakerAtPoint(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	console.log("adding reply");
+	var replicantId = req.body;
+	var speakerIndex = req.params.speakerRank;
+	speakers.findOne({number: replicantId}, function(err, success) {
+		if (success) {
+			console.log("found speaker");
+			console.log(speakerIndex);
+			var speaker = speakerQueue.get(speakerIndex);
+			speaker.replies.push(success);
+			res.send(200);
+			return next();
+		}
+		res.send(500);
+		return next(err);
 	});
 }
 
 function removeSpeakerAtPoint(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
+	console.log(req.params.speakerRank);
 	speakerQueue.removeAt(req.params.speakerRank);
+	res.send(200);
+	return next();
+}
+
+function deleteReply(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	speakerQueue.get(req.params.speakerRank).replies.splice(req.params.replyRank,1);
 	res.send(200);
 	return next();
 }

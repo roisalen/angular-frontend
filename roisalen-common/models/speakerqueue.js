@@ -8,6 +8,7 @@ function SpeakerQueue() {
     this.add = add;
     this.remove = remove;
     this.removeAt = removeAt;
+    this.get = get;
     this.size = size;
     console.log("in queue");
 
@@ -26,6 +27,10 @@ function SpeakerQueue() {
         var index = this.list.indexOf(who);
         this.removeAt(index);
         
+    }
+
+    function get(index) {
+        return this.list[0];
     }
 
     function removeAt(index) {

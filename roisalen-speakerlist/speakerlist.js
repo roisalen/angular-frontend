@@ -3,20 +3,29 @@ var timer;
 function setupListeners() {
 	$("form").submit(addSpeaker);
 	$(".delete-link").click(removeSpeaker);
+	$("#subject").keypress(publishSubject)
 }
 
 function generateTableRowFromSpeaker(speaker) {
 	var tableRow = "<tr class='entry'>";
 	tableRow += "<td class='number'>"+speaker.number+"</td>";
-	tableRow += "<td class='name'>"+speaker.name+"</td>";
-	tableRow += "<td class='delete-link'>X</td>";
-	tableRow += "</tr">
+	tableRow += "<td class='name'>"+speaker.name;
+	tableRow += "</td><td class='delete-link'>X</td></tr>";
+	
+	if (speaker.replies.length > 0) {
+		speaker.replies.forEach(function(entry) {
+			tableRow += "<tr class='reply'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
+			tableRow += entry.number+" "+entry.name+"</td>";
+			tableRow += "<td class='delete-link'>X</td></tr>";
+		});
+	}
+
 
 	$("#speakerList").find('tbody').append(tableRow);
 }
 
 function parseSpeakerQueue(data) {
-	$("#speakerList tr.entry").remove();
+	$("#speakerList tr").remove();
 	data.forEach(generateTableRowFromSpeaker);
 	$(".delete-link").click(removeSpeaker);
 	$("#speakerNumber").val("");
@@ -25,16 +34,29 @@ function parseSpeakerQueue(data) {
 function removeSpeaker(ev, index) {
 	var index;
 	if(index === undefined) {
-		index = $(this).parent().index();
+		index = $(this).parent().index(".entry");
 	}
 
-	$.ajax({
+	if(index === -1) {
+		index = $(this).parent().index(".reply");
+		$.ajax({
+			url: SERVER_URL + "/speakerList/0/replies/" + index,
+			type: "DELETE",
+			success: getSpeakerList
+		});
+	} else {
+		$.ajax({
 		url: SERVER_URL + "/speakerList/" + index,
 		type: "DELETE",
-		success: function(response) {
-			$.get(SERVER_URL + "/speakerList", parseSpeakerQueue);
-		}
+		success: getSpeakerList
 	});
+
+	}
+	
+}
+
+function getSpeakerList(response) {
+	$.get(SERVER_URL + "/speakerList", parseSpeakerQueue);
 }
 
 function addSpeaker(ev) {
@@ -44,10 +66,18 @@ function addSpeaker(ev) {
 		removeSpeaker(null, 0);
 		timer.reset();
 		timer.start();
+	} else if (number.charAt(0) === "r") {
+		$.post(SERVER_URL + "/speakerList/0/replies", number.slice(1), getSpeakerList, "json");
 	} else {
 		timer.start();
 		console.log("Adding "+number);
-		$.post(SERVER_URL + "/speakerList", number, parseSpeakerQueue);
+		$.post(SERVER_URL + "/speakerList", number, parseSpeakerQueue, "json");
+	}
+}
+
+function publishSubject(ev) {
+	if (ev.which==13) {
+		$.post(SERVER_URL + "/subject", $("#subject").val());
 	}
 }
 
