@@ -16,6 +16,19 @@ h1 {
 	padding-left: 10px;
 }
 
+#stopwatch {
+	margin-left: 20px;
+}
+
+#stopwatch a, #stopwatch span {
+	margin: 5px;
+}
+#stopwatch a {
+	text-align: left;
+	text-decoration: none;
+	color: black;
+}
+
 tr.entry {
 	margin-bottom: 10px;
 	width: 100%;

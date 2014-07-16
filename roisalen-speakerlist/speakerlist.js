@@ -1,3 +1,5 @@
+var timer;
+
 function setupListeners() {
 	$("form").submit(addSpeaker);
 	$(".delete-link").click(removeSpeaker);
@@ -40,7 +42,10 @@ function addSpeaker(ev) {
 	var number = $("#speakerNumber").val();
 	if(!number) {
 		removeSpeaker(null, 0);
+		timer.reset();
+		timer.start();
 	} else {
+		timer.start();
 		console.log("Adding "+number);
 		$.post(SERVER_URL + "/speakerList", number, parseSpeakerQueue);
 	}
@@ -48,5 +53,6 @@ function addSpeaker(ev) {
 
 $(document).ready(function () {
 	setupListeners();
+	timer = new Stopwatch(document.getElementById("stopwatch"), {delay: 1000});
 	$.get(SERVER_URL + "/speakerList", parseSpeakerQueue);
 });

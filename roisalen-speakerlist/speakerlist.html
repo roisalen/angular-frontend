@@ -2,18 +2,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>Taleliste</title>
 		<link href="../roisalen-common/common.css" type="text/css" rel="stylesheet" />
 		<link href="speakerlist.css" type="text/css" rel="stylesheet" />
 		<script src="../roisalen-common/jquery.min.js"></script>
 		<script src="../roisalen-common/config.js"></script>
+		<script src="stopwatch.js"></script>
 		<script src="speakerlist.js"></script>
 	</head>
 	<body>
 		<div id="speakerApp">
 			<h1>Taleliste</h1>
+			<div id="stopwatch"></div>
 			<form id="addSpeaker">
-				<input type="tel" placeholder="Hvem vil prate?" id="speakerNumber" class="speaker-input" />
+				<input type="tel" placeholder="Tall+enter legger til, enter fjerner øverste" id="speakerNumber" class="speaker-input" />
 			</form>
 			<table id="speakerList" class="speaker-list">
 				<tbody></tbody>
