@@ -41,7 +41,7 @@ tr.entry {
 }
 
 tr:first-child {
-	font-size: 2em;
+	font-size: 3rem;
 }
 
 td.delete-link {
@@ -49,7 +49,11 @@ td.delete-link {
 }
 
 td.name {
-	width: 100%;
+	width: 88%;
+}
+
+td.number {
+	width: 5rem;
 }
 a.endreKnapp, a.slettKnapp {
 	float:right;

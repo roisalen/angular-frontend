@@ -103,7 +103,6 @@ function createNewSpeaker(req, res, next) {
 }
 
 function getSpeakerList(req, res, next) {
-	console.log("getting speaker");
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.send(200, speakerQueue.list);
 	return next();

@@ -1,7 +1,8 @@
 var timer;
+var nonRegistered = 1;
 
 function setupListeners() {
-	$("form").submit(addSpeaker);
+	$("form").submit(handleSpeakerSubmit);
 	$(".delete-link").click(removeSpeaker);
 	$("#subject").keypress(publishSubject)
 }
@@ -64,20 +65,44 @@ function getSpeakerList(response) {
 	$.get(SERVER_URL + "/speakerList", parseSpeakerQueue);
 }
 
-function addSpeaker(ev) {
+function handleSpeakerSubmit(ev) {
 	ev.preventDefault();
-	var number = $("#speakerNumber").val();
-	if(!number) {
+	var input = $("#speakerNumber").val();
+
+	if (!input) {
 		removeSpeaker(null, 0);
 		timer.reset();
 		timer.start();
-	} else if (number.charAt(0) === "r") {
-		$.post(SERVER_URL + "/speakerList/0/replies", number.slice(1), getSpeakerList, "json");
+	} else if (input.charAt(0) === "r") {
+		addReplyToFirstSpeaker(input.slice(1));
+		
+	} else if (!isNaN(parseInt(input))) {
+		timer.start();
+		addSpeakerToBottom(input);
 	} else {
 		timer.start();
-		console.log("Adding "+number);
-		$.post(SERVER_URL + "/speakerList", number, parseSpeakerQueue, "json");
+		registerUnknownSpeakerAndAddSpeakerToBottom(input);
 	}
+}
+
+function addReplyToFirstSpeaker(replicantId) {
+	$.post(SERVER_URL + "/speakerList/0/replies", replicantId, getSpeakerList, "json");
+}
+
+function addSpeakerToBottom(speakerId) {
+	$.post(SERVER_URL + "/speakerList", speakerId, parseSpeakerQueue, "json");
+}
+
+function registerUnknownSpeakerAndAddSpeakerToBottom(name) {
+	$.post(SERVER_URL + "/speakers", 
+		JSON.stringify({number: "?" + nonRegistered.toString(), 
+			name: name, 
+			group: "?", 
+			sex: "?" }), 
+		function() {
+			$.post(SERVER_URL + "/speakerList", "?" + nonRegistered.toString(), parseSpeakerQueue, "json");
+			nonRegistered += 1;
+		});
 }
 
 function publishSubject(ev) {
