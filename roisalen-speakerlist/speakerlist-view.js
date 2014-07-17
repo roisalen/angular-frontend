@@ -4,16 +4,22 @@ function generateTableRowFromSpeaker(speaker) {
 	tableRow += "<td class='name'>"+speaker.name;
 	tableRow += "</td></tr>";
 	
-	if (speaker.replies.length > 0) {
-		speaker.replies.forEach(function(entry) {
-			tableRow += "<tr class='reply'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
-			tableRow += entry.number+" "+entry.name+"</td>";
-			tableRow += "</tr>";
+	tableRow += generateTableRowsForReplies(speaker.replies);
+
+	$("#speakerList").find('tbody').append(tableRow);
+}
+
+function generateTableRowsForReplies(replies) {
+	var tableRows = "";
+	if (replies.length > 0) {
+		replies.forEach(function(entry) {
+			tableRows += "<tr class='reply'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
+			tableRows += entry.number+" "+entry.name+"</td>";
+			tableRows += "</tr>";
 		});
 	}
 
-
-	$("#speakerList").find('tbody').append(tableRow);
+	return tableRows;
 }
 
 function parseSpeakerQueue(data) {
