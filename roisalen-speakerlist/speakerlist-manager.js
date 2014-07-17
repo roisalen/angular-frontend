@@ -2,7 +2,7 @@ var timer;
 var nonRegistered = 1;
 
 function setupListeners() {
-	$("form.speaker-input").submit(handleSpeakerSubmit);
+	$("form#addSpeaker").submit(handleSpeakerSubmit);
 	$(".delete-link").click(removeSpeaker);
 	$("#subject").keypress(publishSubject)
 }
