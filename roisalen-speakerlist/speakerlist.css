@@ -40,7 +40,7 @@ tr.entry {
 	width: 100%;
 }
 
-tr:first-child {
+tr.hilighted {
 	font-size: 3rem;
 }
 
@@ -60,4 +60,10 @@ a.endreKnapp, a.slettKnapp {
 	text-decoration: underline;
 	margin-right: 5px;
 	cursor:pointer;
+}
+
+p.help {
+	font-size: 0.7em;
+	font-style: italic;
+	margin: 0px;
 }

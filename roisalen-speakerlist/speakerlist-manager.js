@@ -2,7 +2,7 @@ var timer;
 var nonRegistered = 1;
 
 function setupListeners() {
-	$("form").submit(handleSpeakerSubmit);
+	$("form.speaker-input").submit(handleSpeakerSubmit);
 	$(".delete-link").click(removeSpeaker);
 	$("#subject").keypress(publishSubject)
 }
@@ -14,7 +14,8 @@ function generateTableRowFromSpeaker(speaker) {
 	tableRow += "</td><td class='delete-link'>X</td></tr>";
 	
 	tableRow += generateTableRowsForReplies(speaker.replies);
-	$("#speakerList").find('tbody').append(tableRow);
+	console.log("#speakerList tbody");
+	$("#speakerList tbody").append(tableRow);
 }
 
 function generateTableRowsForReplies(replies) {
@@ -102,6 +103,7 @@ function registerUnknownSpeakerAndAddSpeakerToBottom(name) {
 		function() {
 			$.post(SERVER_URL + "/speakerList", "?" + nonRegistered.toString(), parseSpeakerQueue, "json");
 			nonRegistered += 1;
+			getRepresentatives();
 		});
 }
 
@@ -111,7 +113,60 @@ function publishSubject(ev) {
 	}
 }
 
+function postRepresentativeFromArray(entry) {
+		var speaker = {};
+		speaker.number = entry[0];
+		if (entry[1]) {
+			speaker.name = entry[1];
+		};
+
+		if (entry[2]) {
+			speaker.group = entry[2];
+		};
+		if (entry[3]) {
+			speaker.sex = entry[3];
+		};
+
+		console.log("posting speaker "+speaker.name);
+		
+		$.post(SERVER_URL + "/speakers",JSON.stringify(speaker));
+}
+
+function getRepresentatives() {
+	$.get(SERVER_URL + "/speakers", parseAndShowRepresentatives);
+}
+
+function parseAndShowRepresentatives(data) {
+	$("#representatives tr.entry").remove();
+	data.forEach(generateTableRowFromRepresentative);
+}
+
+function generateTableRowFromRepresentative(speaker) {
+	var tableRow = "<tr class='entry'>";
+	tableRow += "<td>"+speaker.number+"</td>";
+	tableRow += "<td>"+speaker.name+"</td>";
+	tableRow += "<td>"+speaker.group+"</td>";
+	tableRow += "<td>"+speaker.sex+"</td>";
+	tableRow += "</tr">
+
+	$("#representatives tr:last").after(tableRow);
+}
+
+function postRepresentativeFromForm() {
+	var number,name, group, sex;
+
+	number = $("#number").val();
+	name = $("#name").val();
+	group = $("#group").val();
+	sex = $("#sex").val();
+
+	
+	postRepresentativeFromArray([number, name, group, sex]);
+	getRepresentatives();
+};
+
 $(document).ready(function () {
+	getRepresentatives();
 	setupListeners();
 	timer = new Stopwatch(document.getElementById("stopwatch"), {delay: 1000});
 	$.get(SERVER_URL + "/speakerList", parseSpeakerQueue);
