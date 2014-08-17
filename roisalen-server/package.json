@@ -14,5 +14,17 @@
     "start": "node server.js"
   },
   "author": "Torkil Vederhus",
-  "license": "ISC"
+  "license": "GNU GPL",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/torkilv/roisalen"
+  },
+  "keywords": [
+    "meetings",
+    "administration"
+  ],
+  "bugs": {
+    "url": "https://github.com/torkilv/roisalen/issues"
+  },
+  "homepage": "https://github.com/torkilv/roisalen"
 }

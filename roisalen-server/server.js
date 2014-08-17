@@ -42,6 +42,7 @@ server.post({path: "/speakerList/:speakerRank/replies", version: "0.0.1"}, addRe
 server.del({path: "/speakerList/:speakerRank/replies/:replyRank", version: "0.0.1"}, deleteReply);
 server.post({path: "/subject", version: "0.0.1"}, setSubject);
 server.get({path: "/subject", version: "0.0.1"}, getSubject);
+server.post({path: "/speakerList/:speakerRank", version: "0.0.1"}, doneSpeaking )
 
 function setSubject(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -141,6 +142,13 @@ function addReplyToSpeakerAtPoint(req, res, next) {
 		res.send(500);
 		return next(err);
 	});
+}
+
+function doneSpeaking(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	var speaker = speakerQueue.get(req.params.speakerRank);
+
+
 }
 
 function removeSpeakerAtPoint(req, res, next) {

@@ -71,10 +71,11 @@ function handleSpeakerSubmit(ev) {
 	var input = $("#speakerNumber").val();
 
 	if (!input) {
-		removeSpeaker(null, 0);
+		moveHilightDown();
 		timer.reset();
 		timer.start();
 	} else if (input.charAt(0) === "r") {
+		console.log(input);
 		addReplyToFirstSpeaker(input.slice(1));
 		
 	} else if (!isNaN(parseInt(input))) {
@@ -83,6 +84,17 @@ function handleSpeakerSubmit(ev) {
 	} else {
 		timer.start();
 		registerUnknownSpeakerAndAddSpeakerToBottom(input);
+	}
+}
+
+function moveHilightDown() {
+	var currentHilighted = $("tr.hilighted");
+	var nextHilighted = currentHilighted.next("tr");
+	currentHilighted.removeClass("hilighted");
+	nextHilighted.addClass("hilighted");
+	console.log(nextHilighted);
+	if (nextHilighted.length == 0 || nextHilighted.hasClass("entry")) {
+		removeSpeaker(null, 0);
 	}
 }
 
