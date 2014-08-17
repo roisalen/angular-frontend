@@ -4,9 +4,10 @@
   "description": "Rest web-server for speakerlist and administration",
   "main": "server.js",
   "dependencies": {
-    "restify": "^2.7.0",
+    "mongodb": "^1.4.8",
     "mongojs": "^0.12.1",
-    "mongodb": "^1.4.2"
+    "restify": "^2.8.2",
+    "se7ensky-restify-preflight": "^0.1.7"
   },
   "devDependencies": {},
   "scripts": {
