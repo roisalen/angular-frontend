@@ -4,8 +4,8 @@ var Speaker = require("../roisalen-common/models/speaker");
 var SpeakerQueue = require("../roisalen-common/models/speakerqueue");
 var preflightEnabler = require('se7ensky-restify-preflight');
 
-var ip_addr = '127.0.0.1';
-var port    =  '8080';
+var ip_addr = '';
+var port    =  process.env.PORT || '8080';
  
 var server = restify.createServer({
     name : "myapp"
@@ -13,7 +13,7 @@ var server = restify.createServer({
 
 
  
-server.listen(port ,ip_addr, function(){
+server.listen(port, function(){
     console.log('%s listening at %s ', server.name , server.url);
 });
 
