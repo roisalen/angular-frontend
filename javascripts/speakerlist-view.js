@@ -1,5 +1,9 @@
 function generateTableRowFromSpeaker(speaker) {
-	var tableRow = "<tr class='entry'>";
+	var tableRow = "<tr class='entry";
+	if (speaker.speaking) {
+		tableRow += " hilighted";
+	} 
+	tableRow += "'>";
 	tableRow += "<td class='number'>"+speaker.number+"</td>";
 	tableRow += "<td class='name'>"+speaker.name;
 	tableRow += "</td></tr>";
@@ -13,7 +17,11 @@ function generateTableRowsForReplies(replies) {
 	var tableRows = "";
 	if (replies.length > 0) {
 		replies.forEach(function(entry) {
-			tableRows += "<tr class='reply'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
+			tableRows += "<tr class='reply"
+			if (entry.speaking) {
+				tableRows += "hilighted";
+			}
+			tableRows += "'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
 			tableRows += entry.number+" "+entry.name+"</td>";
 			tableRows += "</tr>";
 		});
