@@ -116,6 +116,9 @@ function addSpeakerToList(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.findOne({number: req.body}, function(err, success) {
 		if (success) {
+			if (speakerQueue.list.length === 0) {
+				success.speaking = true;
+			}
 			speakerQueue.add(success);
 			res.send(200, speakerQueue.list);
 			return next();
@@ -148,7 +151,43 @@ function doneSpeaking(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var speaker = speakerQueue.get(req.params.speakerRank);
 
+	if (speaker.replies.length > 0) {
+		nextReplyOrMainSpeakerDone(speaker, req.params.speakerRank);
+	} else {
+		mainSpeakerDone(speaker, req.params.speakerRank);
+	}
 
+	res.send(200, speakerQueue.list);
+	return next();
+}
+
+function nextReplyOrMainSpeakerDone(speaker, speakerRank) {
+	if (speaker.speaking) {
+		speaker.speaking = false;
+		speaker.replies[0].speaking = true;
+	} else {
+		var speakingIndex = 0;
+		speaker.replies.forEach(function(reply, index, array) {
+			if (reply.speaking) {
+				speakingIndex = index;		
+			}
+		});
+
+		if (speakingIndex + 1 === speaker.replies.length) {
+			mainSpeakerDone(speaker,speakerRank)
+		} else {
+			speaker[speakingIndex].speaking = false;
+			speaker[speakingIndex + 1] = true;
+		}
+		
+	}
+}
+
+function mainSpeakerDone(speaker, speakerRank) {
+	if (speakerRank + 1 < speakerQueue.size()) {
+		speakerQueue.get(speakerRank + 1).speaking = true;
+	}
+	speakerQueue.remove(speaker);
 }
 
 function removeSpeakerAtPoint(req, res, next) {

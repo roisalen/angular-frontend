@@ -8,6 +8,7 @@ module.exports = function(name, number, sex, group) {
 	this.sex = sex;
 	this.group = group;
 	this.replies = [];
+	this.speaking = false;
 
 	return this;
 };
