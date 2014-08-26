@@ -34,7 +34,8 @@ var PATH = "/speakers";
 
 server.get({path: "/speakers", version: "0.0.1"}, getAllSpeakers);
 server.get({path: "/speakers/:speakerId", version: "0.0.1"}, getSpeaker);
-server.del({path: "/speakers/:speakerId", version: "0.0.1"}, deleteSpeaker)
+server.del({path: "/speakers/:speakerId", version: "0.0.1"}, deleteSpeaker);
+server.del({path: "/speakersDeleteAll/IMSURE", version: "0.0.1"}, deleteAllSpeakers);
 server.post({path: "/speakers", version: "0.0.1"}, createNewSpeaker);
 server.get({path: "/speakerList", version: "0.0.1"}, getSpeakerList);
 server.post({path: "/speakerList", version: "0.0.1"}, addSpeakerToList);
@@ -74,7 +75,7 @@ function getAllSpeakers(req, res, next) {
 
 function getSpeaker(req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
-	speakers.findOne({number: req.params.speakerId}, function(err, success) {
+	speakers.findOne({number: parseInt(req.params.speakerId)}, function(err, success) {
 		console.log("Response success "+success);
 		console.log("Response error "+err);
 		if (success){
@@ -88,7 +89,9 @@ function getSpeaker(req, res, next) {
 
 function deleteSpeaker(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	speakers.remove({number: req.params.speakerId}, function(err, success){
+
+	console.log("Hepp");
+	speakers.remove({number: parseInt(req.params.speakerId)}, function(err, success){
 		if (success) {
 			res.send(200);
 		} else {
@@ -99,13 +102,29 @@ function deleteSpeaker(req, res, next) {
 	});
 }
 
+function deleteAllSpeakers(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
+	console.log("Hepp");
+	
+	speakers.remove({},function(err, success) {
+		if (success) {
+			console.log("deleted all");
+			res.send(200);
+		} else {
+			res.send(500);
+		}
+		return next(err);
+	});
+}
+
 
 function createNewSpeaker(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	console.log(req.body);
 	var speakerJson = JSON.parse(req.body);
 	console.log(speakerJson);
-	var speaker = new Speaker(speakerJson.name, speakerJson.number, speakerJson.sex, speakerJson.group);
+	var speaker = new Speaker(speakerJson.name, parseInt(speakerJson.number), speakerJson.sex, speakerJson.group);
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.save(speaker, function(err, success) {
 		console.log("Response success "+success);
@@ -129,7 +148,7 @@ function getSpeakerList(req, res, next) {
 function addSpeakerToList(req, res, next) {
 	console.log("adding speaker");
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	speakers.findOne({number: req.body}, function(err, success) {
+	speakers.findOne({number: parseInt(req.body)}, function(err, success) {
 		if (success) {
 			if (speakerQueue.list.length === 0) {
 				success.speaking = true;
@@ -146,9 +165,10 @@ function addSpeakerToList(req, res, next) {
 function addReplyToSpeakerAtPoint(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	console.log("adding reply");
+	console.log("replicantId")
 	var replicantId = req.body;
 	var speakerIndex = req.params.speakerRank;
-	speakers.findOne({number: replicantId}, function(err, success) {
+	speakers.findOne({number: parseInt(replicantId)}, function(err, success) {
 		if (success) {
 			console.log("found speaker");
 			console.log(speakerIndex);
@@ -165,7 +185,7 @@ function addReplyToSpeakerAtPoint(req, res, next) {
 function doneSpeaking(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var speaker = speakerQueue.get(req.params.speakerRank);
-
+	console.log("donespeaking");
 	if (speaker.replies.length > 0) {
 		nextReplyOrMainSpeakerDone(speaker, req.params.speakerRank);
 	} else {
