@@ -47,6 +47,16 @@ function getSpeakers() {
 function parseAndShowSpeakers(data) {
 	$("#representatives tr.entry").remove();
 	data.forEach(generateTableRowFromSpeaker);
+	$(".delete-representative").click(removeRepresentative);
+}
+
+function removeRepresentatives() {
+	$.ajax({
+		url: SERVER_URL + "/speakers/" + index,
+		type: "DELETE",
+		success: getSpeakers
+		});
+
 }
 
 function generateTableRowFromSpeaker(speaker) {
@@ -55,6 +65,7 @@ function generateTableRowFromSpeaker(speaker) {
 	tableRow += "<td>"+speaker.name+"</td>";
 	tableRow += "<td>"+speaker.group+"</td>";
 	tableRow += "<td>"+speaker.sex+"</td>";
+	tableRow += "<td class='delete-representative'>X</td>";
 	tableRow += "</tr">
 
 	$("#representatives tr:last").after(tableRow);

@@ -8,7 +8,11 @@ function setupListeners() {
 }
 
 function generateTableRowFromSpeaker(speaker) {
-	var tableRow = "<tr class='entry'>";
+	var tableRow = "<tr class='entry";
+	if (speaker.speaking) {
+		tableRow += " hilighted";
+	} 
+	tableRow += "'>";
 	tableRow += "<td class='number'>"+speaker.number+"</td>";
 	tableRow += "<td class='name'>"+speaker.name;
 	tableRow += "</td><td class='delete-link'>X</td></tr>";
@@ -56,7 +60,7 @@ function removeSpeaker(ev, index) {
 		url: SERVER_URL + "/speakerList/" + index,
 		type: "DELETE",
 		success: getSpeakerList
-	});
+		});
 
 	}
 	
@@ -148,9 +152,20 @@ function getRepresentatives() {
 	$.get(SERVER_URL + "/speakers", parseAndShowRepresentatives);
 }
 
+function removeRepresentative(ev) {
+	var index = $(this).parent().find('td:first').text();
+	$.ajax({
+		url: SERVER_URL + "/speakers/" + index,
+		type: "DELETE",
+		success: getRepresentatives
+		});
+
+}
+
 function parseAndShowRepresentatives(data) {
 	$("#representatives tr.entry").remove();
 	data.forEach(generateTableRowFromRepresentative);
+	$(".delete-representative").click(removeRepresentative);
 }
 
 function generateTableRowFromRepresentative(speaker) {
@@ -159,6 +174,7 @@ function generateTableRowFromRepresentative(speaker) {
 	tableRow += "<td>"+speaker.name+"</td>";
 	tableRow += "<td>"+speaker.group+"</td>";
 	tableRow += "<td>"+speaker.sex+"</td>";
+	tableRow += "<td class='delete-representative'>X</td>"
 	tableRow += "</tr">
 
 	$("#representatives tr:last").after(tableRow);
