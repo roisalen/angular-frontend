@@ -100,17 +100,6 @@ function nextSpeaker() {
 
 }
 
-function moveHilightDown() {
-	var currentHilighted = $("tr.hilighted");
-	var nextHilighted = currentHilighted.next("tr");
-	currentHilighted.removeClass("hilighted");
-	nextHilighted.addClass("hilighted");
-	console.log(nextHilighted);
-	if (nextHilighted.length == 0 || nextHilighted.hasClass("entry")) {
-		removeSpeaker(null, 0);
-	}
-}
-
 function addReplyToFirstSpeaker(replicantId) {
 	$.post(SERVER_URL + "/speakerList/0/replies", replicantId, getSpeakerList, "json");
 }

@@ -40,6 +40,7 @@ function postSpeakerFromArray(entry) {
 		$.post(SERVER_URL + "/speakers",JSON.stringify(speaker));
 }
 
+
 function getSpeakers() {
 	$.get(SERVER_URL + "/speakers", parseAndShowSpeakers);
 }
