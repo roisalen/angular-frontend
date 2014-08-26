@@ -19,7 +19,7 @@ function generateTableRowsForReplies(replies) {
 		replies.forEach(function(entry) {
 			tableRows += "<tr class='reply"
 			if (entry.speaking) {
-				tableRows += "hilighted";
+				tableRows += " hilighted";
 			}
 			tableRows += "'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
 			tableRows += entry.number+" "+entry.name+"</td>";
