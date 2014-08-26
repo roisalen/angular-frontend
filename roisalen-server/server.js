@@ -61,7 +61,7 @@ function getSubject(req, res, next) {
 
 function getAllSpeakers(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	speakers.find().sort({speakerId: 1}, function(err, success){
+	speakers.find().sort({number: 1}, function(err, success){
 		console.log("Response success "+success);
 		console.log("Response error "+err);
 		if (success){
