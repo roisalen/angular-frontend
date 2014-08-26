@@ -26,7 +26,11 @@ function generateTableRowsForReplies(replies) {
 	var tableRows = "";
 	if (replies.length > 0) {
 		replies.forEach(function(entry) {
-			tableRows += "<tr class='reply'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
+			tableRows += "<tr class='reply"
+			if (entry.speaking) {
+				tableRows += " hilighted"; 
+			}
+			tableRows += "'><td class='reply-arrow'>&#8627;</td><td class='replies'>" 
 			tableRows += entry.number+" "+entry.name+"</td>";
 			tableRows += "<td class='delete-link'>X</td></tr>";
 		});
@@ -75,7 +79,7 @@ function handleSpeakerSubmit(ev) {
 	var input = $("#speakerNumber").val();
 
 	if (!input) {
-		moveHilightDown();
+		nextSpeaker();
 		timer.reset();
 		timer.start();
 	} else if (input.charAt(0) === "r") {
@@ -89,6 +93,11 @@ function handleSpeakerSubmit(ev) {
 		timer.start();
 		registerUnknownSpeakerAndAddSpeakerToBottom(input);
 	}
+}
+
+function nextSpeaker() {
+	$.post(SERVER_URL + "/speakerList/0", {},  parseSpeakerQueue, "json");
+
 }
 
 function moveHilightDown() {
