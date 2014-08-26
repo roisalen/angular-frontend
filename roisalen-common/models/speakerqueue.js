@@ -30,7 +30,7 @@ function SpeakerQueue() {
     }
 
     function get(index) {
-        return this.list[0];
+        return this.list[index];
     }
 
     function removeAt(index) {

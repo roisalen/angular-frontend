@@ -34,6 +34,7 @@ var PATH = "/speakers";
 
 server.get({path: "/speakers", version: "0.0.1"}, getAllSpeakers);
 server.get({path: "/speakers/:speakerId", version: "0.0.1"}, getSpeaker);
+server.del({path: "/speakers/:speakerId", version: "0.0.1"}, deleteSpeaker)
 server.post({path: "/speakers", version: "0.0.1"}, createNewSpeaker);
 server.get({path: "/speakerList", version: "0.0.1"}, getSpeakerList);
 server.post({path: "/speakerList", version: "0.0.1"}, addSpeakerToList);
@@ -42,7 +43,7 @@ server.post({path: "/speakerList/:speakerRank/replies", version: "0.0.1"}, addRe
 server.del({path: "/speakerList/:speakerRank/replies/:replyRank", version: "0.0.1"}, deleteReply);
 server.post({path: "/subject", version: "0.0.1"}, setSubject);
 server.get({path: "/subject", version: "0.0.1"}, getSubject);
-server.post({path: "/speakerList/:speakerRank", version: "0.0.1"}, doneSpeaking )
+server.post({path: "/speakerList/:speakerRank", version: "0.0.1"}, doneSpeaking);
 
 function setSubject(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -84,6 +85,20 @@ function getSpeaker(req, res, next) {
 		return next(err);
 	});
 }
+
+function deleteSpeaker(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	speakers.remove({number: req.params.speakerId}, function(err, success){
+		if (success) {
+			res.send(200);
+		} else {
+			res.send(500);
+		}
+
+		return next(err);
+	});
+}
+
 
 function createNewSpeaker(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -176,8 +191,8 @@ function nextReplyOrMainSpeakerDone(speaker, speakerRank) {
 		if (speakingIndex + 1 === speaker.replies.length) {
 			mainSpeakerDone(speaker,speakerRank)
 		} else {
-			speaker[speakingIndex].speaking = false;
-			speaker[speakingIndex + 1] = true;
+			speaker.replies[speakingIndex].speaking = false;
+			speaker.replies[speakingIndex + 1].speaking = true;
 		}
 		
 	}
@@ -185,14 +200,14 @@ function nextReplyOrMainSpeakerDone(speaker, speakerRank) {
 
 function mainSpeakerDone(speaker, speakerRank) {
 	if (speakerRank + 1 < speakerQueue.size()) {
-		speakerQueue.get(speakerRank + 1).speaking = true;
+		var nextSpeaker = speakerQueue.get(parseInt(speakerRank) + 1);
+		nextSpeaker.speaking = true;
 	}
 	speakerQueue.remove(speaker);
 }
 
 function removeSpeakerAtPoint(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	console.log(req.params.speakerRank);
 	speakerQueue.removeAt(req.params.speakerRank);
 	res.send(200);
 	return next();
