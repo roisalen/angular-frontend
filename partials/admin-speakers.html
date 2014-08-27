@@ -1,0 +1,90 @@
+<h1>Administrer representanter</h1>
+
+<h2>Registrerte representanter</h2>
+<div ng-show="adminSpeakersController.speakers">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Navn</th>
+				<th>Gruppe</th>
+				<th>Kjønn</th>
+				<th>Slett?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="speaker in adminSpeakersController.speakers">
+				<td>{{ speaker.number }}</td>
+				<td>{{ speaker.name }}</td>
+				<td>{{ speaker.group }}</td>
+				<td>{{ speaker.sex }}</td>
+				<td><small class="btn btn-danger" ng-click="adminSpeakersController.removeRepresentative($index)">X</small></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div ng-hide="adminSpeakersController.speakers">
+	<p>Ingen registrerte talere.</p>
+</div>
+
+<h2>Registrér representanter</h2>
+
+<label for="csv-upload">Last opp fil med representanter:</label>
+<input id="csv-upload" type="file" accept=".csv" onchange='adminSpeakersController.readFileToArray(this.files)' />
+
+<p class="help">Fila må ende på .csv og ha følgende format:</p>
+<pre>1,Torkil Vederhus,Realistlista,M
+2,Grete Godtland Noem,Venstrealliansen,K
+3,Stian Lågstad,Realistlista,M
+4,Ingunn Inge Nordmann,Grønn liste,T</pre> 
+
+<h2>Legg til eller rediger enkeltrepresentant</h2>
+<p class="help">Hvis du bruker et nummer som allerede eksisterer vil du overskrive all data for representanten</p>
+
+<form ng-submit="adminSpeakersController.postSpeakerFromForm()" class="form-horizontal">
+
+	<div class="form-group">
+		<label for="number" class="control-label col-xs-2">Nummer</label>
+		<div class="col-xs-10">
+			<input
+				id="number"
+				class="form-control"
+				ng-model="adminSpeakersController.number" />
+			</div>
+	</div>
+
+	<div class="form-group">
+		<label for="name" class="control-label col-xs-2">Navn</label>
+		<div class="col-xs-10">
+			<input
+				id="name"
+				class="form-control"
+				ng-model="adminSpeakersController.name" />
+			</div>
+	</div>
+
+	<div class="form-group">
+		<label for="group" class="control-label col-xs-2">Liste/gruppe</label>
+		<div class="col-xs-10">
+			<input
+				id="group"
+				class="form-control"
+				ng-model="adminSpeakersController.group" />
+			</div>
+	</div>
+
+	<div class="form-group">
+		<label for="sex" class="control-label col-xs-2">Kjønn</label>
+		<div class="col-xs-10">
+			<input
+				id="sex"
+				class="form-control"
+				ng-model="adminSpeakersController.sex" />
+			</div>
+	</div>
+
+	<div class="form-group text-right">
+		<button class="btn btn-default" type="submit">Legg til</button>
+	</div>
+
+</form>

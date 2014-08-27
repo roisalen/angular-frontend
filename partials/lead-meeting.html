@@ -1,0 +1,83 @@
+<h1>Ordstyrer</h1>
+
+<h2>Sakstittel</h2>
+<form ng-submit="adminSpeakersController.setSubject()" class="form-horizontal">
+
+	<div class="form-group">
+		<label for="subject" class="control-label col-xs-2">Sakstittel</label>
+		<div class="col-xs-8">
+			<input
+				type="text"
+				placeholder="Skriv inn sakstittel.."
+				id="subject"
+				class="form-control"
+				ng-model="adminSpeakersController.subject" />
+			</div>
+		<div class="col-xs-2">
+			<button class="btn btn-default" type="submit">Sett sakstittel</button>
+		</div>
+	</div>
+
+</form>
+
+<div id="stopwatch"></div>
+
+<h2>Legg til taler</h2>
+<form ng-submit="adminSpeakersController.addSpeaker()" class="form-horizontal">
+
+	<div class="form-group">
+		<label for="speakerNumber" class="control-label col-xs-2">Talenummer</label>
+		<div class="col-xs-8">
+			<input
+				type="text"
+				placeholder="Skriv inn talenummer.."
+				id="speakerNumber"
+				class="form-control"
+				ng-model="adminSpeakersController.speakerNumber" />
+		</div>
+		<div class="col-xs-2">
+			<button class="btn btn-default" type="submit">Legg til</button>
+		</div>
+	</div>
+
+</form>
+
+<h2>Talelista nå</h2>
+<div ng-show="leadMeetingController.speakerList">
+	<table id="speakerList" class="speaker-list">
+		<tbody>
+			<tr ng-repeat="speaker in leadMeetingController.speakerList">
+				<td>{{ speaker.number }}</td>
+				<td>{{ speaker.name }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div ng-hide="leadMeetingController.speakerList">
+	<p>Ingen talere på lista.</p>
+</div>
+
+<h2>Registrerte representanter</h2>
+<div ng-show="leadMeetingController.speakers">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Navn</th>
+				<th>Gruppe</th>
+				<th>Kjønn</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="speaker in leadMeetingController.speakers">
+				<td>{{ speaker.number }}</td>
+				<td>{{ speaker.name }}</td>
+				<td>{{ speaker.group }}</td>
+				<td>{{ speaker.sex }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div ng-hide="leadMeetingController.speakers">
+	<p>Ingen registrerte talere.</p>
+</div>

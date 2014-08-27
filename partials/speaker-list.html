@@ -1,0 +1,17 @@
+<h1>Taleliste</h1>
+
+<div ng-show="speakerListController.speakerList">
+	<table class="table">
+		<tbody>
+			<tr ng-repeat="speaker in speakerListController.speakerList">
+				<td>{{ speaker.number }}</td>
+				<td>{{ speaker.name }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div ng-hide="speakerListController.speakerList">
+	<h2>Si noe da!</h2>
+	<p>Ingen talere på lista :'(</p>
+</div>
