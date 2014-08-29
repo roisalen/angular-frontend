@@ -53,13 +53,21 @@
 				<th>#</th>
 				<th>Navn</th>
 				<th>Gruppe</th>
+				<th>Fjern</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr ng-repeat="speaker in leadMeetingController.speakerList">
+		<tbody ng-repeat="speaker in leadMeetingController.speakerList">
+			<tr>
 				<td>{{ speaker.number }}</td>
 				<td>{{ speaker.name }}</td>
 				<td>{{ speaker.group }}</td>
+				<td><small class="btn btn-danger" ng-click="leadMeetingController.removeSpeaker($index)">X</small></td>
+			</tr>
+			<tr ng-repeat="reply in speaker.replies">
+				<td><span class="glyphicon glyphicon-arrow-right"></span> {{ reply.number }}</td>
+				<td>{{ reply.name }}</td>
+				<td>{{ reply.group }}</td>
+				<td><small class="btn btn-danger" ng-click="leadMeetingController.removeReplicant($index)">X</small></td>
 			</tr>
 		</tbody>
 	</table>

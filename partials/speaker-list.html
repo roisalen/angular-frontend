@@ -2,10 +2,23 @@
 
 <div ng-show="speakerListController.speakerList">
 	<table class="table">
-		<tbody>
-			<tr ng-repeat="speaker in speakerListController.speakerList">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Navn</th>
+				<th>Gruppe</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="speaker in speakerListController.speakerList">
+			<tr>
 				<td>{{ speaker.number }}</td>
 				<td>{{ speaker.name }}</td>
+				<td>{{ speaker.group }}</td>
+			</tr>
+			<tr ng-repeat="reply in speaker.replies">
+				<td><span class="glyphicon glyphicon-arrow-right"></span> {{ reply.number }}</td>
+				<td>{{ reply.name }}</td>
+				<td>{{ reply.group }}</td>
 			</tr>
 		</tbody>
 	</table>

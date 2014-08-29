@@ -14,6 +14,7 @@
 	    // get the current speaker _list_ from server
 	    SpeakersFactory.getSpeakerListFromServer()
 	    .success(function(data) {
+	    	console.log(data);
 	    	vm.speakerList = data;
 	    })
 	    .error(function() {
@@ -71,7 +72,7 @@
 	    vm.group = null;
 	    vm.sex = null;
 	    vm.postSpeakerFromForm = function() {
-	    	// TO DO: hente logikken for å registrere ny representant fra admin.js
+	    	SpeakersFactory.postSpeakerFromArray([vm.number, vm.name, vm.group, vm.sex]);
 	    };
 
 	    // handler for removing a representative
@@ -129,7 +130,17 @@
 	    vm.addSpeaker = function() {
 	    	console.log('Let\'s try to add a new speaker to the list:' + vm.speakerNumber);
 	    	SpeakersFactory.addSpeaker(vm.speakerNumber);
-	    }
+	    };
+
+	    // handler for removing a speaker from the speaker list
+	    vm.removeSpeaker = function(index) {
+	    	SpeakersFactory.removeSpeaker(index);
+	    };
+
+	    // handler for removing a replicant from the current
+	    vm.removeReplicant = function(index) {
+	    	SpeakersFactory.removeReplicant(index);
+	    };
 
 	    return vm;
 

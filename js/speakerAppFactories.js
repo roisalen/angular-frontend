@@ -50,6 +50,8 @@
 				speaker.sex = entry[3];
 			};
 
+			console.log(JSON.stringify(speaker));
+
 			$http.post(speakerAppSettings.server_url + "/speakers", JSON.stringify(speaker))
 			.success(function() {
 				console.log('Successfully posted speaker: ' + speaker.number);
@@ -98,6 +100,32 @@
 				console.log('Unable to add replicant.');
 			});
 		};
+
+		/*
+		 * Will remove the speaker with the given index
+		 */
+		SpeakersFactory.removeSpeaker = function(index) {
+			$http.delete(speakerAppSettings.server_url + "/speakerList/" + index)
+			.success(function() {
+				console.log('Speaker removed.');
+			})
+			.error(function() {
+				console.log('Unable to remove speaker.');
+			});
+		}
+
+		/*
+		 * Will remove the replicant with the given index
+		 */
+		SpeakersFactory.removeReplicant = function(index) {
+			$http.delete(speakerAppSettings.server_url + "/speakerList/0/replies/" + index)
+			.success(function() {
+				console.log('Replicant removed.');
+			})
+			.error(function() {
+				console.log('Unable to remove replicant.');
+			});
+		}
 
 		/*
 		 * Will add a new speaker to the bottom of the speaker list.
