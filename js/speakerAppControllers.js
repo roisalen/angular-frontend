@@ -7,28 +7,18 @@
 
 	// -----
 	// used with partials/speaker-list.html
-	function speakerListController(RegisteredSpeakersFactory) {
+	function speakerListController(SpeakersFactory) {
 
 	    var vm = this;
 
 	    // get the current speaker _list_ from server
-	    RegisteredSpeakersFactory.getSpeakerListFromServer()
+	    SpeakersFactory.getSpeakerListFromServer()
 	    .success(function(data) {
 	    	vm.speakerList = data;
 	    })
 	    .error(function() {
 	    	console.log('could not get data from server')
 	    });
-
-	    // handler for setting the current case subject
-	    vm.setSubject = function() {
-	    	// TO DO: lagre sakstittel (kanskje i en ny factory)
-	    };
-
-	    // handler for å legge til taler
-	    vm.addSpeaker = function() {
-	    	// TO DO: hente over logikken for å legge til taler fra speakerlist-manager.js
-	    }
 
 	    return vm;
 
@@ -42,18 +32,32 @@
 
 	// -----
 	// used with partials/admin-speakers.html
-	function adminSpeakersController(RegisteredSpeakersFactory) {
+	function adminSpeakersController($interval, SpeakersFactory) {
 
 	    var vm = this;
 
-	    // get registered speakers from server
-	    RegisteredSpeakersFactory.getSpeakersFromServer()
-	    .success(function(data) {
-	    	vm.speakers = data;
-	    })
-	    .error(function() {
-	    	console.log('could not get data from server')
-	    });
+	    // fetch stuff every 1 second
+	    $interval(function() {
+
+	    	// get registered speakers from server
+	    	SpeakersFactory.getSpeakersFromServer()
+	    	.success(function(data) {
+	    		vm.speakers = data;
+	    	})
+	    	.error(function() {
+	    		console.log('could not get data from server')
+	    	});
+
+	    	// get the current speaker _list_ from server
+	    	SpeakersFactory.getSpeakerListFromServer()
+	    	.success(function(data) {
+	    		vm.speakerList = data;
+	    	})
+	    	.error(function() {
+	    		console.log('could not get data from server')
+	    	});
+
+	    }, 1000);
 
 	    // handler for the csv speaker import
 	    vm.readFileToArray = function(files) {
@@ -88,27 +92,44 @@
 
 	// -----
 	// used with partials/lead-meeting.html
-	function leadMeetingController($http, RegisteredSpeakersFactory) {
+	function leadMeetingController($http, $interval, SpeakersFactory) {
 
 	    var vm = this;
 
-	    // get registered speakers from server
-	    RegisteredSpeakersFactory.getSpeakersFromServer()
-	    .success(function(data) {
-	    	vm.speakers = data;
-	    })
-	    .error(function() {
-	    	console.log('could not get data from server')
-	    });
+	    // fetch stuff every 1 second
+	    $interval(function() {
 
-	    // get the current speaker _list_ from server
-	    RegisteredSpeakersFactory.getSpeakerListFromServer()
-	    .success(function(data) {
-	    	vm.speakerList = data;
-	    })
-	    .error(function() {
-	    	console.log('could not get data from server')
-	    });
+	    	// get registered speakers from server
+	    	SpeakersFactory.getSpeakersFromServer()
+	    	.success(function(data) {
+	    		vm.speakers = data;
+	    	})
+	    	.error(function() {
+	    		console.log('could not get data from server')
+	    	});
+
+	    	// get the current speaker _list_ from server
+	    	SpeakersFactory.getSpeakerListFromServer()
+	    	.success(function(data) {
+	    		vm.speakerList = data;
+	    	})
+	    	.error(function() {
+	    		console.log('could not get data from server')
+	    	});
+
+	    }, 1000);
+
+	    // handler for setting the current case subject
+	    vm.setSubject = function() {
+	    	// TO DO: lagre sakstittel (kanskje i en ny factory)
+	    };
+
+	    // variables and handler for adding a speaker to the speaker list
+	    vm.speakerNumber = null;
+	    vm.addSpeaker = function() {
+	    	console.log('Let\'s try to add a new speaker to the list:' + vm.speakerNumber);
+	    	SpeakersFactory.addSpeaker(vm.speakerNumber);
+	    }
 
 	    return vm;
 

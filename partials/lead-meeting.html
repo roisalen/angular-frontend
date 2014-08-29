@@ -1,7 +1,9 @@
 <h1>Ordstyrer</h1>
 
+<!-- idéen er at man etterhvert kan laste opp sakstitlene og displaye hvilken sak man er på nå, og kanskje tegne seg til ulike saker. ikke implementert forløpig -->
+<div ng-show="false"> <!-- false because not implemented -->
 <h2>Sakstittel</h2>
-<form ng-submit="adminSpeakersController.setSubject()" class="form-horizontal">
+<form ng-submit="leadMeetingController.setSubject()" class="form-horizontal">
 
 	<div class="form-group">
 		<label for="subject" class="control-label col-xs-2">Sakstittel</label>
@@ -11,7 +13,7 @@
 				placeholder="Skriv inn sakstittel.."
 				id="subject"
 				class="form-control"
-				ng-model="adminSpeakersController.subject" />
+				ng-model="leadMeetingController.subject" />
 			</div>
 		<div class="col-xs-2">
 			<button class="btn btn-default" type="submit">Sett sakstittel</button>
@@ -19,11 +21,12 @@
 	</div>
 
 </form>
+</div>
 
 <div id="stopwatch"></div>
 
 <h2>Legg til taler</h2>
-<form ng-submit="adminSpeakersController.addSpeaker()" class="form-horizontal">
+<form ng-submit="leadMeetingController.addSpeaker()" class="form-horizontal">
 
 	<div class="form-group">
 		<label for="speakerNumber" class="control-label col-xs-2">Talenummer</label>
@@ -33,7 +36,7 @@
 				placeholder="Skriv inn talenummer.."
 				id="speakerNumber"
 				class="form-control"
-				ng-model="adminSpeakersController.speakerNumber" />
+				ng-model="leadMeetingController.speakerNumber" />
 		</div>
 		<div class="col-xs-2">
 			<button class="btn btn-default" type="submit">Legg til</button>
@@ -44,11 +47,19 @@
 
 <h2>Talelista nå</h2>
 <div ng-show="leadMeetingController.speakerList">
-	<table id="speakerList" class="speaker-list">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Navn</th>
+				<th>Gruppe</th>
+			</tr>
+		</thead>
 		<tbody>
 			<tr ng-repeat="speaker in leadMeetingController.speakerList">
 				<td>{{ speaker.number }}</td>
 				<td>{{ speaker.name }}</td>
+				<td>{{ speaker.group }}</td>
 			</tr>
 		</tbody>
 	</table>
