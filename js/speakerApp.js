@@ -13,6 +13,7 @@
 	angular.module('speakerApp')
 	.constant('speakerAppSettings', {
 		server_url: 'http://roisalen.herokuapp.com'
+		// server_url: 'http://127.0.0.1:8080'
 	});
 
 	// edit config

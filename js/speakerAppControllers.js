@@ -97,17 +97,17 @@
 
 	    var vm = this;
 
+	    // get registered speakers from server
+	    SpeakersFactory.getSpeakersFromServer()
+	    .success(function(data) {
+	    	vm.speakers = data;
+	    })
+	    .error(function() {
+	    	console.log('could not get data from server')
+	    });
+
 	    // fetch stuff every 1 second
 	    $interval(function() {
-
-	    	// get registered speakers from server
-	    	SpeakersFactory.getSpeakersFromServer()
-	    	.success(function(data) {
-	    		vm.speakers = data;
-	    	})
-	    	.error(function() {
-	    		console.log('could not get data from server')
-	    	});
 
 	    	// get the current speaker _list_ from server
 	    	SpeakersFactory.getSpeakerListFromServer()
