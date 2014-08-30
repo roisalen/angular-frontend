@@ -37,7 +37,7 @@
 		 * Stores the current subject title on the server.
 		 */
 		SpeakersFactory.setSubjectTitleOnServer = function(subjectTitle) {
-			return $http.post(speakerAppSettings.server_url + "/subject", subjectTitle);
+			return $http.post(speakerAppSettings.server_url + "/subject", JSON.stringify(subjectTitle));
 		}
 
 		/*

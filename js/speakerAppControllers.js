@@ -26,7 +26,7 @@
 		    // get the current subject title form the sever
 		    SpeakersFactory.getSubjectTitleFromServer()
 		    .success(function(data) {
-		    	vm.subjectTitle = data;
+		    	vm.subjectTitle = JSON.parse(data);
 		    })
 		    .error(function() {
 		    	console.log('could not get data from server')
@@ -123,8 +123,7 @@
 	    // get the current subject title form the sever
 	    SpeakersFactory.getSubjectTitleFromServer()
 	    .success(function(data) {
-	    	console.log(data);
-	    	vm.subjectTitle = data;
+	    	vm.subjectTitle = JSON.parse(data);
 	    })
 	    .error(function() {
 	    	console.log('could not get data from server')
