@@ -62,8 +62,8 @@ function getSubject(req, res, next) {
 function getAllSpeakers(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.find().sort({number: 1}, function(err, success){
-		console.log("Response success "+success);
-		console.log("Response error "+err);
+		//console.log("Response success "+success);
+		//console.log("Response error "+err);
 		if (success){
 			res.send(200, success);
 		} else{
@@ -76,8 +76,8 @@ function getAllSpeakers(req, res, next) {
 function getSpeaker(req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	speakers.findOne({number: parseInt(req.params.speakerId)}, function(err, success) {
-		console.log("Response success "+success);
-		console.log("Response error "+err);
+		//console.log("Response success "+success);
+		//console.log("Response error "+err);
 		if (success){
 			res.send(200, success);
 			return next();
@@ -166,8 +166,9 @@ function addReplyToSpeakerAtPoint(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	console.log("adding reply");
 	console.log("replicantId")
+	console.log(req.params);
 	var replicantId = req.body;
-	var speakerIndex = req.params.speakerRank;
+	var speakerIndex = 0 //req.params.speakerRank;
 	speakers.findOne({number: parseInt(replicantId)}, function(err, success) {
 		if (success) {
 			console.log("found speaker");
