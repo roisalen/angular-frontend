@@ -79,12 +79,12 @@
 		 * Will remove the speaker with the given number.
 		 */
 		SpeakersFactory.removeSpeakerByNumber = function(number) {
-			$http.delete(speakerAppSettings.server_url + "/speakers/" + index)
+			$http.delete(speakerAppSettings.server_url + "/speakers/" + number)
 			.success(function() {
-				console.log('Successfully deleted speaker: ' + index);
+				console.log('Successfully deleted speaker: ' + number);
 			})
 			.error(function() {
-				console.log('Unable to delete speaker: ' + index);
+				console.log('Unable to delete speaker: ' + number);
 			});
 		}
 

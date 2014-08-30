@@ -89,9 +89,8 @@
 	    };
 
 	    // handler for removing a representative
-	    vm.removeRepresentative = function(index) {
-	    	// TO DO: hent fra speakerlist-manager
-	    	console.log('slettmeg');
+	    vm.removeRepresentative = function(number) {
+	    	SpeakersFactory.removeSpeakerByNumber(number);
 	    };
 
 	    return vm;
@@ -153,7 +152,7 @@
 	    // variables and handler for adding a speaker to the speaker list
 	    vm.speakerNumber = null;
 	    vm.addSpeaker = function() {
-	    	
+
 	    	console.log('Let\'s try to add a new speaker to the list:' + vm.speakerNumber);
 	    	
 	    	var callback = function() {

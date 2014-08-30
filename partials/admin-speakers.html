@@ -18,7 +18,7 @@
 				<td>{{ speaker.name }}</td>
 				<td>{{ speaker.group }}</td>
 				<td>{{ speaker.sex }}</td>
-				<td><small class="btn btn-danger" ng-click="adminSpeakersController.removeRepresentative($index)">X</small></td>
+				<td><small class="btn btn-danger" ng-click="adminSpeakersController.removeRepresentative(speaker.number)">X</small></td>
 			</tr>
 		</tbody>
 	</table>
