@@ -34,6 +34,20 @@
 		};
 
 		/*
+		 * Stores the current subject title on the server.
+		 */
+		SpeakersFactory.setSubjectTitleOnServer = function(subjectTitle) {
+			return $http.post(speakerAppSettings.server_url + "/subject", subjectTitle);
+		}
+
+		/*
+		 * Gets the current subject title from the server.
+		 */
+		SpeakersFactory.getSubjectTitleFromServer = function() {
+			return $http.get(speakerAppSettings.server_url + "/subject");
+		}
+
+		/*
 		 * Posts (registers) a new speaker to the server.
 		 */
 		SpeakersFactory.postSpeakerFromArray = function(entry) {

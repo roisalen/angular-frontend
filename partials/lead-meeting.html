@@ -3,7 +3,7 @@
 <!-- idéen er at man etterhvert kan laste opp sakstitlene og displaye hvilken sak man er på nå, og kanskje tegne seg til ulike saker. ikke implementert forløpig -->
 <div ng-show="false"> <!-- false because not implemented -->
 <h2>Sakstittel</h2>
-<form ng-submit="leadMeetingController.setSubject()" class="form-horizontal">
+<form ng-submit="leadMeetingController.setSubjectTitle()" class="form-horizontal">
 
 	<div class="form-group">
 		<label for="subject" class="control-label col-xs-2">Sakstittel</label>
@@ -13,7 +13,7 @@
 				placeholder="Skriv inn sakstittel.."
 				id="subject"
 				class="form-control"
-				ng-model="leadMeetingController.subject" />
+				ng-model="leadMeetingController.subjectTitle" />
 			</div>
 		<div class="col-xs-2">
 			<button class="btn btn-default" type="submit">Sett sakstittel</button>

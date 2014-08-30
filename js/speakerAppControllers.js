@@ -23,6 +23,15 @@
 		    	console.log('could not get data from server')
 		    });
 
+		    // get the current subject title form the sever
+		    SpeakersFactory.getSubjectTitleFromServer()
+		    .success(function(data) {
+		    	vm.subjectTitle = data;
+		    })
+		    .error(function() {
+		    	console.log('could not get data from server')
+		    });
+
 	    }, 1000);
 
 	    return vm;
@@ -110,6 +119,16 @@
 	    	console.log('could not get data from server')
 	    });
 
+	    // get the current subject title form the sever
+	    SpeakersFactory.getSubjectTitleFromServer()
+	    .success(function(data) {
+	    	console.log(data);
+	    	vm.subjectTitle = data;
+	    })
+	    .error(function() {
+	    	console.log('could not get data from server')
+	    });
+
 	    // fetch stuff every 1 second
 	    $interval(function() {
 
@@ -148,6 +167,17 @@
 	    vm.removeReplicant = function(index) {
 	    	SpeakersFactory.removeReplicant(index);
 	    };
+
+	    // handler for setting the current subject title
+	    vm.setSubjectTitle = function() {
+	    	SpeakersFactory.setSubjectTitleOnServer(vm.subjectTitle)
+	    	.success(function() {
+	    		console.log('Subject title updated.');
+	    	})
+	    	.error(function() {
+	    		console.log('Could not set subject title.');
+	    	});
+	    }
 
 	    return vm;
 
