@@ -122,9 +122,10 @@ function deleteAllSpeakers(req, res, next) {
 function createNewSpeaker(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	console.log(req.body);
-	var speakerJson = JSON.parse(req.body);
+	var speakerJson = req.body;
 	console.log(speakerJson);
 	var speaker = new Speaker(speakerJson.name, parseInt(speakerJson.number), speakerJson.sex, speakerJson.group);
+	
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	speakers.save(speaker, function(err, success) {
 		console.log("Response success "+success);
