@@ -91,10 +91,11 @@
 		/*
 		 * Will add a replicant to the current speaker.
 		 */
-		SpeakersFactory.addReplyToFirstSpeaker = function(replicantNumber) {
+		SpeakersFactory.addReplyToFirstSpeaker = function(replicantNumber, callback) {
 			$http.post(speakerAppSettings.server_url + "/speakerList/0/replies", replicantNumber)
 			.success(function() {
 				console.log('Added replicant.');
+				callback();
 			})
 			.error(function() {
 				console.log('Unable to add replicant.');
@@ -130,10 +131,11 @@
 		/*
 		 * Will add a new speaker to the bottom of the speaker list.
 		 */
-		SpeakersFactory.addSpeakerToBottom = function(speakerNumber) {
+		SpeakersFactory.addSpeakerToBottom = function(speakerNumber, callback) {
 			$http.post(speakerAppSettings.server_url + "/speakerList", speakerNumber)
 			.success(function() {
 				console.log('Added speaker.');
+				callback();
 			})
 			.error(function() {
 				console.log('Unable to add speaker.');
@@ -144,7 +146,7 @@
 		 * Will take input from the add speaker field, and decide what to do
 		 * next.
 		 */
-		SpeakersFactory.addSpeaker = function(input) {
+		SpeakersFactory.addSpeaker = function(input, callback) {
 			if (!input) {
 
 				SpeakersFactory.nextSpeaker();
@@ -153,12 +155,12 @@
 
 			} else if (input.charAt(0) === "r") {
 
-				SpeakersFactory.addReplyToFirstSpeaker(input.slice(1));
+				SpeakersFactory.addReplyToFirstSpeaker(input.slice(1), callback);
 				
 			} else if (!isNaN(parseInt(input))) {
 
 				// timer.start();
-				SpeakersFactory.addSpeakerToBottom(input);
+				SpeakersFactory.addSpeakerToBottom(input, callback);
 
 			} else {
 

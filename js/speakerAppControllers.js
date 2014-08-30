@@ -129,7 +129,10 @@
 	    vm.speakerNumber = null;
 	    vm.addSpeaker = function() {
 	    	console.log('Let\'s try to add a new speaker to the list:' + vm.speakerNumber);
-	    	SpeakersFactory.addSpeaker(vm.speakerNumber);
+	    	SpeakersFactory.addSpeaker(vm.speakerNumber, function() {
+	    		// this is called when the action is done successfully
+	    		vm.speakerNumber = null;
+	    	});
 	    };
 
 	    // handler for removing a speaker from the speaker list
