@@ -78,7 +78,7 @@
 		/*
 		 * Will remove the speaker with the given number.
 		 */
-		SpeakersFactory.removeSpeakerByNumber = function(number) {
+		SpeakersFactory.removeRepresentative = function(number) {
 			$http.delete(speakerAppSettings.server_url + "/speakers/" + number)
 			.success(function() {
 				console.log('Successfully deleted speaker: ' + number);

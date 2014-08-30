@@ -90,7 +90,7 @@
 
 	    // handler for removing a representative
 	    vm.removeRepresentative = function(number) {
-	    	SpeakersFactory.removeSpeakerByNumber(number);
+	    	SpeakersFactory.removeRepresentative(number);
 	    };
 
 	    return vm;
