@@ -7,19 +7,23 @@
 
 	// -----
 	// used with partials/speaker-list.html
-	function speakerListController(SpeakersFactory) {
+	function speakerListController($interval, SpeakersFactory) {
 
 	    var vm = this;
 
-	    // get the current speaker _list_ from server
-	    SpeakersFactory.getSpeakerListFromServer()
-	    .success(function(data) {
-	    	console.log(data);
-	    	vm.speakerList = data;
-	    })
-	    .error(function() {
-	    	console.log('could not get data from server')
-	    });
+	    // fetch stuff every 1 second
+	    $interval(function() {
+
+		    // get the current speaker _list_ from server
+		    SpeakersFactory.getSpeakerListFromServer()
+		    .success(function(data) {
+		    	vm.speakerList = data;
+		    })
+		    .error(function() {
+		    	console.log('could not get data from server')
+		    });
+
+	    }, 1000);
 
 	    return vm;
 
