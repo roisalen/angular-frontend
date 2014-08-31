@@ -4,7 +4,8 @@
 	<title>Taleliste</title>
 	<meta charset="UTF-8">
 
-	<link href="css/bootstrap.simplex.min.css" type="text/css" rel="stylesheet" />
+	<!-- bootstrap and own our own css -->
+	<link href="css/vtoa.bootstrap.min.css" type="text/css" rel="stylesheet" />
 	<link href="css/styles.css" type="text/css" rel="stylesheet" />
 	
 	<!-- angular with router -->
@@ -30,16 +31,18 @@
 </head>
 <body ng-app="speakerApp">
 
-<div class="navbar navbar-inverse navbar-static-top">
+<div class="navbar navbar-default navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
 			
 			<div>
 				<a ui-sref="speaker-list" class="navbar-brand">
-					<img
-						src="images/logo.png"
+					<!-- <img
+						src="images/logo_spuio.png"
 						alt=""
-						height="20px">
+						height="20px"> -->
+					Velferdstinget OA
+					<span class="glyphicon glyphicon-bullhorn"></span>
 				</a>
 			</div>
 
