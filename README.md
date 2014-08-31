@@ -1,14 +1,9 @@
-roisalen
+roisalen: angular-frontend
 ========
 
-Simple apps for managing large meetings
+roisalen is a simple app for managing meetings. This is the frontend.
 
 ## INSTALLING:
-1. Clone git repository 
-2. In backend folder, run npm install
-3. Install and run mongod
-4. run server.js backend
-5. Todo: Open index.html
-
-## ARCHITECTURE: 
-![architecture](https://raw.githubusercontent.com/torkilv/roisalen/master/roisalenarkitektur.jpg)
+1. First setup the backend.
+2. Clone this repo
+3. Set server url in js/speakerApp.js
