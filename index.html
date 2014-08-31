@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="speakerApp">
 <head>
 	<title>roisalen</title>
 	<meta charset="UTF-8">
 
 	<!-- bootstrap and own our own css -->
-	<link href="css/vtoa.bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/{{ css }}" type="text/css" rel="stylesheet" />
 	<link href="css/styles.css" type="text/css" rel="stylesheet" />
 	
 	<!-- angular with router -->
@@ -29,7 +29,7 @@
 	<!-- aand the bootstrap js -->
 	<script src="js/bootstrap.min.js"></script>
 </head>
-<body ng-app="speakerApp">
+<body>
 
 <div class="navbar navbar-default navbar-static-top">
 	<div class="navbar-inner">
@@ -37,11 +37,7 @@
 			
 			<div>
 				<a ui-sref="speaker-list" class="navbar-brand">
-					<!-- <img
-						src="images/logo_spuio.png"
-						alt=""
-						height="20px"> -->
-					Velferdstinget OA
+					{{ organization_name }}
 					<span class="glyphicon glyphicon-bullhorn"></span>
 				</a>
 			</div>
@@ -72,10 +68,7 @@
 
 <div class="container">
 
-<!-- 	<a href="admin/">Administrer representanter</a>
-	<a href="admin/ordstyrer.html">Styr ordet</a> -->
-
-	<!-- load partials -->
+	<!-- ui-router loads partials in this div -->
 	<div ui-view></div>
 
 </div>
