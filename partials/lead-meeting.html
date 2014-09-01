@@ -20,9 +20,7 @@
 </form>
 
 <h2>Tid</h2>
-
-
-
+<div id="stopwatch" class="biggerText"></div>
 
 <h2>Talelista nå</h2>
 <div ng-show="leadMeetingController.speakerList">
@@ -63,7 +61,7 @@
 		<div class="col-xs-8">
 			<input
 				type="text"
-				placeholder="Skriv inn talenummer.."
+				placeholder="Skriv inn talenummer eller trykk enter for neste taler"
 				id="speakerNumber"
 				class="form-control"
 				ng-model="leadMeetingController.speakerNumber" />
