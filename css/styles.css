@@ -8,6 +8,9 @@
 	font-size: 300%;
 }
 
+.fontSizeDoubled {
+	font-size: 200%;
+}
 .borderless tbody tr td, .borderless thead tr th {
     border: none;
 }
