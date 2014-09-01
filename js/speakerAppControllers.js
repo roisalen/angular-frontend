@@ -23,6 +23,15 @@
 		    	console.log('could not get data from server')
 		    });
 
+		    // get the current subject title form the sever
+		    SpeakersFactory.getSubjectTitleFromServer()
+		    .success(function(data) {
+		    	vm.subjectTitle = JSON.parse(data);
+		    })
+		    .error(function() {
+		    	console.log('could not get data from server')
+		    });
+
 	    }, 1000);
 
 	    return vm;
@@ -80,9 +89,8 @@
 	    };
 
 	    // handler for removing a representative
-	    vm.removeRepresentative = function(index) {
-	    	// TO DO: hent fra speakerlist-manager
-	    	console.log('slettmeg');
+	    vm.removeRepresentative = function(number) {
+	    	SpeakersFactory.removeRepresentative(number);
 	    };
 
 	    return vm;
@@ -101,10 +109,21 @@
 
 	    var vm = this;
 
+	    vm.timer = new Stopwatch(document.getElementById("stopwatch"), {delay: 1000});
+
 	    // get registered speakers from server
 	    SpeakersFactory.getSpeakersFromServer()
 	    .success(function(data) {
 	    	vm.speakers = data;
+	    })
+	    .error(function() {
+	    	console.log('could not get data from server')
+	    });
+
+	    // get the current subject title form the sever
+	    SpeakersFactory.getSubjectTitleFromServer()
+	    .success(function(data) {
+	    	vm.subjectTitle = JSON.parse(data);
 	    })
 	    .error(function() {
 	    	console.log('could not get data from server')
@@ -132,11 +151,35 @@
 	    // variables and handler for adding a speaker to the speaker list
 	    vm.speakerNumber = null;
 	    vm.addSpeaker = function() {
+
 	    	console.log('Let\'s try to add a new speaker to the list:' + vm.speakerNumber);
-	    	SpeakersFactory.addSpeaker(vm.speakerNumber, function() {
+	    	
+	    	var callback = function() {
 	    		// this is called when the action is done successfully
 	    		vm.speakerNumber = null;
-	    	});
+	    	};
+
+	    	if (!vm.speakerNumber) {
+
+	    		SpeakersFactory.nextSpeaker();
+	    		vm.timer.reset();
+	    		vm.timer.start();
+
+	    	} else if (vm.speakerNumber.charAt(0) === "r") {
+
+	    		SpeakersFactory.addReplyToFirstSpeaker(vm.speakerNumber.slice(1), callback);
+	    		
+	    	} else if (!isNaN(parseInt(vm.speakerNumber))) {
+
+	    		vm.timer.start();
+	    		SpeakersFactory.addSpeakerToBottom(vm.speakerNumber, callback);
+
+	    	} else {
+
+	    		vm.timer.start();
+	    		SpeakersFactory.registerUnknownSpeakerAndAddSpeakerToBottom(vm.speakerNumber);
+
+	    	}
 	    };
 
 	    // handler for removing a speaker from the speaker list
@@ -148,6 +191,17 @@
 	    vm.removeReplicant = function(index) {
 	    	SpeakersFactory.removeReplicant(index);
 	    };
+
+	    // handler for setting the current subject title
+	    vm.setSubjectTitle = function() {
+	    	SpeakersFactory.setSubjectTitleOnServer(vm.subjectTitle)
+	    	.success(function() {
+	    		console.log('Subject title updated.');
+	    	})
+	    	.error(function() {
+	    		console.log('Could not set subject title.');
+	    	});
+	    }
 
 	    return vm;
 

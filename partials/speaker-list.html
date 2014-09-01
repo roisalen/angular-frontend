@@ -1,4 +1,8 @@
+<div class="biggerText">
+
 <h1>Taleliste</h1>
+
+<h3>Sakstittel: {{ speakerListController.subjectTitle }}</h3>
 
 <div ng-show="speakerListController.speakerList">
 	<table class="table">
@@ -25,6 +29,7 @@
 </div>
 
 <div ng-hide="speakerListController.speakerList">
-	<h2>Si noe da!</h2>
 	<p>Ingen talere på lista :'(</p>
+</div>
+
 </div>

@@ -1,4 +1,9 @@
-/*Highlighting of the current speaker */
+/* Highlighting of the current speaker */
 .hightlightSpeaker {
 	font-size: 1.5em;
+}
+
+/* Bigger text for the speaker-list view */
+.biggerText {
+	font-size: 300%;
 }

@@ -34,6 +34,20 @@
 		};
 
 		/*
+		 * Stores the current subject title on the server.
+		 */
+		SpeakersFactory.setSubjectTitleOnServer = function(subjectTitle) {
+			return $http.post(speakerAppSettings.server_url + "/subject", JSON.stringify(subjectTitle));
+		}
+
+		/*
+		 * Gets the current subject title from the server.
+		 */
+		SpeakersFactory.getSubjectTitleFromServer = function() {
+			return $http.get(speakerAppSettings.server_url + "/subject");
+		}
+
+		/*
 		 * Posts (registers) a new speaker to the server.
 		 */
 		SpeakersFactory.postSpeakerFromArray = function(entry) {
@@ -64,13 +78,13 @@
 		/*
 		 * Will remove the speaker with the given number.
 		 */
-		SpeakersFactory.removeSpeakerByNumber = function(number) {
-			$http.delete(speakerAppSettings.server_url + "/speakers/" + index)
+		SpeakersFactory.removeRepresentative = function(number) {
+			$http.delete(speakerAppSettings.server_url + "/speakers/" + number)
 			.success(function() {
-				console.log('Successfully deleted speaker: ' + index);
+				console.log('Successfully deleted speaker: ' + number);
 			})
 			.error(function() {
-				console.log('Unable to delete speaker: ' + index);
+				console.log('Unable to delete speaker: ' + number);
 			});
 		}
 

@@ -1,9 +1,9 @@
 var Stopwatch = function(elem, options) {
 
   var timer       = createTimer(),
-      startButton = createButton("&#9654;", start),
-      stopButton  = createButton("&#9632;", stop),
-      resetButton = createButton("&#10226;", reset),
+      startButton = createButton("<span class='glyphicon glyphicon-play'></span>", start),
+      stopButton  = createButton("<span class='glyphicon glyphicon-stop'></span>", stop),
+      resetButton = createButton("<span class='glyphicon glyphicon-repeat'></span>", reset),
       offset,
       clock,
       interval;
