@@ -7,3 +7,7 @@
 .biggerText {
 	font-size: 300%;
 }
+
+.borderless tbody tr td, .borderless thead tr th {
+    border: none;
+}
