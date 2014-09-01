@@ -11,6 +11,10 @@
 .fontSizeDoubled {
 	font-size: 200%;
 }
+
+.alignCenter {
+	text-align: center;
+}
 .borderless tbody tr td, .borderless thead tr th {
     border: none;
 }
