@@ -13,34 +13,16 @@
 				ng-model="leadMeetingController.subjectTitle" />
 			</div>
 		<div class="col-xs-2">
-			<button class="btn btn-default" type="submit">Sett sakstittel</button>
+			<button class="btn btn-default" type="submit">Lagre</button>
 		</div>
 	</div>
 
 </form>
 
 <h2>Tid</h2>
-<div id="stopwatch" class="biggerText"></div>
 
-<h2>Legg til taler</h2>
-<form ng-submit="leadMeetingController.addSpeaker()" class="form-horizontal">
 
-	<div class="form-group">
-		<label for="speakerNumber" class="control-label col-xs-2">Talenummer</label>
-		<div class="col-xs-8">
-			<input
-				type="text"
-				placeholder="Skriv inn talenummer.."
-				id="speakerNumber"
-				class="form-control"
-				ng-model="leadMeetingController.speakerNumber" />
-		</div>
-		<div class="col-xs-2">
-			<button class="btn btn-default" type="submit">Legg til</button>
-		</div>
-	</div>
 
-</form>
 
 <h2>Talelista nå</h2>
 <div ng-show="leadMeetingController.speakerList">
@@ -72,6 +54,26 @@
 <div ng-hide="leadMeetingController.speakerList">
 	<p>Ingen talere på lista.</p>
 </div>
+
+<h2>Legg til taler</h2>
+<form ng-submit="leadMeetingController.addSpeaker()" class="form-horizontal">
+
+	<div class="form-group">
+		<label for="speakerNumber" class="control-label col-xs-2">Talenummer</label>
+		<div class="col-xs-8">
+			<input
+				type="text"
+				placeholder="Skriv inn talenummer.."
+				id="speakerNumber"
+				class="form-control"
+				ng-model="leadMeetingController.speakerNumber" />
+		</div>
+		<div class="col-xs-2">
+			<button class="btn btn-default" type="submit">Legg til</button>
+		</div>
+	</div>
+
+</form>
 
 <h2>Registrerte representanter</h2>
 <div ng-show="leadMeetingController.speakers">
