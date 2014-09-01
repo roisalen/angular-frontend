@@ -12,7 +12,9 @@
 	// add app constants
 	angular.module('speakerApp')
 	.constant('speakerAppSettings', {
-		server_url: 'http://roisalen.herokuapp.com'
+		server_url: 'http://roisalen.herokuapp.com',
+		css: 'vtoa.bootstrap.min.css',
+		organization_name: 'Velferdstinget OA'
 		// server_url: 'http://127.0.0.1:8080'
 	});
 
@@ -44,8 +46,10 @@
 	})
 	// in order to add the active class to the nav-links that are active, we
 	// need access to the state in our header. we do that this way:
-	.run(function($rootScope, $state) {
+	.run(function($rootScope, $state, speakerAppSettings) {
 		$rootScope.$state = $state;
+		$rootScope.css = speakerAppSettings.css;
+		$rootScope.organization_name = speakerAppSettings.organization_name;
 	});
 
 })();

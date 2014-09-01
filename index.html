@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="speakerApp">
 <head>
 	<title>Taleliste</title>
 	<meta charset="UTF-8">
 
-	<link href="css/bootstrap.simplex.min.css" type="text/css" rel="stylesheet" />
+	<!-- bootstrap and own our own css -->
+	<link href="css/{{ css }}" type="text/css" rel="stylesheet" />
 	<link href="css/styles.css" type="text/css" rel="stylesheet" />
 	
 	<!-- angular with router -->
@@ -28,18 +29,16 @@
 	<!-- aand the bootstrap js -->
 	<script src="js/bootstrap.min.js"></script>
 </head>
-<body ng-app="speakerApp">
+<body>
 
-<div class="navbar navbar-inverse navbar-static-top">
+<div class="navbar navbar-default navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
 			
 			<div>
 				<a ui-sref="speaker-list" class="navbar-brand">
-					<img
-						src="images/logo.png"
-						alt=""
-						height="20px">
+					{{ organization_name }}
+					<span class="glyphicon glyphicon-bullhorn"></span>
 				</a>
 			</div>
 
