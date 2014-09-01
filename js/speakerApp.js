@@ -45,7 +45,8 @@
 			});
 	})
 	// in order to add the active class to the nav-links that are active, we
-	// need access to the state in our header. we do that this way:
+	// need access to $state in our header. we'll just add it to the
+	// rootScope, even though that makes us cringe.
 	.run(function($rootScope, $state, speakerAppSettings) {
 		$rootScope.$state = $state;
 		$rootScope.css = speakerAppSettings.css;
