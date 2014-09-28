@@ -47,14 +47,6 @@
 	// -----
 	// used with partials/admin-representatives.html
 	function adminRepresentativesController($scope, $interval, SpeakersFactory) {
-		$scope.readFileToArray = function(files) {
-			var reader = new FileReader();
-			reader.readAsText(files[0]);
-			reader.onload = function(event) {
-				var csvText = event.target.result;
-				SpeakersFactory.registerRepresentativesFromArray(csvText.csvToArray());
-			};
-		};
 	    var vm = this;
 
 	    // fetch stuff every 1 second
@@ -79,10 +71,7 @@
 	    	});
 
 	    }, 1000);
-
-	    // handler for the csv speaker import
-	   
-
+	    
 	    // variables and submit handler for manually adding speakers
 	    vm.number = null;
 	    vm.name = null;
@@ -97,8 +86,17 @@
 	    	SpeakersFactory.removeRepresentative(number);
 	    };
 
-	    return vm;
+	    //Function for handling csv-upload
+		$scope.readFileToArray = function(files) {
+			var reader = new FileReader();
+			reader.readAsText(files[0]);
+			reader.onload = function(event) {
+				var csvText = event.target.result;
+				SpeakersFactory.registerRepresentativesFromArray(csvText.csvToArray());
+			};
+		};
 
+	    return vm;
 	}
 
 	// add it to our bookControllers module
