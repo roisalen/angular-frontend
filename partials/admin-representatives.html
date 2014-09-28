@@ -26,11 +26,10 @@
 	<p>Ingen registrerte talere.</p>
 </div>
 
-<div ng-show="false"> <!-- fordi ikke implementert enda -->
 <h2>Registrér representanter</h2>
 
 <label for="csv-upload">Last opp fil med representanter:</label>
-<input id="csv-upload" type="file" accept=".csv" onchange='adminRepresentativesController.readFileToArray(this.files)' />
+<input id="csv-upload" type="file" accept=".csv" onchange='angular.element(this).scope().readFileToArray(this.files)' />
 
 <p class="help">Fila må ende på .csv og ha følgende format:</p>
 <pre>1,Torkil Vederhus,Realistlista,M

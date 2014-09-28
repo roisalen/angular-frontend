@@ -23,7 +23,7 @@
 		 * Gets all registered representatives from the server.
 		 */
 		SpeakersFactory.getRepresentativesFromServer = function() {
-			return $http.get(speakerAppSettings.server_url + "/representatives ");
+			return $http.get(speakerAppSettings.server_url + "/representatives");
 		};
 
 		/*
@@ -86,6 +86,12 @@
 			.error(function() {
 				console.log('Unable to delete speaker: ' + number);
 			});
+		}
+
+		SpeakersFactory.registerRepresentativesFromArray = function(representativeArray) {
+			for (var representative in representativeArray) {
+				SpeakersFactory.registerRepresentative(representativeArray[representative]);
+			}
 		}
 
 		/*
