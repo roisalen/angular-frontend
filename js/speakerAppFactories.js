@@ -89,8 +89,8 @@
 		}
 
 		SpeakersFactory.registerRepresentativesFromArray = function(representativeArray) {
-			for (var representative in representativeArray) {
-				SpeakersFactory.registerRepresentative(representativeArray[representative]);
+			for (var index in representativeArray) {
+				SpeakersFactory.registerRepresentative(representativeArray[index]);
 			}
 		}
 
