@@ -67,7 +67,7 @@
 </form>
 
 <h2>Registrerte representanter</h2>
-<div ng-show="leadMeetingController.speakers">
+<div ng-show="leadMeetingController.representatives">
 	<table class="table borderless">
 		<thead>
 			<tr>
@@ -78,15 +78,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="speaker in leadMeetingController.speakers">
-				<td>{{ speaker.number }}</td>
-				<td>{{ speaker.name }}</td>
-				<td>{{ speaker.group }}</td>
-				<td>{{ speaker.sex }}</td>
+			<tr ng-repeat="representative in leadMeetingController.representatives">
+				<td>{{ representative.number }}</td>
+				<td>{{ representative.name }}</td>
+				<td>{{ representative.group }}</td>
+				<td>{{ representative.sex }}</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
-<div ng-hide="leadMeetingController.speakers">
-	<p>Ingen registrerte talere.</p>
+<div ng-hide="leadMeetingController.representativess">
+	<p>Ingen registrerte representanter.</p>
 </div>

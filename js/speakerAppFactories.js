@@ -9,6 +9,8 @@
 	// will hold all the speakers on the client side
 	function SpeakersFactory($http, speakerAppSettings) {
 
+		$http.defaults.headers.common['X-organisation'] = speakerAppSettings.organization_shortName;
+
 		/*
 		 * Holds all registered representatives.
 		 */

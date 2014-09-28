@@ -26,7 +26,9 @@
 		    // get the current subject title form the sever
 		    SpeakersFactory.getSubjectTitleFromServer()
 		    .success(function(data) {
-		    	vm.subjectTitle = JSON.parse(data);
+		    	if (data) {
+		    		vm.subjectTitle = JSON.parse(data);
+		    	}
 		    })
 		    .error(function() {
 		    	console.log('could not get data from server')
@@ -71,14 +73,14 @@
 	    	});
 
 	    }, 1000);
-	    
+
 	    // variables and submit handler for manually adding speakers
 	    vm.number = null;
 	    vm.name = null;
 	    vm.group = null;
 	    vm.sex = null;
-	    vm.postSpeakerFromForm = function() {
-	    	SpeakersFactory.postSpeakerFromArray([vm.number, vm.name, vm.group, vm.sex]);
+	    vm.postRepresentativeFromForm = function() {
+	    	SpeakersFactory.registerRepresentative([vm.number, vm.name, vm.group, vm.sex]);
 	    };
 
 	    // handler for removing a representative
@@ -116,7 +118,7 @@
 	    // get registered speakers from server
 	    SpeakersFactory.getRepresentativesFromServer()
 	    .success(function(data) {
-	    	vm.speakers = data;
+	    	vm.representatives = data;
 	    })
 	    .error(function() {
 	    	console.log('could not get data from server')
@@ -125,7 +127,9 @@
 	    // get the current subject title form the sever
 	    SpeakersFactory.getSubjectTitleFromServer()
 	    .success(function(data) {
-	    	vm.subjectTitle = JSON.parse(data);
+	    	if(data) {
+	    		vm.subjectTitle = JSON.parse(data);
+	    	}
 	    })
 	    .error(function() {
 	    	console.log('could not get data from server')
