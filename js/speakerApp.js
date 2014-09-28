@@ -31,11 +31,11 @@
 				controller: 'speakerListController',
 				controllerAs: 'speakerListController'
 			})
-			.state('admin-speakers', {
-				url: '/admin-speakers',
-				templateUrl: 'partials/admin-speakers.html',
-				controller: 'adminSpeakersController',
-				controllerAs: 'adminSpeakersController'
+			.state('admin-representatives', {
+				url: '/admin-representatives',
+				templateUrl: 'partials/admin-representatives.html',
+				controller: 'adminRepresentativesController',
+				controllerAs: 'adminRepresentativesController'
 			})
 			.state('lead-meeting', {
 				url: '/lead-meeting',

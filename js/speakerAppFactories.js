@@ -10,9 +10,9 @@
 	function SpeakersFactory($http, speakerAppSettings) {
 
 		/*
-		 * Holds all registered speakers.
+		 * Holds all registered representatives.
 		 */
-		SpeakersFactory.registeredSpeakers = [];
+		SpeakersFactory.registeredRepresentatives = [];
 
 		/*
 		 * Holds all the speaker list.
@@ -20,10 +20,10 @@
 		SpeakersFactory.speakerList = [];
 
 		/*
-		 * Gets all registered speakers from the server.
+		 * Gets all registered representatives from the server.
 		 */
-		SpeakersFactory.getSpeakersFromServer = function() {
-			return $http.get(speakerAppSettings.server_url + "/speakers");
+		SpeakersFactory.getRepresentativesFromServer = function() {
+			return $http.get(speakerAppSettings.server_url + "/representatives ");
 		};
 
 		/*
@@ -48,38 +48,38 @@
 		}
 
 		/*
-		 * Posts (registers) a new speaker to the server.
+		 * Posts (registers) a new representative to the server.
 		 */
-		SpeakersFactory.postSpeakerFromArray = function(entry) {
-			var speaker = {};
-			speaker.number = entry[0];
+		SpeakersFactory.registerRepresentative = function(entry) {
+			var representative = {};
+			representative.number = entry[0];
 			if (entry[1]) {
-				speaker.name = entry[1];
+				representative.name = entry[1];
 			};
 
 			if (entry[2]) {
-				speaker.group = entry[2];
+				representative.group = entry[2];
 			};
 			if (entry[3]) {
-				speaker.sex = entry[3];
+				representative.sex = entry[3];
 			};
 
-			console.log(JSON.stringify(speaker));
+			console.log(JSON.stringify(representative));
 
-			$http.post(speakerAppSettings.server_url + "/speakers", JSON.stringify(speaker))
+			$http.post(speakerAppSettings.server_url + "/representatives", JSON.stringify(representative))
 			.success(function() {
-				console.log('Successfully posted speaker: ' + speaker.number);
+				console.log('Successfully posted representative: ' + representative.number);
 			})
 			.error(function() {
-				console.log('Unable to post speaker: ' + speaker.number);
+				console.log('Unable to post representative: ' + representative.number);
 			});
 		};
 
 		/*
-		 * Will remove the speaker with the given number.
+		 * Will remove the representative with the given number.
 		 */
 		SpeakersFactory.removeRepresentative = function(number) {
-			$http.delete(speakerAppSettings.server_url + "/speakers/" + number)
+			$http.delete(speakerAppSettings.server_url + "/representatives/" + number)
 			.success(function() {
 				console.log('Successfully deleted speaker: ' + number);
 			})
@@ -179,7 +179,7 @@
 			} else {
 
 				// timer.start();
-				SpeakersFactory.registerUnknownSpeakerAndAddSpeakerToBottom(input);
+				SpeakersFactory.registerUnknownRepresentativeAndAddSpeakerToBottom(input);
 
 			}
 		};

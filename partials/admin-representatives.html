@@ -1,6 +1,6 @@
 
 <h1>Registrerte representanter</h1>
-<div ng-show="adminSpeakersController.speakers">
+<div ng-show="adminRepresentativesController.representatives">
 	<table class="table">
 		<thead>
 			<tr>
@@ -12,17 +12,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="speaker in adminSpeakersController.speakers">
-				<td>{{ speaker.number }}</td>
-				<td>{{ speaker.name }}</td>
-				<td>{{ speaker.group }}</td>
-				<td>{{ speaker.sex }}</td>
-				<td><small class="btn btn-danger" ng-click="adminSpeakersController.removeRepresentative(speaker.number)">X</small></td>
+			<tr ng-repeat="representative in adminRepresentativesController.representatives">
+				<td>{{ representative.number }}</td>
+				<td>{{ representative.name }}</td>
+				<td>{{ representative.group }}</td>
+				<td>{{ representative.sex }}</td>
+				<td><small class="btn btn-danger" ng-click="adminRepresentativesController.removeRepresentative(representative.number)">X</small></td>
 			</tr>
 		</tbody>
 	</table>
 </div>
-<div ng-hide="adminSpeakersController.speakers">
+<div ng-hide="adminRepresentativesController.representatives">
 	<p>Ingen registrerte talere.</p>
 </div>
 
@@ -30,7 +30,7 @@
 <h2>Registrér representanter</h2>
 
 <label for="csv-upload">Last opp fil med representanter:</label>
-<input id="csv-upload" type="file" accept=".csv" onchange='adminSpeakersController.readFileToArray(this.files)' />
+<input id="csv-upload" type="file" accept=".csv" onchange='adminRepresentativesController.readFileToArray(this.files)' />
 
 <p class="help">Fila må ende på .csv og ha følgende format:</p>
 <pre>1,Torkil Vederhus,Realistlista,M
@@ -42,7 +42,7 @@
 <h2>Legg til eller rediger enkeltrepresentant</h2>
 <p class="help">Hvis du bruker et nummer som allerede eksisterer vil du overskrive all data for representanten</p>
 
-<form ng-submit="adminSpeakersController.postSpeakerFromForm()" class="form-horizontal">
+<form ng-submit="adminRepresentativesController.postRepresentativeFromForm()" class="form-horizontal">
 
 	<div class="form-group">
 		<label for="number" class="control-label col-xs-2">Nummer</label>
@@ -50,7 +50,7 @@
 			<input
 				id="number"
 				class="form-control"
-				ng-model="adminSpeakersController.number" />
+				ng-model="adminRepresentativesController.number" />
 			</div>
 	</div>
 
@@ -60,7 +60,7 @@
 			<input
 				id="name"
 				class="form-control"
-				ng-model="adminSpeakersController.name" />
+				ng-model="adminRepresentativesController.name" />
 			</div>
 	</div>
 
@@ -70,7 +70,7 @@
 			<input
 				id="group"
 				class="form-control"
-				ng-model="adminSpeakersController.group" />
+				ng-model="adminRepresentativesController.group" />
 			</div>
 	</div>
 
@@ -80,7 +80,7 @@
 			<input
 				id="sex"
 				class="form-control"
-				ng-model="adminSpeakersController.sex" />
+				ng-model="adminRepresentativesController.sex" />
 			</div>
 	</div>
 

@@ -45,18 +45,18 @@
 	// -----
 
 	// -----
-	// used with partials/admin-speakers.html
-	function adminSpeakersController($interval, SpeakersFactory) {
+	// used with partials/admin-representatives.html
+	function adminRepresentativesController($interval, SpeakersFactory) {
 
 	    var vm = this;
 
 	    // fetch stuff every 1 second
 	    $interval(function() {
 
-	    	// get registered speakers from server
-	    	SpeakersFactory.getSpeakersFromServer()
+	    	// get registered representatives from server
+	    	SpeakersFactory.getRepresentativesFromServer()
 	    	.success(function(data) {
-	    		vm.speakers = data;
+	    		vm.representatives = data;
 	    	})
 	    	.error(function() {
 	    		console.log('could not get data from server')
@@ -100,7 +100,7 @@
 	// add it to our bookControllers module
 	angular
 	    .module('speakerAppControllers')
-	    .controller('adminSpeakersController', adminSpeakersController);
+	    .controller('adminRepresentativesController', adminRepresentativesController);
 	// -----
 
 	// -----
@@ -112,7 +112,7 @@
 	    vm.timer = new Stopwatch(document.getElementById("stopwatch"), {delay: 1000});
 
 	    // get registered speakers from server
-	    SpeakersFactory.getSpeakersFromServer()
+	    SpeakersFactory.getRepresentativesFromServer()
 	    .success(function(data) {
 	    	vm.speakers = data;
 	    })
@@ -177,7 +177,7 @@
 	    	} else {
 
 	    		vm.timer.start();
-	    		SpeakersFactory.registerUnknownSpeakerAndAddSpeakerToBottom(vm.speakerNumber);
+	    		SpeakersFactory.registerUnknownRepresentativeAndAddSpeakerToBottom(vm.speakerNumber);
 
 	    	}
 	    };
