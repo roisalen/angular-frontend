@@ -43,6 +43,12 @@
 				templateUrl: 'partials/lead-meeting.html',
 				controller: 'leadMeetingController',
 				controllerAs: 'leadMeetingController'
+			})
+			.state('statistics', {
+				url: '/statistics',
+				templateUrl: 'partials/statistics.html',
+				controller: 'statisticsController',
+				controllerAs: 'statisticsController'
 			});
 	})
 	// in order to add the active class to the nav-links that are active, we

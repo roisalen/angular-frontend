@@ -192,6 +192,10 @@
 			}
 		};
 
+		SpeakersFactory.getStatistics = function(type, options, callback) {
+			return $http.get(speakerAppSettings.server_url + "/statistics/" + type);
+		};
+
 	    return SpeakersFactory;
 
 	}

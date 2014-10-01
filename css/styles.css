@@ -15,3 +15,8 @@
 .alignCenter {
 	text-align: center;
 }
+
+.display-inline-half-width {
+	display: inline-block;
+	width: 49%;
+}
