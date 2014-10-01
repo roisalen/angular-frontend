@@ -308,6 +308,7 @@
    			},
    			
    			yAxis: {
+   				allowDecimals: false,
    				title: {
    					text: 'Antall'
    				}
