@@ -12,16 +12,6 @@
 		$http.defaults.headers.common['X-organisation'] = speakerAppSettings.organization_shortName;
 
 		/*
-		 * Holds all registered representatives.
-		 */
-		SpeakersFactory.registeredRepresentatives = [];
-
-		/*
-		 * Holds all the speaker list.
-		 */
-		SpeakersFactory.speakerList = [];
-
-		/*
 		 * Gets all registered representatives from the server.
 		 */
 		SpeakersFactory.getRepresentativesFromServer = function() {
@@ -200,10 +190,28 @@
 
 	}
 
+
 	// add it to our factories module
 	angular
 	    .module('speakerAppFactories')
 	    .factory('SpeakersFactory', SpeakersFactory);
     // -----
+
+
+	function OrganisationFactory($http, speakerAppSettings) {
+		OrganisationFactory.getOrganisations = function() {
+			return $http.get(speakerAppSettings.server_url + "/organisations");
+		}
+
+		return OrganisationFactory;
+	}
+
+
+	// add it to our factories module
+	angular
+	    .module('speakerAppFactories')
+	    .factory('OrganisationFactory', OrganisationFactory);
+    // -----
+
 
 })();

@@ -23,7 +23,7 @@
 	angular.module('speakerApp')
 	.config(function($stateProvider, $urlRouterProvider) {
 		// set default
-		$urlRouterProvider.otherwise('speaker-list');
+		$urlRouterProvider.otherwise('organisation');
 
 		$stateProvider
 			.state('speaker-list', {
@@ -49,6 +49,13 @@
 				templateUrl: 'partials/statistics.html',
 				controller: 'statisticsController',
 				controllerAs: 'statisticsController'
+			})
+			.state('organisation', {
+				url: '/',
+				templateUrl: 'partials/organisation.html',
+				controller: 'organisationController',
+				controllerAs: 'organisationController'
+
 			});
 	})
 	// in order to add the active class to the nav-links that are active, we

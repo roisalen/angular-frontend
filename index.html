@@ -53,6 +53,9 @@
 
 			<div class="collapse navbar-collapse navHeaderCollapse">
 				<ul class="nav navbar-nav navbar-right">
+					<li ng-class="{active: $state.includes('organisation')}">
+						<a ui-sref="organisation">Bytt organisasjon</a>
+					</li>
 					<li ng-class="{active: $state.includes('speaker-list')}">
 						<a ui-sref="speaker-list">Taleliste</a>
 					</li>
