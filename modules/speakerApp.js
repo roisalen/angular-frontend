@@ -15,9 +15,12 @@
 		server_url: 'http://roisalen.herokuapp.com',
 		css: 'spuio.bootstrap.min.css',
 		organization_name: 'Studentparlamentet UiO',
-		organization_shortName: "spuio"
-		// server_url: 'http://127.0.0.1:8080'
+		organization_shortName: "spuio",
+		//server_url: 'http://127.0.0.1:8080'
 	});
+
+	angular.module('speakerAppControllers', []);
+	angular.module('speakerAppFactories', []);
 
 	// edit config
 	angular.module('speakerApp')
@@ -28,31 +31,31 @@
 		$stateProvider
 			.state('speaker-list', {
 				url: '/speaker-list',
-				templateUrl: 'partials/speaker-list.html',
+				templateUrl: 'modules/speaker-list/speaker-list.html',
 				controller: 'speakerListController',
 				controllerAs: 'speakerListController'
 			})
 			.state('admin-representatives', {
 				url: '/admin-representatives',
-				templateUrl: 'partials/admin-representatives.html',
+				templateUrl: 'modules/admin-representatives/admin-representatives.html',
 				controller: 'adminRepresentativesController',
 				controllerAs: 'adminRepresentativesController'
 			})
 			.state('lead-meeting', {
 				url: '/lead-meeting',
-				templateUrl: 'partials/lead-meeting.html',
+				templateUrl: 'modules/lead-meeting/lead-meeting.html',
 				controller: 'leadMeetingController',
 				controllerAs: 'leadMeetingController'
 			})
 			.state('statistics', {
 				url: '/statistics',
-				templateUrl: 'partials/statistics.html',
+				templateUrl: 'modules/statistics/statistics.html',
 				controller: 'statisticsController',
 				controllerAs: 'statisticsController'
 			})
 			.state('organisation', {
 				url: '/',
-				templateUrl: 'partials/organisation.html',
+				templateUrl: 'modules/organisation/organisation.html',
 				controller: 'organisationController',
 				controllerAs: 'organisationController'
 

@@ -1,0 +1,135 @@
+(function() {
+
+
+	function leadMeetingController($scope, $http, $interval, SpeakerListFactory, SubjectFactory, RepresentativeFactory) {
+	    var vm = this;
+
+	    function updateList(data) {
+			vm.speakerList = data;
+		}
+
+		function updateRepresentatives(data) {
+			vm.representatives = data;
+		}
+
+		function errorHandler() {
+			console.log('Error from server. '+arguments);
+		}
+
+		function setSubject(data) {
+	    	if(data) {
+	    		vm.subjectTitle = JSON.parse(data);
+	    	}
+	    }
+
+	    vm.timer = new Stopwatch(document.getElementById("stopwatch"), {delay: 1000});
+
+	    SpeakerListFactory.getSpeakerListFromServer()
+	    .success(updateList)
+	    .error(errorHandler);
+	    
+	    // get registered speakers from server
+	    RepresentativeFactory.getRepresentativesFromServer()
+	    .success(updateRepresentatives)
+	    .error(errorHandler);
+
+	    // get the current subject title form the sever
+	    SubjectFactory.getSubjectTitleFromServer()
+	    .success(setSubject)
+	    .error(errorHandler);
+
+	    // fetch stuff every 5 seconds
+	    var stop = $interval(function() {
+	    	// get the current speaker _list_ from server
+	    	SpeakerListFactory.getSpeakerListFromServer()
+	    	.success(updateList)
+	    	.error(errorHandler);
+
+	    }, 5000);
+
+	    $scope.stopInterval = function() {
+      		if (angular.isDefined(stop)) {
+        		$interval.cancel(stop);
+        		stop = undefined;
+      		}
+    	};
+	    $scope.$on('$destroy', function() {
+      		// Make sure that the interval is destroyed too
+      		$scope.stopInterval();
+    	});
+
+	    // variables and handler for adding a speaker to the speaker list
+	    vm.speakerNumber = null;
+	    vm.addSpeaker = function() {
+
+	    	console.log('Let\'s try to add a new speaker to the list:' + vm.speakerNumber);
+	    	
+	    	var updateListAndResetInput = function(data) {
+	    		// this is called when the action is done successfully
+	    		updateList(data);
+	    		vm.speakerNumber = null;
+	    	};
+
+	    	if (!vm.speakerNumber) {
+
+	    		SpeakerListFactory.nextSpeaker()
+	    		.success(updateList)
+				.error(errorHandler);
+	    		vm.timer.reset();
+	    		vm.timer.start();
+
+	    	} else if (vm.speakerNumber.charAt(0) === "r") {
+
+	    		SpeakerListFactory.addReplyToFirstSpeaker(vm.speakerNumber.slice(1))
+	    		.success(updateListAndResetInput)
+	    		.error(errorHandler);
+	    		
+	    	} else if (!isNaN(parseInt(vm.speakerNumber))) {
+
+	    		vm.timer.start();
+	    		SpeakerListFactory.addSpeakerToBottom(vm.speakerNumber)
+	    		.success(updateListAndResetInput)
+	    		.error(errorHandler);
+
+	    	} else {
+
+	    		vm.timer.start();
+	    		SpeakerListFactory.registerUnknownRepresentativeAndAddSpeakerToBottom(vm.speakerNumber)
+	    		.success(updateListAndResetInput)
+	    		.error(errorHandler);
+
+	    	}
+	    };
+
+	    // handler for removing a speaker from the speaker list
+	    vm.removeSpeaker = function(index) {
+	    	SpeakerListFactory.removeSpeaker(index)
+	    	.success(updateList)
+	    	.error(errorHandler);
+	    };
+
+	    // handler for removing a replicant from the current
+	    vm.removeReplicant = function(index) {
+	    	SpeakerListFactory.removeReplicant(index)
+	    	.success(updateList)
+	    	.error(errorHandler);
+	    };
+
+	    // handler for setting the current subject title
+	    vm.setSubjectTitle = function() {
+	    	SubjectFactory.setSubjectTitleOnServer(vm.subjectTitle)
+	    	.success(setSubject)
+	    	.error(errorHandler);
+	    }
+
+	    return vm;
+
+	}
+
+	// add it to our bookControllers module
+	angular
+	    .module('speakerAppControllers')
+	    .controller('leadMeetingController', leadMeetingController);
+   // -----
+
+})();

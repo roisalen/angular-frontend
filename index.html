@@ -5,32 +5,44 @@
 	<meta charset="UTF-8">
 
 	<!-- bootstrap and own our own css -->
-	<link href="css/{{ css }}" type="text/css" rel="stylesheet" />
-	<link href="css/styles.css" type="text/css" rel="stylesheet" />
+	<link href="resources/css/{{ css }}" type="text/css" rel="stylesheet" />
+	<link href="resources/css/styles.css" type="text/css" rel="stylesheet" />
 	
 	<!-- angular with router -->
-	<script src="js/angular.min.js"></script>
-	<script src="js/angular-ui-router.min.js"></script>
-
-	<!-- our angular stuff -->
-	<script src="js/speakerApp.js"></script>
-	<script src="js/speakerAppFactories.js"></script>
-	<script src="js/speakerAppControllers.js"></script>
+	<script src="modules/js-libs/angular.min.js"></script>
+	<script src="modules/js-libs/angular-ui-router.min.js"></script>
 
 	<!-- csv to array -->
-	<script src="js/csvToArray.v2.1.js"></script>
+	<script src="modules/admin-representatives/csvToArray.v2.1.js"></script>
 
 	<!-- stopwatch -->
-	<script src="js/stopwatch.js"></script>
+	<script src="modules/lead-meeting/stopwatch.js"></script>
 
 	<!-- highcharts -->
-	<script src="js/highcharts.js"></script>
+	<script src="modules/statistics/highcharts.js"></script>
 	
 	<!-- we'll need jquery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="modules/js-libs/jquery.min.js"></script>
 	
 	<!-- aand the bootstrap js -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="modules/js-libs/bootstrap.min.js"></script>
+
+	<!-- our angular stuff -->
+	<script src="modules/speakerApp.js"></script>
+
+	<!-- factories -->
+	<script src="modules/organisation/organisation-factory.js"></script>
+	<script src="modules/speaker-list/speaker-list-factory.js"></script>
+	<script src="modules/admin-representatives/admin-representatives-factory.js"></script>
+	<script src="modules/subject/subject-factory.js"></script>
+	<script src="modules/statistics/statistics-factory.js"></script>
+
+	<!-- controllers -->
+	<script src="modules/speaker-list/speaker-list-controller.js"></script>
+	<script src="modules/admin-representatives/admin-representatives-controller.js"></script>
+	<script src="modules/statistics/statistics-controller.js"></script>
+	<script src="modules/organisation/organisation-controller.js"></script>
+	<script src="modules/lead-meeting/lead-meeting-controller.js"></script>
 </head>
 <body>
 
