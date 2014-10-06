@@ -7,6 +7,7 @@
 	<!-- bootstrap and own our own css -->
 	<link href="resources/css/{{ css }}" type="text/css" rel="stylesheet" />
 	<link href="resources/css/styles.css" type="text/css" rel="stylesheet" />
+	<link href="modules/organisation/organisation.css" rel="stylesheet" />
 	
 	<!-- angular with router -->
 	<script src="modules/js-libs/angular.min.js"></script>
@@ -78,7 +79,7 @@
 						<a ui-sref="lead-meeting">Styr ordet</a>
 					</li>
 					<li ng-class="{active: $state.includes('statistics')}">
-						<a ui-sref="statistics">Statistikk</a>
+						<a ui-sref="statistics">Dagens Statistikk</a>
 					</li>
 				</ul>
 

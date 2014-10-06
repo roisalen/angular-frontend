@@ -1,5 +1,6 @@
 <h1>Velg organisasjon</h1>
 
-<ul ng-repeat="organisation in organisationController.organisations">
-	<li ng-click="organisationController.chooseOrganisation(organisation)">{{organisation.name}}</li>
-</ul>
+<div class="organisations-chooser">
+	<button  class="organisation" ng-repeat="organisation in organisationController.organisations" ng-click="organisationController.chooseOrganisation(organisation)">{{organisation.name}}</button>
+	<!--<button class="organisation new-organisation" ui-sref='add-organisation'> + Legg til ny..</a>-->
+</div>

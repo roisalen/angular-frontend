@@ -12,18 +12,11 @@
 	// add app constants
 	angular.module('speakerApp')
 	.constant('speakerAppSettings', {
-		server_url: 'http://roisalen.herokuapp.com',
-<<<<<<< Updated upstream:modules/speakerApp.js
+		//server_url: 'http://roisalen.herokuapp.com',
 		css: 'spuio.bootstrap.min.css',
 		organization_name: 'Studentparlamentet UiO',
 		organization_shortName: "spuio",
-		//server_url: 'http://127.0.0.1:8080'
-=======
-		css: 'vtoa.bootstrap.min.css',
-		organization_name: 'Velferdstinget',
-		organization_shortName: "vtoa"
-		// server_url: 'http://127.0.0.1:8080'
->>>>>>> Stashed changes:js/speakerApp.js
+		server_url: 'http://127.0.0.1:8080'
 	});
 
 	angular.module('speakerAppControllers', []);
@@ -33,35 +26,39 @@
 	angular.module('speakerApp')
 	.config(function($stateProvider, $urlRouterProvider) {
 		// set default
-		$urlRouterProvider.otherwise('organisation');
+		$urlRouterProvider.otherwise('/choose-organisation');
 
 		$stateProvider
 			.state('speaker-list', {
 				url: '/speaker-list',
 				templateUrl: 'modules/speaker-list/speaker-list.html',
 				controller: 'speakerListController',
-				controllerAs: 'speakerListController'
+				controllerAs: 'speakerListController',
+				data: {needsOrg: true}
 			})
 			.state('admin-representatives', {
 				url: '/admin-representatives',
 				templateUrl: 'modules/admin-representatives/admin-representatives.html',
 				controller: 'adminRepresentativesController',
-				controllerAs: 'adminRepresentativesController'
+				controllerAs: 'adminRepresentativesController',
+				data: {needsOrg: true}
 			})
 			.state('lead-meeting', {
 				url: '/lead-meeting',
 				templateUrl: 'modules/lead-meeting/lead-meeting.html',
 				controller: 'leadMeetingController',
-				controllerAs: 'leadMeetingController'
+				controllerAs: 'leadMeetingController',
+				data: {needsOrg: true}
 			})
 			.state('statistics', {
 				url: '/statistics',
 				templateUrl: 'modules/statistics/statistics.html',
 				controller: 'statisticsController',
-				controllerAs: 'statisticsController'
+				controllerAs: 'statisticsController',
+				data: {needsOrg: true}
 			})
 			.state('organisation', {
-				url: '/',
+				url: '/choose-organisation',
 				templateUrl: 'modules/organisation/organisation.html',
 				controller: 'organisationController',
 				controllerAs: 'organisationController'
@@ -71,10 +68,17 @@
 	// in order to add the active class to the nav-links that are active, we
 	// need access to $state in our header. we'll just add it to the
 	// rootScope, even though that makes us cringe.
-	.run(function($rootScope, $state, speakerAppSettings) {
+
+
+	.run(function($rootScope, $state, $location) {
 		$rootScope.$state = $state;
-		$rootScope.css = speakerAppSettings.css;
-		$rootScope.organization_name = speakerAppSettings.organization_name;
+		$rootScope.css = 'spuio.bootstrap.min.css';
+		$rootScope.$on('$stateChangeStart', function (event, next) {
+    		if (next.data && next.data.needsOrg && !$rootScope.organization_name) {
+      			event.preventDefault();
+      			$location.url('/choose-organisation');
+      		}
+  		});
 	});
 
 })();
