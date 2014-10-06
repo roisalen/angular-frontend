@@ -13,10 +13,17 @@
 	angular.module('speakerApp')
 	.constant('speakerAppSettings', {
 		server_url: 'http://roisalen.herokuapp.com',
+<<<<<<< Updated upstream:modules/speakerApp.js
 		css: 'spuio.bootstrap.min.css',
 		organization_name: 'Studentparlamentet UiO',
 		organization_shortName: "spuio",
 		//server_url: 'http://127.0.0.1:8080'
+=======
+		css: 'vtoa.bootstrap.min.css',
+		organization_name: 'Velferdstinget',
+		organization_shortName: "vtoa"
+		// server_url: 'http://127.0.0.1:8080'
+>>>>>>> Stashed changes:js/speakerApp.js
 	});
 
 	angular.module('speakerAppControllers', []);
