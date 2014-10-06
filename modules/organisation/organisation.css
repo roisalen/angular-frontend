@@ -1,0 +1,19 @@
+button.organisation, a.newOrganisation {
+	background: #fcfcfc;
+	border: 0px;
+	text-align: left;
+	font-size: 2em;
+	margin: 2px;
+	width: 75%;
+	padding: 10px;
+}
+
+button.organisation:hover {
+	color: red;
+	background: white;
+}
+
+
+/*.organisation-chooser {
+	width: 50%;
+}*/
