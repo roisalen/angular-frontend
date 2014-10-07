@@ -76,7 +76,7 @@
 		$rootScope.$on('$stateChangeStart', function (event, next) {
     		if (next.data && next.data.needsOrg && !$rootScope.organization_name) {
       			event.preventDefault();
-      			$location.url('/choose-organisation');
+      			$state.go('organisation');
       		}
   		});
 	});

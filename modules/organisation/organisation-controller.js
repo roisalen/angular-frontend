@@ -8,10 +8,10 @@
    			$rootScope.organization_name = organisation.name;
 
    			if (organisation.css) {
- 	  			$rootScope.css = organisation.css;
+ 	  			  $rootScope.css = organisation.css;
    			}
 			
-   			$location.url('/speaker-list')
+   			$location.url('speaker-list')
    		}
 
    		OrganisationFactory.getOrganisations()
