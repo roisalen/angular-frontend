@@ -1,6 +1,6 @@
 <h1>Velg organisasjon</h1>
 
-<div class="organisations-chooser">
-	<a class="organisation" ng-repeat="organisation in organisationController.organisations" ng-click="organisationController.chooseOrganisation(organisation)"><img class='logo' src='resources/images/logo_{{organisation.shortName}}.jpg' />{{organisation.name}}</a>
-	<!--<button class="organisation new-organisation" ui-sref='add-organisation'> + Legg til ny..</a>-->
+<div ng-controller="organisationController" class="organisations-chooser">
+	<a class="organisation" href="" ng-repeat="organisation in organisationController.organisations" ng-click="organisationController.chooseOrganisation(organisation)"><img class='logo' src='{{organisation.logoUrl}}' />{{organisation.name}}</a>
+	<a class="organisation new-organisation" ui-sref='add-organisation'> + Legg til ny..</a>
 </div>

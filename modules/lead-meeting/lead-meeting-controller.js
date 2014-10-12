@@ -13,7 +13,7 @@
 		}
 
 		function errorHandler() {
-			console.log('Error from server. '+arguments);
+			console.log('Error from server. '+ JSON.stringify(arguments));
 		}
 
 		function setSubject(data) {

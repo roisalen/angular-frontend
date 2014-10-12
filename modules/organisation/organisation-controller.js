@@ -1,26 +1,60 @@
 (function() {   
 
-   function organisationController (OrganisationFactory, speakerAppSettings, $location, $rootScope, $http) {
-   		var vm = this;
+
+
+   function organisationController (OrganisationFactory, speakerAppSettings, $location, $rootScope, $scope, $http) {
+   		var vm = $scope;
 
    		vm.chooseOrganisation = function (organisation) {
    			$http.defaults.headers.common['X-organisation'] = organisation.shortName;
    			$rootScope.organization_name = organisation.name;
 
+
+
    			if (organisation.css) {
  	  			  $rootScope.css = organisation.css;
-   			}
+   			} else {
+               $rootScope.css = "spuio.bootstrap.min.css";
+            }
 			
    			$location.url('speaker-list')
    		}
 
+         vm.organisations = [];
+         function checkIfOrgHasLogo(organisation, orgs) {
+            var img = new Image();
+            img.onload = function() {
+               organisation.logoUrl = 'resources/images/logo_'+organisation.shortName+ '.jpg';
+               vm.organisations.push(organisation);
+               vm.$apply();
+            };
+            img.onerror = function() {
+               organisation.logoUrl = 'resources/images/question.jpg';
+               vm.organisations.push(organisation);
+               vm.$apply();
+            };
+
+            img.src = 'resources/images/logo_'+organisation.shortName+ '.jpg'; // fires off loading of image
+         }
+
+         function checkIfOrgsHaveLogoAndSetOnVM(data) {
+            var orgs = [];
+            for (organisationIndex in data) {
+               checkIfOrgHasLogo(data[organisationIndex], orgs);
+            }
+            
+         }
+
+
    		OrganisationFactory.getOrganisations()
-   		.success(function(data) {
-   			vm.organisations = data;
-   		})
+   		.success(checkIfOrgsHaveLogoAndSetOnVM)
    		.error(function() {
    			console.log("could not get organisations");
    		});
+
+         return vm;
+
+
    }
 
    angular

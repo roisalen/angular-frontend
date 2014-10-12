@@ -63,6 +63,12 @@
 				controller: 'organisationController',
 				controllerAs: 'organisationController'
 
+			})
+			.state('add-organisation', {
+				url: '/add-organisation',
+				templateUrl: 'modules/organisation/add-organisation.html',
+				controller: 'addOrganisationController',
+				controllerAs: 'addOrganisationController'
 			});
 	})
 	// in order to add the active class to the nav-links that are active, we
