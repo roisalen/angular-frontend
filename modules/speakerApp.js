@@ -6,7 +6,8 @@
 	angular.module('speakerApp', [
 		'ui.router',
 		'speakerAppControllers',
-		'speakerAppFactories'
+		'speakerAppFactories',
+		'yaru22.md'
 	]);
 
 	// add app constants

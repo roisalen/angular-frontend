@@ -16,6 +16,14 @@
 			return $http.get(speakerAppSettings.server_url + "/subject");
 		}
 
+		SubjectFactory.setMessageOnServer = function(message) {
+			return $http.post(speakerAppSettings.server_url + "/message", JSON.stringify(message));
+		}
+
+		SubjectFactory.getMessageOnServer = function(get) {
+			return $http.get(speakerAppSettings.server_url + "/message");
+		}
+
 		return SubjectFactory;
 	}
 

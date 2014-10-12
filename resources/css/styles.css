@@ -20,3 +20,7 @@
 	display: inline-block;
 	width: 49%;
 }
+
+textarea {
+	width: 100%;
+}

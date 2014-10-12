@@ -22,6 +22,12 @@
 	    	}
 	    }
 
+	    function setMessage(data) {
+	    	if (data) {
+	    		vm.message = JSON.parse(data);
+	    	}
+	    }
+
 	    vm.timer = new Stopwatch(document.getElementById("stopwatch"), {delay: 1000});
 
 	    SpeakerListFactory.getSpeakerListFromServer()
@@ -37,6 +43,10 @@
 	    SubjectFactory.getSubjectTitleFromServer()
 	    .success(setSubject)
 	    .error(errorHandler);
+
+	    SubjectFactory.getMessageOnServer()
+		    .success(setMessage)
+		    .error(errorHandler);
 
 	    // fetch stuff every 5 seconds
 	    var stop = $interval(function() {
@@ -119,6 +129,12 @@
 	    vm.setSubjectTitle = function() {
 	    	SubjectFactory.setSubjectTitleOnServer(vm.subjectTitle)
 	    	.success(setSubject)
+	    	.error(errorHandler);
+	    }
+
+	    vm.updateMessage = function() {
+	    	SubjectFactory.setMessageOnServer(vm.message)
+	    	.success(setMessage)
 	    	.error(errorHandler);
 	    }
 

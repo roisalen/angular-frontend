@@ -2,7 +2,7 @@
 
 
 
-   function organisationController (OrganisationFactory, speakerAppSettings, $location, $rootScope, $scope, $http) {
+   function organisationController (OrganisationFactory, speakerAppSettings, $window, $rootScope, $scope, $http) {
    		var vm = $scope;
 
    		vm.chooseOrganisation = function (organisation) {
@@ -17,7 +17,7 @@
                $rootScope.css = "spuio.bootstrap.min.css";
             }
 			
-   			$location.url('speaker-list')
+   			$window.history.back();
    		}
 
          vm.organisations = [];

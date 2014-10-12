@@ -66,6 +66,21 @@
 <div ng-hide="leadMeetingController.speakerList">
 	<p>Ingen talere på lista.</p>
 </div>
+<form id="infoForm" class="form-horizontal" ng-submit="leadMeetingController.updateMessage()">
+<div class="form-group">
+	<label for="generalInfo" class="control-label col-xs-2">Beskjeder og info</label>
+	<div class="col-xs-8">
+		<textarea id="generalInfo" rows="4" cols="50" ng-model="leadMeetingController.message">
+		</textarea> 
+		<p>Dette feltet vises under talelista. Støtter <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a></p>
+	</div>
+	<div class="col-xs-2">
+		<button type="submit" class="btn btn-default">Oppdatér
+		</button>
+	</div>
+</div>
+</form>
+
 
 
 
@@ -90,6 +105,6 @@
 		</tbody>
 	</table>
 </div>
-<div ng-hide="leadMeetingController.representativess">
+<div ng-hide="leadMeetingController.representatives">
 	<p>Ingen registrerte representanter.</p>
 </div>

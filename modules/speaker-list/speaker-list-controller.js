@@ -24,6 +24,14 @@
 		    .error(function() {
 		    	console.log('could not get data from server')
 		    });
+
+		    SubjectFactory.getMessageOnServer()
+		    .success(function(data) {
+		    	if (data) {
+		    		vm.message = JSON.parse(data);
+		    	}
+
+		    });
 	    }
 
 	    getSpeakerListAndSubject();
