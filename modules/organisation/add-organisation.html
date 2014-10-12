@@ -1,0 +1,12 @@
+
+<h1>Lag ny organisasjon</h1>
+
+<form ng-submit="addOrganisationController.addOrganisation()" class="form-horizontal">
+	<div class="form-group">
+	<label for="orgName">Navn på organisasjon</label>
+	<input class="form-control" id="orgName" type="text" ng-model="addOrganisationController.orgName" />
+	<label for="orgShortName" type="text">Kortnavn uten mellomrom</label>
+	<input class="form-control" id="orgShortName" type="text" ng-model="addOrganisationController.orgShortName" />
+	<button type="submit">Legg til</button>
+</div>
+</form>
