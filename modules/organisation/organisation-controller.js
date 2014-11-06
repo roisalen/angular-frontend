@@ -17,7 +17,7 @@
                $rootScope.css = "spuio.bootstrap.min.css";
             }
 			
-   			$window.history.back();
+   			$rootScope.$state.go("speaker-list");
    		}
 
          vm.organisations = [];
