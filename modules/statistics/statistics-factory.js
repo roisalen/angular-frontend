@@ -1,7 +1,7 @@
 
 (function() {
 	function StatisticsFactory($http, speakerAppSettings) {
-		StatisticsFactory.getStatistics = function(type, options, callback) {
+		StatisticsFactory.getStatistics = function(type) {
 			return $http.get(speakerAppSettings.server_url + "/statistics/" + type);
 		};
 
