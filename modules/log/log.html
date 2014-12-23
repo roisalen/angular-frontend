@@ -1,0 +1,27 @@
+<h1>Referat</h1>
+
+<div ng-show="logController.logData">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Navn</th>
+				<th>Gruppe</th>
+				<th>Tid</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="speaker in speakerListController.logData">
+			<tr>
+				<td>{{ speaker.number }}</td>
+				<td>{{ speaker.name }}</td>
+				<td>{{ speaker.group }}</td>
+			</tr>
+			<tr ng-repeat="reply in speaker.replies">
+				<td><span class="glyphicon glyphicon-arrow-right"></span> {{ reply.number }}</td>
+				<td>{{ reply.name }}</td>
+				<td>{{ reply.group }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
