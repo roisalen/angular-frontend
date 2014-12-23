@@ -70,6 +70,12 @@
 				templateUrl: 'modules/organisation/add-organisation.html',
 				controller: 'addOrganisationController',
 				controllerAs: 'addOrganisationController'
+			})
+			.state('log', {
+				url: '/log',
+				templateUrl: 'modules/log/log.html',
+				controller: 'logController',
+				controllerAs: 'logController'
 			});
 	})
 	// in order to add the active class to the nav-links that are active, we
