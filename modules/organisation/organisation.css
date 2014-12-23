@@ -1,25 +1,44 @@
-a.organisation, a.newOrganisation {
-	display: block;
+a.organisation {
+	display: inline-block;
 	background: #fcfcfc;
 	border: 0px;
 	text-align: left;
-	font-size: 2em;
-	margin: 2px;
-	width: 75%;
+	font-size: 1.75rem;
+	margin: 2rem;
+	width: 18rem;
 	padding: 10px;
 	color: #444444;
+	vertical-align: top;
 
 }
 
 img.logo {
-	height: 2.5em;
-	width: 2.5em;
-	padding: 10px;
+	height: 18rem;
+	width: 18rem;
 }
 
-a.organisation:hover {
+a.new-organisation {
+	display: inline-block;
+	color: #444444;
+	margin: 2rem;
+	width: 100%;
+	font-size: 5rem;
+	vertical-align: middle;
+
+}
+.add-icon {
+	display: inline-block;
+	font-size: 6rem;
+	margin: 1rem;
+
+}
+
+.add-icon:hover {
+	text-decoration: none;
+
+}
+a.organisation:hover, a.new-organisation:hover {
 	color: red;
-	background: white;
 }
 
 
