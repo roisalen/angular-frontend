@@ -12,6 +12,10 @@ a.organisation {
 
 }
 
+.organisations-chooser {
+	margin-top: 2rem;
+}
+
 img.logo {
 	height: 18rem;
 	width: 18rem;
