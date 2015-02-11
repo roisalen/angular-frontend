@@ -44,7 +44,7 @@
 			reader.readAsText(files[0]);
 			reader.onload = function(event) {
 				var csvText = event.target.result;
-				RepresentativeFactory.registerRepresentativesFromArray(csvText.csvToArray(), updateRepresentatives);
+				RepresentativeFactory.registerRepresentativesFromArray(csvText.csvToArray({trim:true, rSep:"\n"}), updateRepresentatives);
 			};
 		};
 
