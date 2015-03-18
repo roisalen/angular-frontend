@@ -38,17 +38,27 @@
 	    	.error(errorHandler);
 	    };
 
-	    //Function for handling csv-upload
-		$scope.readFileToArray = function(files) {
-			var reader = new FileReader();
-			reader.readAsText(files[0]);
-			reader.onload = function(event) {
-				var csvText = event.target.result;
-				RepresentativeFactory.registerRepresentativesFromArray(csvText.csvToArray({trim:true, rSep:"\n"}), updateRepresentatives);
-			};
-		};
+        //Function for handling csv-upload
+        $scope.readFileToArray = function(files) {
+            var reader = new FileReader();
+            reader.readAsText(files[0]);
+            reader.onload = function(event) {
+                if ( event.target.result.indexOf( String.fromCharCode( 65533 ) ) == -1 ) {
+                    var csvText = event.target.result;
+                    RepresentativeFactory.registerRepresentativesFromArray(csvText.csvToArray({trim:true, rSep:"\n"}), updateRepresentatives);
+                } else {
+                    console.log("Note: CSV-file was not utf8, trying iso-8859-1.");
+                    reader.onload = function(event) {
+                        var csvText = event.target.result;
+                        RepresentativeFactory.registerRepresentativesFromArray(csvText.csvToArray({trim:true, rSep:"\n"}), updateRepresentatives);
+                    };
+                    reader.readAsText(files[0], "iso-8859-1");
+                }
 
-	    return vm;
+            };
+        };
+
+        return vm;
 	}
 
 	// add it to our bookControllers module
