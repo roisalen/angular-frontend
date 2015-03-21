@@ -4,23 +4,27 @@ a.organisation {
 	border: 0px;
 	text-align: left;
 	font-size: 1.75rem;
-	margin: 2rem;
+	margin-right: 4rem;
+	margin-bottom: 1rem;
 	width: 18rem;
-	padding: 10px;
 	color: #444444;
 	vertical-align: top;
 
 }
 
+.organisations-chooser {
+	margin-top: 2rem;
+}
+
 img.logo {
 	height: 18rem;
 	width: 18rem;
+	margin-bottom: 1rem;
 }
 
 a.new-organisation {
 	display: inline-block;
 	color: #444444;
-	margin: 2rem;
 	width: 100%;
 	font-size: 5rem;
 	vertical-align: middle;
@@ -29,7 +33,6 @@ a.new-organisation {
 .add-icon {
 	display: inline-block;
 	font-size: 6rem;
-	margin: 1rem;
 
 }
 

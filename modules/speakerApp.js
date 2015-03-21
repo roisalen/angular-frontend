@@ -62,20 +62,23 @@
 				url: '/choose-organisation',
 				templateUrl: 'modules/organisation/organisation.html',
 				controller: 'organisationController',
-				controllerAs: 'organisationController'
+				controllerAs: 'organisationController',
+				data: {hideHeader: true}
 
 			})
 			.state('add-organisation', {
 				url: '/add-organisation',
 				templateUrl: 'modules/organisation/add-organisation.html',
 				controller: 'addOrganisationController',
-				controllerAs: 'addOrganisationController'
+				controllerAs: 'addOrganisationController',
+				data: {hideHeader: true}
 			})
 			.state('log', {
 				url: '/log',
 				templateUrl: 'modules/log/log.html',
 				controller: 'logController',
-				controllerAs: 'logController'
+				controllerAs: 'logController',
+				data: {needsOrg: true}
 			});
 	})
 	// in order to add the active class to the nav-links that are active, we
@@ -90,7 +93,9 @@
     		if (next.data && next.data.needsOrg && !$rootScope.organization_name) {
       			event.preventDefault();
       			$state.go('organisation');
-      		}
+      		} 
+
+      		$(".navbar").toggle(!(next.data && next.data.hideHeader));
   		});
 	});
 
