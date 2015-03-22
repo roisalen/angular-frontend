@@ -80,14 +80,22 @@
 	    		vm.speakerNumber = null;
 	    	};
 
-	    	if (!vm.speakerNumber) {
-
-	    		SpeakerListFactory.nextSpeaker()
-	    		.success(updateList)
-				.error(errorHandler);
+	    	var updateListAndResetStopWatch = function(data) {
+	    		updateList(data);
+	    		if (vm.speakerList.length > 0) {
+	    			vm.timer.start();
+	    		} else {
+	    			vm.timer.stop();
+	    		}
 	    		vm.timer.reset();
-	    		vm.timer.start();
+	    	}
 
+	    	if (!vm.speakerNumber) {
+	    		SpeakerListFactory.nextSpeaker()
+	    		.success(updateListAndResetStopWatch)
+				.error(errorHandler);
+	    		
+	    		
 	    	} else if (vm.speakerNumber.charAt(0) === "r") {
 
 	    		SpeakerListFactory.addReplyToFirstSpeaker(vm.speakerNumber.slice(1))
