@@ -13,7 +13,7 @@
 	// add app constants
 	angular.module('speakerApp')
 	.constant('speakerAppSettings', {
-		server_url: 'http://roisalen.herokuapp.com',
+		server_url: 'http://roisalen.no/rest',
 		css: 'spuio.bootstrap.min.css',
 		organization_name: 'Studentparlamentet UiO',
 		organization_shortName: "spuio",
