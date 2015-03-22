@@ -1,0 +1,11 @@
+.info-text {
+	color: black;
+}
+
+.info-text > h1 {
+	font-size: 300%;
+}
+
+.info-text > h2, h3, h4, h5, h6 {
+	font-size: 200%;
+}
