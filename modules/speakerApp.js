@@ -17,7 +17,6 @@
 		css: 'spuio.bootstrap.min.css',
 		organization_name: 'Studentparlamentet UiO',
 		organization_shortName: "spuio",
-		//server_url: 'http://127.0.0.1:8080'
 	});
 
 	angular.module('speakerAppControllers', []);
