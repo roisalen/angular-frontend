@@ -23,7 +23,7 @@
 		 * Will add a replicant to the current speaker.
 		 */
 		SpeakerListFactory.addReplyToFirstSpeaker = function(replicantNumber, callback) {
-			return $http.post(speakerAppSettings.server_url + "/speakerList/0/replies", replicantNumber);	
+			return $http.post(speakerAppSettings.server_url + "/speakerList/0/replies", {"replicantNumber":replicantNumber});	
 		};
 
 		/*
@@ -45,7 +45,7 @@
 		 * Will add a new speaker to the bottom of the speaker list.
 		 */
 		SpeakerListFactory.addSpeakerToBottom = function(speakerNumber) {
-			return $http.post(speakerAppSettings.server_url + "/speakerList", speakerNumber);
+			return $http.post(speakerAppSettings.server_url + "/speakerList", {"speakerNumber":speakerNumber});
 		};
 
 		return SpeakerListFactory;

@@ -14,11 +14,11 @@
 		    	console.log('could not get data from server')
 		    });
 
-		    // get the current subject title form the sever
+		    // get the current subject title from the sever
 		    SubjectFactory.getSubjectTitleFromServer()
 		    .success(function(data) {
 		    	if (data) {
-		    		vm.subjectTitle = JSON.parse(data);
+		    		vm.subjectTitle = data;
 		    	}
 		    })
 		    .error(function() {
@@ -28,7 +28,7 @@
 		    SubjectFactory.getMessageOnServer()
 		    .success(function(data) {
 		    	if (data) {
-		    		vm.message = JSON.parse(data);
+		    		vm.message = data;
 		    	}
 
 		    });

@@ -6,7 +6,7 @@
 		 * Stores the current subject title on the server.
 		 */
 		SubjectFactory.setSubjectTitleOnServer = function(subjectTitle) {
-			return $http.post(speakerAppSettings.server_url + "/subject", JSON.stringify(subjectTitle));
+			return $http.post(speakerAppSettings.server_url + "/subject", JSON.stringify({"subject":subjectTitle}));
 		}
 
 		/*
@@ -17,7 +17,7 @@
 		}
 
 		SubjectFactory.setMessageOnServer = function(message) {
-			return $http.post(speakerAppSettings.server_url + "/message", JSON.stringify(message));
+			return $http.post(speakerAppSettings.server_url + "/message", JSON.stringify({"message":message}));
 		}
 
 		SubjectFactory.getMessageOnServer = function(get) {

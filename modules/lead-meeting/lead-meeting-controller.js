@@ -18,13 +18,14 @@
 
 		function setSubject(data) {
 	    	if(data) {
-	    		vm.subjectTitle = JSON.parse(data);
+	    		vm.subjectTitle = data;
+	    		// vm.subjectTitle = JSON.parse(data);
 	    	}
 	    }
 
 	    function setMessage(data) {
 	    	if (data) {
-	    		vm.message = JSON.parse(data);
+	    		vm.message = data;
 	    	}
 	    }
 
