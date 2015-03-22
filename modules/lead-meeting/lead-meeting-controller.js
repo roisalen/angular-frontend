@@ -81,13 +81,18 @@
 	    	};
 
 	    	if (!vm.speakerNumber) {
+	    		if (vm.speakerList.length > 1) {
+	    			vm.timer.start();
+	    		} else {
+	    			vm.timer.stop();
+	    		}
+	    		vm.timer.reset();
 
 	    		SpeakerListFactory.nextSpeaker()
 	    		.success(updateList)
 				.error(errorHandler);
-	    		vm.timer.reset();
-	    		vm.timer.start();
-
+	    		
+	    		
 	    	} else if (vm.speakerNumber.charAt(0) === "r") {
 
 	    		SpeakerListFactory.addReplyToFirstSpeaker(vm.speakerNumber.slice(1))
