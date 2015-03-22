@@ -80,16 +80,19 @@
 	    		vm.speakerNumber = null;
 	    	};
 
-	    	if (!vm.speakerNumber) {
-	    		if (vm.speakerList.length > 1) {
+	    	var updateListAndResetStopWatch = function(data) {
+	    		updateList(data);
+	    		if (vm.speakerList.length > 0) {
 	    			vm.timer.start();
 	    		} else {
 	    			vm.timer.stop();
 	    		}
 	    		vm.timer.reset();
+	    	}
 
+	    	if (!vm.speakerNumber) {
 	    		SpeakerListFactory.nextSpeaker()
-	    		.success(updateList)
+	    		.success(updateListAndResetStopWatch)
 				.error(errorHandler);
 	    		
 	    		
