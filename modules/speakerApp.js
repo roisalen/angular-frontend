@@ -87,7 +87,7 @@
 
 	.run(function($rootScope, $state, $location) {
 		$rootScope.$state = $state;
-		$rootScope.css = 'spuio.bootstrap.min.css';
+		// $rootScope.css = 'spuio.bootstrap.min.css';
 		$rootScope.$on('$stateChangeStart', function (event, next) {
     		if (next.data && next.data.needsOrg && !$rootScope.organization_name) {
       			event.preventDefault();

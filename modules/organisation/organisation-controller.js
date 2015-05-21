@@ -5,17 +5,18 @@
    function organisationController (OrganisationFactory, speakerAppSettings, $window, $rootScope, $scope, $http) {
    		var vm = $scope;
 
+			// remove organisationspecific css if we returned from an organisation
+			if (document.getElementById("orgcss") != null) {
+				document.getElementsByTagName("head")[0].removeChild(document.getElementById("orgcss"));
+			}
+
    		vm.chooseOrganisation = function (organisation) {
    			$http.defaults.headers.common['X-organisation'] = organisation.shortName;
    			$rootScope.organization_name = organisation.name;
 
-
-
    			if (organisation.css) {
- 	  			  $rootScope.css = organisation.css;
-   			} else {
-               $rootScope.css = "spuio.bootstrap.min.css";
-            }
+   				$('head').append('<link id="orgcss" rel="stylesheet" type="text/css" href="resources/css/' + organisation.css + '" >');
+   			}
 			
    			$rootScope.$state.go("speaker-list");
    		}
