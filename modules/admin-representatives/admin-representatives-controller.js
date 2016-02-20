@@ -16,6 +16,8 @@
 	    	.error(errorHandler);
 
 	    	resetForm();
+	    	
+	    	$('#number').focus();
 	    }
 
 	    function resetForm() {
@@ -44,6 +46,14 @@
 	    	.success(updateRepresentatives)
 	    	.error(errorHandler);
 	    };
+
+	    vm.changeRepresentative = function(representative) {
+	    	vm.number = representative.number;
+	    	vm.name = representative.name;
+	    	vm.group = representative.group;
+	    	vm.sex = representative.sex;
+	    	$('#number').focus();
+	    }
 
         //Function for handling csv-upload
         $scope.readFileToArray = function(files) {

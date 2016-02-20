@@ -8,6 +8,7 @@
 				<th>Navn</th>
 				<th>Gruppe</th>
 				<th>Kjønn</th>
+				<th>Endre</th>
 				<th>Slett?</th>
 			</tr>
 		</thead>
@@ -17,6 +18,7 @@
 				<td>{{ representative.name }}</td>
 				<td>{{ representative.group }}</td>
 				<td>{{ representative.sex }}</td>
+				<td><small class="btn btn-info" ng-click="adminRepresentativesController.changeRepresentative(representative)">✎</small></td>
 				<td><small class="btn btn-danger" ng-click="adminRepresentativesController.removeRepresentative(representative.number)">X</small></td>
 			</tr>
 		</tbody>
