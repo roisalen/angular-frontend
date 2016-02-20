@@ -4,7 +4,8 @@
 	function adminRepresentativesController($scope, $interval, RepresentativeFactory) {
 	    var vm = this;
 		function errorHandler() {
-	    	console.log("Something went wrong with the server "+arguments);
+	    	console.log("Something went wrong with the server ");
+	    	console.log(arguments);
 	    }
 	    function updateRepresentatives() {
 	    	RepresentativeFactory.getRepresentativesFromServer()
