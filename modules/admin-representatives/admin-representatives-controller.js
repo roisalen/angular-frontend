@@ -6,6 +6,7 @@
 		function errorHandler() {
 	    	console.log("Something went wrong with the server ");
 	    	console.log(arguments);
+	    	vm.number = "MÅ VÆRE TALL!";
 	    }
 	    function updateRepresentatives() {
 	    	RepresentativeFactory.getRepresentativesFromServer()
@@ -13,19 +14,24 @@
 	    		vm.representatives = data;
 	    	})
 	    	.error(errorHandler);
-	    	
+
+	    	resetForm();
 	    }
 
+	    function resetForm() {
+		    vm.number = null;
+		    vm.name = null;
+	    	vm.group = null;
+	    	vm.sex = null;
+	    }
 	    
 		// get registered representatives from server
 		updateRepresentatives();
 	    
 
 	    // variables and submit handler for manually adding speakers
-	    vm.number = null;
-	    vm.name = null;
-	    vm.group = null;
-	    vm.sex = null;
+
+
 	    vm.postRepresentativeFromForm = function() {
 	    	RepresentativeFactory.registerRepresentative([vm.number, vm.name, vm.group, vm.sex])
 	    	.success(updateRepresentatives)
