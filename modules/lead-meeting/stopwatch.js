@@ -16,7 +16,6 @@ var Stopwatch = function(elem, options) {
   elem.appendChild(timer);
   elem.appendChild(startButton);
   elem.appendChild(resetButton);
-  this.elem = elem;
 
   // initialize
   reset();
@@ -43,9 +42,9 @@ var Stopwatch = function(elem, options) {
       interval = setInterval(update, options.delay);
     }
 
-    if (this.elem.contains(startButton)) {
-      this.elem.insertBefore(stopButton, resetButton);
-      this.elem.removeChild(startButton);
+    if (elem.contains(startButton)) {
+      elem.insertBefore(stopButton, resetButton);
+      elem.removeChild(startButton);
     }
     
   }
@@ -56,9 +55,9 @@ var Stopwatch = function(elem, options) {
       interval = null;
     }
 
-    if (this.elem.contains(stopButton)) {
-      this.elem.removeChild(stopButton);
-      this.elem.insertBefore(startButton, resetButton);
+    if (elem.contains(stopButton)) {
+      elem.removeChild(stopButton);
+      elem.insertBefore(startButton, resetButton);
     }
   }
 
