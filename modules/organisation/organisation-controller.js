@@ -22,16 +22,14 @@
    		}
 
          vm.organisations = [];
-         function checkIfOrgHasLogo(organisation, orgs) {
+         function checkIfOrgHasLogo(organisation) {
             var img = new Image();
             img.onload = function() {
                organisation.logoUrl = 'resources/images/logo_'+organisation.shortName+ '.jpg';
-               vm.organisations.push(organisation);
                vm.$apply();
             };
             img.onerror = function() {
                organisation.logoUrl = 'resources/images/question.jpg';
-               vm.organisations.push(organisation);
                vm.$apply();
             };
 
@@ -39,9 +37,9 @@
          }
 
          function checkIfOrgsHaveLogoAndSetOnVM(data) {
-            var orgs = [];
+            vm.organisations = data;
             for (organisationIndex in data) {
-               checkIfOrgHasLogo(data[organisationIndex], orgs);
+               checkIfOrgHasLogo(data[organisationIndex]);
             }
             
          }
