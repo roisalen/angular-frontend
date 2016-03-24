@@ -69,6 +69,18 @@
       		$scope.stopInterval();
     	});
 
+
+    	vm.speakerMove = function(start, end) {
+    		console.log("move ended");
+
+    		console.log(arguments);
+    		console.log("start index "+start);
+    		console.log("end index "+end);
+    		if (vm.moveStartIndex == null) return false;
+    		SpeakerListFactory.moveSpeaker(vm.moveStartIndex, endIndex).success(updateList).error(errorHandler);
+    		return true;
+    	}
+
 	    // variables and handler for adding a speaker to the speaker list
 	    vm.speakerNumber = null;
 	    vm.addSpeaker = function() {

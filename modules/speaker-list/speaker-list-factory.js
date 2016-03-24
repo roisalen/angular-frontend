@@ -48,6 +48,10 @@
 			return $http.post(speakerAppSettings.server_url + "/speakerList", {"speakerNumber":speakerNumber});
 		};
 
+		SpeakerListFactory.moveSpeaker = function(start, end) {
+			return $http.put(speakerAppSettings.server_url + "/speakerlist/"+start, {"newPlace":end});
+		};
+
 		return SpeakerListFactory;
 	}
 

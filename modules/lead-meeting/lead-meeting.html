@@ -38,7 +38,7 @@
 	</form>
 <div id="stopwatch" class="fontSizeDoubled alignCenter"></div>
 <div ng-show="leadMeetingController.speakerList">
-	<table class="table borderless">
+	<table class="table borderless" dnd-list="leadMeetingController.speakerList">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -47,7 +47,10 @@
 				<th>Fjern</th>
 			</tr>
 		</thead>
-		<tbody ng-repeat="speaker in leadMeetingController.speakerList">
+		<tbody ng-repeat="speaker in leadMeetingController.speakerList"
+				dnd-draggable="speaker"
+				dnd-inserted="leadMeetingController.speakerMove($event, $index)"
+				dnd-effect-allowed="move">
 			<tr ng-class="{hightlightSpeaker: speaker.speaking}">
 				<td>{{ speaker.number }}</td>
 				<td>{{ speaker.name }}</td>
