@@ -3,9 +3,27 @@
 
 	function leadMeetingController($scope, $http, $interval, SpeakerListFactory, SubjectFactory, RepresentativeFactory) {
 	    var vm = this;
+	    vm.speechLength = 3;
+	    vm.replyLength = 1;
+	    vm.numberOfReplies = 1;
+	    vm.showEstimateParameters = false;
+	    vm.doneEstimate = moment();
+
+	    vm.estimateTime = function() {
+	    	vm.doneEstimate = moment();
+	    	if (vm.speakerList) {
+	    		vm.doneEstimate.add(vm.speakerList.length * vm.speechLength, 'minutes');
+	    		vm.doneEstimate.add(vm.speakerList.length * vm.numberOfReplies * vm.replyLength, 'minutes');
+	    	}
+	    }
+
+	    vm.toggleEstimateParameters = function() {
+	    	vm.showEstimateParameters = !vm.showEstimateParameters;
+	    }
 
 	    function updateList(data) {
 			vm.speakerList = data;
+			vm.estimateTime();
 		}
 
 		function updateRepresentatives(data) {
@@ -50,13 +68,13 @@
 		    .error(errorHandler);
 
 	    // fetch stuff every 5 seconds
-	    var stop = $interval(function() {
+	    /*var stop = $interval(function() {
 	    	// get the current speaker _list_ from server
 	    	SpeakerListFactory.getSpeakerListFromServer()
 	    	.success(updateList)
 	    	.error(errorHandler);
 
-	    }, 5000);
+	    }, 5000);*/
 
 	    $scope.stopInterval = function() {
       		if (angular.isDefined(stop)) {
@@ -155,6 +173,11 @@
 	    	.success(setMessage)
 	    	.error(errorHandler);
 	    }
+
+	    
+
+	    vm.estimateTime();
+
 
 	    return vm;
 
