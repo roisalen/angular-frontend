@@ -69,6 +69,15 @@
       		$scope.stopInterval();
     	});
 
+
+    	vm.moveDown = function(index) {
+    		SpeakerListFactory.moveSpeaker(index, index + 1).success(updateList).error(errorHandler);
+    	}
+
+    	vm.moveUp = function(index) {
+    		SpeakerListFactory.moveSpeaker(index, index - 1).success(updateList).error(errorHandler);
+    	}
+
 	    // variables and handler for adding a speaker to the speaker list
 	    vm.speakerNumber = null;
 	    vm.addSpeaker = function() {
