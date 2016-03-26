@@ -7,8 +7,7 @@
 		'ui.router',
 		'speakerAppControllers',
 		'speakerAppFactories',
-		'yaru22.md',
-		'dndLists'
+		'yaru22.md'
 	]);
 
 	// add app constants
