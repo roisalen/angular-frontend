@@ -3,9 +3,27 @@
 
 	function leadMeetingController($scope, $http, $interval, SpeakerListFactory, SubjectFactory, RepresentativeFactory) {
 	    var vm = this;
+	    vm.speechLength = 3;
+	    vm.replyLength = 1;
+	    vm.numberOfReplies = 1;
+	    vm.showEstimateParameters = false;
+	    vm.doneEstimate = moment();
+
+	    vm.estimateTime = function() {
+	    	vm.doneEstimate = moment();
+	    	if (vm.speakerList) {
+	    		vm.doneEstimate.add(vm.speakerList.length * vm.speechLength, 'minutes');
+	    		vm.doneEstimate.add(vm.speakerList.length * vm.numberOfReplies * vm.replyLength, 'minutes');
+	    	}
+	    }
+
+	    vm.toggleEstimateParameters = function() {
+	    	vm.showEstimateParameters = !vm.showEstimateParameters;
+	    }
 
 	    function updateList(data) {
 			vm.speakerList = data;
+			vm.estimateTime();
 		}
 
 		function updateRepresentatives(data) {
@@ -157,7 +175,6 @@
 	    }
 
 	    return vm;
-
 	}
 
 	// add it to our bookControllers module

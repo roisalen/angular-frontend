@@ -35,8 +35,40 @@
 		</div>
 	</div>
 
-	</form>
+</form>
+
 <div id="stopwatch" class="fontSizeDoubled alignCenter"></div>
+<div id="timeLeft" >Ferdig ca. {{ leadMeetingController.doneEstimate.format("H:mm") }} 
+	<a ng-hide="leadMeetingController.showEstimateParameters" ng-click="leadMeetingController.toggleEstimateParameters()">	⚙
+	</a>
+	<a ng-show="leadMeetingController.showEstimateParameters" ng-click="leadMeetingController.toggleEstimateParameters()">	Skjul inputt
+	</a>
+</div>
+
+<div class="form-horizontal" ng-show="leadMeetingController.showEstimateParameters">
+	<div class="form-group">
+
+		<form ng-submit="leadMeetingController.estimateTime()">
+			<label for="speechLength" class="control-label col-xs-2">Snittlengde innlegg</label>
+			<div class="col-xs-1">
+				<input id="speechLength" type="text" class="form-control" ng-model="leadMeetingController.speechLength"/> 
+			</div>
+		</form>
+		<form ng-submit="leadMeetingController.estimateTime()">
+			<label for="numberOfReplies" class="control-label col-xs-3">Snitt antall replikker</label>
+			<div class="col-xs-1">
+				<input id="numberOfReplies" type="text" class="form-control" ng-model="leadMeetingController.numberOfReplies"/>
+			</div>
+		</form>
+		<form ng-submit="leadMeetingController.estimateTime()">
+			<label for="replyLength" class="control-label col-xs-3">Snittlengde replikk</label>
+			<div class="col-xs-1">
+				<input id="replyLength" type="text" class="form-control" ng-model="leadMeetingController.replyLength" />
+			</div>
+		</form>
+	</div>
+</div>
+	
 <div ng-show="leadMeetingController.speakerList">
 	<table class="table borderless">
 		<thead>
@@ -68,6 +100,7 @@
 		</tbody>
 	</table>
 </div>
+
 <div ng-hide="leadMeetingController.speakerList">
 	<p>Ingen talere på lista.</p>
 </div>
@@ -85,9 +118,6 @@
 	</div>
 </div>
 </form>
-
-
-
 
 <h2>Registrerte representanter</h2>
 <div ng-show="leadMeetingController.representatives">

@@ -1,3 +1,16 @@
 .cursor-hover:hover {
 	cursor: pointer;
 }
+
+input {
+	min-width: 3.7em;
+}
+
+#timeLeft {
+	display: inline-block;
+	margin-left: 10%;
+}
+#stopwatch {
+	display: inline-block;
+	margin-left: 40%;
+ }
