@@ -174,13 +174,7 @@
 	    	.error(errorHandler);
 	    }
 
-	    
-
-	    vm.estimateTime();
-
-
 	    return vm;
-
 	}
 
 	// add it to our bookControllers module
