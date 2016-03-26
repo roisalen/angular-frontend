@@ -70,15 +70,12 @@
     	});
 
 
-    	vm.speakerMove = function(start, end) {
-    		console.log("move ended");
+    	vm.moveDown = function(index) {
+    		SpeakerListFactory.moveSpeaker(index, index + 1).success(updateList).error(errorHandler);
+    	}
 
-    		console.log(arguments);
-    		console.log("start index "+start);
-    		console.log("end index "+end);
-    		if (vm.moveStartIndex == null) return false;
-    		SpeakerListFactory.moveSpeaker(vm.moveStartIndex, endIndex).success(updateList).error(errorHandler);
-    		return true;
+    	vm.moveUp = function(index) {
+    		SpeakerListFactory.moveSpeaker(index, index - 1).success(updateList).error(errorHandler);
     	}
 
 	    // variables and handler for adding a speaker to the speaker list

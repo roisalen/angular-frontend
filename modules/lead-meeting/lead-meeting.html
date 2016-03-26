@@ -44,23 +44,26 @@
 				<th>#</th>
 				<th>Navn</th>
 				<th>Gruppe</th>
+				<th>Flytt</th>
 				<th>Fjern</th>
 			</tr>
 		</thead>
-		<tbody ng-repeat="speaker in leadMeetingController.speakerList"
-				dnd-draggable="speaker"
-				dnd-inserted="leadMeetingController.speakerMove($event, $index)"
-				dnd-effect-allowed="move">
+		<tbody ng-repeat="speaker in leadMeetingController.speakerList">
 			<tr ng-class="{hightlightSpeaker: speaker.speaking}">
 				<td>{{ speaker.number }}</td>
 				<td>{{ speaker.name }}</td>
 				<td>{{ speaker.group }}</td>
+
+				<td><div class="cursor-hover" ng-hide="$first"  ng-click="leadMeetingController.moveUp($index)">↑</div><div class="cursor-hover" ng-hide="$last"  ng-click="leadMeetingController.moveDown($index)">
+						↓</div></td>
+				
 				<td><small class="btn btn-danger" ng-click="leadMeetingController.removeSpeaker($index)">X</small></td>
 			</tr>
 			<tr ng-repeat="reply in speaker.replies" ng-class="{hightlightSpeaker: reply.speaking}">
 				<td><span class="glyphicon glyphicon-arrow-right"></span> {{ reply.number }}</td>
 				<td>{{ reply.name }}</td>
 				<td>{{ reply.group }}</td>
+				<td></td>
 				<td><small class="btn btn-danger" ng-click="leadMeetingController.removeReplicant($index)">X</small></td>
 			</tr>
 		</tbody>
