@@ -53,10 +53,9 @@
 				<td>{{ speaker.number }}</td>
 				<td>{{ speaker.name }}</td>
 				<td>{{ speaker.group }}</td>
-
-				<td><div class="cursor-hover" ng-hide="$first"  ng-click="leadMeetingController.moveUp($index)">↑</div><div class="cursor-hover" ng-hide="$last"  ng-click="leadMeetingController.moveDown($index)">
-						↓</div></td>
-				
+				<td><div class="cursor-hover" ng-hide="$first"  ng-click="leadMeetingController.moveUp($index)">↑</div>
+					<div class="cursor-hover" ng-hide="$last"  ng-click="leadMeetingController.moveDown($index)">↓</div>
+				</td>
 				<td><small class="btn btn-danger" ng-click="leadMeetingController.removeSpeaker($index)">X</small></td>
 			</tr>
 			<tr ng-repeat="reply in speaker.replies" ng-class="{hightlightSpeaker: reply.speaking}">
