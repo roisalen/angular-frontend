@@ -68,13 +68,13 @@
 		    .error(errorHandler);
 
 	    // fetch stuff every 5 seconds
-	    /*var stop = $interval(function() {
+	    var stop = $interval(function() {
 	    	// get the current speaker _list_ from server
 	    	SpeakerListFactory.getSpeakerListFromServer()
 	    	.success(updateList)
 	    	.error(errorHandler);
 
-	    }, 5000);*/
+	    }, 5000);
 
 	    $scope.stopInterval = function() {
       		if (angular.isDefined(stop)) {
