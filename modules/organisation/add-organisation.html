@@ -4,9 +4,9 @@
 <form ng-submit="addOrganisationController.addOrganisation()" class="form-horizontal">
 	<div class="form-group">
 	<label for="orgName">Navn på organisasjon</label>
-	<input class="form-control" id="orgName" type="text" ng-model="addOrganisationController.orgName" />
+	<input class="form-control" id="orgName" type="text" ng-model="addOrganisationController.orgName" pattern="[a-z\x00e6\x00f8\x00e5A-Z\x00c6\x00d8\x00c50-9]{3}" required="required"/>
 	<label for="orgShortName" type="text">Kortnavn uten mellomrom og andre spesialteikn</label>
-    <input class="form-control" id="orgShortName" type="text" pattern="[a-z\x00e6\x00f8\x00e5A-Z\x00c6\x00d8\x00c50-9]{3,}" ng-model="addOrganisationController.orgShortName" />
+    <input class="form-control" id="orgShortName" type="text" pattern="[a-z\x00e6\x00f8\x00e5A-Z\x00c6\x00d8\x00c50-9]{3,12}" ng-model="addOrganisationController.orgShortName" required="required"/>
 	<button type="submit">Legg til</button>
 </div>
 </form>
