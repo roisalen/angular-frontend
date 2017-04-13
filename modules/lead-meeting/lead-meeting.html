@@ -21,11 +21,11 @@
 <form ng-submit="leadMeetingController.addSpeaker()" class="form-horizontal">
 
 	<div class="form-group">
-		<label for="speakerNumber" class="control-label col-xs-2">Legg til/Neste taler</label>
+		<label for="speakerNumber" class="control-label col-xs-2">Styr ordet</label>
 		<div class="col-xs-8">
 			<input
 				type="text"
-				placeholder="Ny taler: Skriv talenummer. Replikk: Skriv r+talenummer. Neste taler/replikk: Trykk enter i tomt felt"
+				placeholder="Styr ordet her, instruksjoner under"
 				id="speakerNumber"
 				class="form-control"
 				ng-model="leadMeetingController.speakerNumber" />
@@ -36,6 +36,7 @@
 	</div>
 
 </form>
+<div id="helpText" class=" alignCenter"><b>Ny taler nederst i lista</b>: Skriv nummer. <b>Replikk til nåværende taler</b>: Skriv r+nummer. <b>Neste taler/replikk</b>: Trykk enter i tomt felt</div>
 
 <div id="stopwatch" class="fontSizeDoubled alignCenter"></div>
 <div id="timeLeft" >Ferdig ca. {{ leadMeetingController.doneEstimate.format("H:mm") }} 
@@ -44,6 +45,7 @@
 	<a ng-show="leadMeetingController.showEstimateParameters" ng-click="leadMeetingController.toggleEstimateParameters()">	Skjul inputt
 	</a>
 </div>
+<div id="helpText" class=" alignCenter">Trykk på tannhjulet for å endre standardtid for innlegg/replikk som beregningen bruker. </div>
 
 <div class="form-horizontal" ng-show="leadMeetingController.showEstimateParameters">
 	<div class="form-group">
@@ -110,7 +112,7 @@
 	<div class="col-xs-8">
 		<textarea id="generalInfo" rows="4" cols="50" ng-model="leadMeetingController.message">
 		</textarea> 
-		<p>Dette feltet vises under talelista. Støtter <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a></p>
+		<p>Dette feltet vises under talelista. Støtter <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown.</a> Hvis du vil si ifra om at strek er satt for inntegning til talelista anbefales det å skrive "### STREK ER SATT" her, evt i sakstittelfeltet hvis talelista er lang.</p>
 	</div>
 	<div class="col-xs-2">
 		<button type="submit" class="btn btn-default">Oppdatér
