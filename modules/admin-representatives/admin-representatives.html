@@ -29,8 +29,9 @@
 </div>
 
 <h2 translate>{{ 'REGISTERED_REPRESENTATIVES' }}</h2>
-
+<p translate>{{ 'TERMS_ORGANISATION'}}</p>
 <label for="csv-upload" translate>{{ 'UPLOAD_FILE' }}</label>
+
 <input id="csv-upload" type="file" accept=".csv" onchange='angular.element(this).scope().readFileToArray(this.files)' />
 
 <p class="help" translate>{{ 'UPLOAD_FILE_HELPER' }}</p>
