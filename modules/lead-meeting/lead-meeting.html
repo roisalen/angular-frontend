@@ -1,18 +1,18 @@
 <form ng-submit="leadMeetingController.setSubjectTitle()" class="form-horizontal">
 
 	<div class="form-group">
-		<label for="subject" class="control-label col-xs-2">Sakstittel</label>
+		<label for="subject" class="control-label col-xs-2" translate>{{ 'SUBJECT' }}</label>
 		<div class="col-xs-8">
 			<input
 				type="text"
-				placeholder="Skriv inn sakstittel.."
+				placeholder="{{ 'SUBJECT_PLACEHOLDER' | translate }}"
 				id="subject"
 				class="form-control"
 				ng-model="leadMeetingController.subjectTitle" />
 			</div>
 			
 		<div class="col-xs-2">
-			<button class="btn btn-default" type="submit">Lagre</button>
+			<button class="btn btn-default" type="submit" translate>{{ 'SAVE' }}</button>
 		</div>
 	</div>
 
@@ -20,29 +20,28 @@
 
 <form ng-submit="leadMeetingController.addSpeaker()" class="form-horizontal">
 
-	<div class="form-group">
-		<label for="speakerNumber" class="control-label col-xs-2">Styr ordet</label>
+		<label for="speakerNumber" class="control-label col-xs-2" translate>{{ 'ADD_NEXT_SPEAKER' }}</label>
 		<div class="col-xs-8">
 			<input
 				type="text"
-				placeholder="Styr ordet her, instruksjoner under"
+				placeholder="{{ 'ADD_NEXT_SPEAKER_PLACEHOLDER' | translate }}"
 				id="speakerNumber"
 				class="form-control"
 				ng-model="leadMeetingController.speakerNumber" />
 		</div>
 		<div class="col-xs-2">
-			<button class="btn btn-default" type="submit">Legg til</button>
+			<button class="btn btn-default" type="submit" translate>{{ 'SUBMIT' }}</button>
 		</div>
 	</div>
 
 </form>
-<div id="helpText" class=" alignCenter"><b>Ny taler nederst i lista</b>: Skriv nummer. <b>Replikk til nåværende taler</b>: Skriv r+nummer. <b>Hopp til neste taler/replikk</b>: Trykk enter i tomt felt</div>
+<div id="helpText" class=" alignCenter" translate>{{ 'LEADER_HELP' }}</div>
 
 <div id="stopwatch" class="fontSizeDoubled alignCenter"></div>
-<div id="timeLeft" >Ferdig ca. {{ leadMeetingController.doneEstimate.format("H:mm") }} 
+<div id="timeLeft">{{ 'TIME_LEFT'  | translate}} {{ leadMeetingController.doneEstimate.format("H:mm") }}
 	<a ng-hide="leadMeetingController.showEstimateParameters" ng-click="leadMeetingController.toggleEstimateParameters()">	⚙
 	</a>
-	<a ng-show="leadMeetingController.showEstimateParameters" ng-click="leadMeetingController.toggleEstimateParameters()">	Skjul inputt
+	<a ng-show="leadMeetingController.showEstimateParameters" ng-click="leadMeetingController.toggleEstimateParameters()" translate>	{{ 'HIDE_INPUT' }}
 	</a>
 </div>
 <div id="helpText" class=" alignCenter">Trykk på tannhjulet for å endre standardtid for innlegg/replikk som beregningen bruker. </div>
@@ -51,19 +50,19 @@
 	<div class="form-group">
 
 		<form ng-submit="leadMeetingController.estimateTime()">
-			<label for="speechLength" class="control-label col-xs-2">Snittlengde innlegg</label>
+			<label for="speechLength" class="control-label col-xs-2" translate>{{ 'SPEECH_LENGTH' }}</label>
 			<div class="col-xs-1">
 				<input id="speechLength" type="text" class="form-control" ng-model="leadMeetingController.speechLength"/> 
 			</div>
 		</form>
 		<form ng-submit="leadMeetingController.estimateTime()">
-			<label for="numberOfReplies" class="control-label col-xs-3">Snitt antall replikker</label>
+			<label for="numberOfReplies" class="control-label col-xs-3" translate>{{ 'NUMBER_OF_REPLIES' }}</label>
 			<div class="col-xs-1">
 				<input id="numberOfReplies" type="text" class="form-control" ng-model="leadMeetingController.numberOfReplies"/>
 			</div>
 		</form>
 		<form ng-submit="leadMeetingController.estimateTime()">
-			<label for="replyLength" class="control-label col-xs-3">Snittlengde replikk</label>
+			<label for="replyLength" class="control-label col-xs-3" translate>{{ 'REPLY_LENGTH' }}</label>
 			<div class="col-xs-1">
 				<input id="replyLength" type="text" class="form-control" ng-model="leadMeetingController.replyLength" />
 			</div>
@@ -76,10 +75,10 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Navn</th>
-				<th>Gruppe</th>
-				<th>Flytt</th>
-				<th>Fjern</th>
+				<th translate>{{ 'NAME' }}</th>
+				<th translate>{{ 'GROUP' }}</th>
+				<th translate>{{ 'MOVE' }}</th>
+				<th translate>{{ 'REMOVE' }}</th>
 			</tr>
 		</thead>
 		<tbody ng-repeat="speaker in leadMeetingController.speakerList">
@@ -104,32 +103,32 @@
 </div>
 
 <div ng-hide="leadMeetingController.speakerList">
-	<p>Ingen talere på lista.</p>
+	<p translate>{{ 'NO_SPEAKERS_ON_LIST' }}</p>
 </div>
 <form id="infoForm" class="form-horizontal" ng-submit="leadMeetingController.updateMessage()">
 <div class="form-group">
-	<label for="generalInfo" class="control-label col-xs-2">Beskjeder og info</label>
+	<label for="generalInfo" class="control-label col-xs-2" translate>{{ 'GENERAL_INFO' }}</label>
 	<div class="col-xs-8">
 		<textarea id="generalInfo" rows="4" cols="50" ng-model="leadMeetingController.message">
 		</textarea> 
-		<p>Dette feltet vises under talelista. Støtter <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown.</a> Hvis du vil si ifra om at strek er satt for inntegning til talelista anbefales det å skrive "### STREK ER SATT" her, evt i sakstittelfeltet hvis talelista er lang.</p>
+		<p translate>{{ 'GENERAL_INFO_INSTRUCTIONS' }} </p>
 	</div>
 	<div class="col-xs-2">
-		<button type="submit" class="btn btn-default">Oppdatér
+		<button type="submit" class="btn btn-default" translate>{{ 'UPDATE' }}
 		</button>
 	</div>
 </div>
 </form>
 
-<h2>Registrerte representanter</h2>
+<h2 translate>{{ 'REGISTERED_REPRESENTATIVES' }}</h2>
 <div ng-show="leadMeetingController.representatives">
 	<table class="table borderless">
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Navn</th>
-				<th>Gruppe</th>
-				<th>Kjønn</th>
+				<th translate>{{ 'NAME' | translate }}</th>
+				<th translate>{{ 'GROUP' }}</th>
+				<th translate>{{ 'SEX' }}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -143,5 +142,5 @@
 	</table>
 </div>
 <div ng-hide="leadMeetingController.representatives">
-	<p>Ingen registrerte representanter.</p>
+	<p translate>{{ 'NO_REPRESENTATIVES' }}</p>
 </div>

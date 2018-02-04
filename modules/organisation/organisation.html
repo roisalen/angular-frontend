@@ -2,15 +2,16 @@
 
 <div ng-controller="organisationController" class="organisations-chooser">
 	<a class="organisation" href="" ng-repeat="organisation in organisationController.organisations" ng-click="organisationController.chooseOrganisation(organisation)"><img class='logo' src='{{organisation.logoUrl}}' />{{organisation.name}}</a>
-	<a class="new-organisation" ui-sref='add-organisation'> <div class="add-icon">+</div> Legg til ny organisasjon her</a>
+	<a class="new-organisation" ui-sref='add-organisation' translate> <div class="add-icon">+</div> {{ 'ADD_ORGANISATION' }}</a>
 </div>
 
 <hr/>
-<h2>Om Ro<span class="name-i">i</span>salen</h2>
-Vi prøver å lage enkle digitale verktøy for å gjøre store møter bedre. Foreløpig har vi laget verktøy som:<ul>
-<li>Holder styr på talelista for deg</li>
-<li>Innebygd klokke for å sørge for at alle får prate like lenge</li>
-<li>Lager statistikk over hvem som har pratet mest på dette møtet</li>
-<li>Viser sakstittel og dele beskjeder med salen</li>
+<h2 translate>{{ 'ABOUT_HEADER' }}</h2>
+<p translate>{{ 'ABOUT_P_1' }}</p>
+<ul>
+<li translate>{{ 'ABOUT_LIST_1' }}</li>
+<li translate>{{ 'ABOUT_LIST_2' }}</li>
+<li translate>{{ 'ABOUT_LIST_3' }}</li>
+<li translate>{{ 'ABOUT_LIST_4' }}</li>
 </ul> 
-Ro<span class="name-i">i</span>salen er laget på fritida av tre aktive organisasjonsmennesker: Christian Strandenæs, Stian Lågstad og Torkil Vederhus. All kildekode er åpent tilgjengelig på <a href="http://github.com/roisalen">GitHub</a>, bidra gjerne selv! Ønsker om funksjonalitet og spesialtilpasning kan sendes til torkilv(a)gmail.com
+<p translate>{{ 'ABOUT_P_2' }}</p>

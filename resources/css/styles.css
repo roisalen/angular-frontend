@@ -21,6 +21,10 @@
 	width: 49%;
 }
 
+.menuDropdown {
+	margin-top: 9px;
+}
+
 textarea {
 	width: 100%;
 }

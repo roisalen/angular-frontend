@@ -1,15 +1,15 @@
 
-<h1>Registrerte representanter</h1>
+<h1 translate>{{ 'REGISTERED_REPRESENTATIVES' }}</h1>
 <div ng-show="adminRepresentativesController.representatives">
 	<table class="table">
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Navn</th>
-				<th>Gruppe</th>
-				<th>Kjønn</th>
-				<th>Endre</th>
-				<th>Slett?</th>
+				<th translate>{{ 'NAME' }}</th>
+				<th translate>{{ 'GROUP' }}</th>
+				<th translate>{{ 'SEX' }}</th>
+				<th translate>{{ 'CHANGE' }}</th>
+				<th translate>{{ 'DELETE' }}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,28 +25,28 @@
 	</table>
 </div>
 <div ng-hide="adminRepresentativesController.representatives">
-	<p>Ingen registrerte talere.</p>
+	<p translate>{{ 'NO_REPRESENTATIVES' }}</p>
 </div>
 
-<h2>Registrér representanter</h2>
+<h2 translate>{{ 'REGISTERED_REPRESENTATIVES' }}</h2>
 
-<label for="csv-upload">Last opp fil med representanter:</label>
+<label for="csv-upload" translate>{{ 'UPLOAD_FILE' }}</label>
 <input id="csv-upload" type="file" accept=".csv" onchange='angular.element(this).scope().readFileToArray(this.files)' />
 
-<p class="help">Fila må ende på .csv og ha følgende format:</p>
+<p class="help" translate>{{ 'UPLOAD_FILE_HELPER' }}</p>
 <pre>1,Torkil Vederhus,Realistlista,M
-2,Grete Godtland Noem,Venstrealliansen,K
+2,Greta Svenske,Venstrealliansen,K
 3,Stian Lågstad,Realistlista,M
 4,Ingunn Inge Nordmann,Grønn liste,T</pre>
 </div>
 
-<h2>Legg til eller rediger enkeltrepresentant</h2>
-<p class="help">Hvis du bruker et nummer som allerede eksisterer vil du overskrive all data for representanten</p>
+<h2 translate>{{ 'ADD_OR_CHANGE_REPRESENTATIVE' }}</h2>
+<p class="help" translate>{{ 'ADD_OR_CHANGE_REPRESENTATIVE_HELPER' | translate }}</p>
 
 <form ng-submit="adminRepresentativesController.postRepresentativeFromForm()" class="form-horizontal">
 
 	<div class="form-group">
-		<label for="number" class="control-label col-xs-2">Nummer</label>
+		<label for="number" class="control-label col-xs-2" translate>{{ 'NUMBER' }}</label>
 		<div class="col-xs-10">
 			<input
 				id="number"
@@ -56,7 +56,7 @@
 	</div>
 
 	<div class="form-group">
-		<label for="name" class="control-label col-xs-2">Navn</label>
+		<label for="name" class="control-label col-xs-2" translate>{{ 'NAME' }}</label>
 		<div class="col-xs-10">
 			<input
 				id="name"
@@ -66,7 +66,7 @@
 	</div>
 
 	<div class="form-group">
-		<label for="group" class="control-label col-xs-2">Liste/gruppe</label>
+		<label for="group" class="control-label col-xs-2" translate>{{ 'LIST_OR_GROUP' }}</label>
 		<div class="col-xs-10">
 			<input
 				id="group"
@@ -76,7 +76,7 @@
 	</div>
 
 	<div class="form-group">
-		<label for="sex" class="control-label col-xs-2">Kjønn</label>
+		<label for="sex" class="control-label col-xs-2" translate>{{ 'SEX' }}</label>
 		<div class="col-xs-10">
 			<input
 				id="sex"
@@ -86,7 +86,7 @@
 	</div>
 
 	<div class="form-group text-right">
-		<button class="btn btn-default" type="submit">Legg til</button>
+		<button class="btn btn-default" type="submit" translate>{{ 'SUBMIT' }}</button>
 	</div>
 
 </form>
