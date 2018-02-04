@@ -1,11 +1,14 @@
 <h1><span class="glyphicon glyphicon-bullhorn"></span> Ro<span class="name-i">i</span>salen</h1>
 
 <div ng-controller="organisationController" class="organisations-chooser">
-	<a class="organisation" href="" ng-repeat="organisation in organisationController.organisations" ng-click="organisationController.chooseOrganisation(organisation)"><img class='logo' src='{{organisation.logoUrl}}' />{{organisation.name}}</a>
 	<a class="new-organisation" ui-sref='add-organisation' translate> <div class="add-icon">+</div> {{ 'ADD_ORGANISATION' }}</a>
+	<hr/>
+
+
+	<a class="organisation" href="" ng-repeat="organisation in organisationController.organisations" ng-click="organisationController.chooseOrganisation(organisation)"><img class='logo' src='{{organisation.logoUrl}}' />{{organisation.name}}</a>
+	
 </div>
 
-<hr/>
 <h2 translate>{{ 'ABOUT_HEADER' }}</h2>
 <p translate>{{ 'ABOUT_P_1' }}</p>
 <ul>
