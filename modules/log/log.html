@@ -1,13 +1,13 @@
-<h1>Referat</h1>
+<h1 translate>{{ 'LOG' }}</h1>
 
 <div ng-show="logController.logData">
 	<table class="table">
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Navn</th>
-				<th>Gruppe</th>
-				<th>Tid</th>
+				<th translate>{{ 'NAME' }}</th>
+				<th translate>{{ 'GROUP' }}</th>
+				<th translate>{{ 'TIME' }}</th>
 			</tr>
 		</thead>
 		<tbody ng-repeat="speaker in speakerListController.logData">

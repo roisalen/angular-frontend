@@ -1,5 +1,7 @@
 // To avoid polluting the global scope with our function declarations, we wrap
 // everything inside an IIFE
+
+
 (function () {
 
 	// create app
@@ -7,7 +9,9 @@
 		'ui.router',
 		'speakerAppControllers',
 		'speakerAppFactories',
-		'yaru22.md'
+		'yaru22.md',
+		'pascalprecht.translate',
+		'ngSanitize'
 	]);
 
 	// add app constants
@@ -22,9 +26,10 @@
 	angular.module('speakerAppControllers', []);
 	angular.module('speakerAppFactories', []);
 
+
 	// edit config
 	angular.module('speakerApp')
-	.config(function($stateProvider, $urlRouterProvider) {
+	.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		// set default
 		$urlRouterProvider.otherwise('/choose-organisation');
 
@@ -79,6 +84,10 @@
 				controllerAs: 'logController',
 				data: {needsOrg: true}
 			});
+		$translateProvider.translations('nb', translationsNB);
+		$translateProvider.translations('nn', translationsNN);
+		$translateProvider.preferredLanguage('nn');
+		$translateProvider.useSanitizeValueStrategy('sanitizeParameters');
 	})
 	// in order to add the active class to the nav-links that are active, we
 	// need access to $state in our header. we'll just add it to the
