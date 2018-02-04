@@ -37,6 +37,11 @@
 	<!-- aand the bootstrap js -->
 	<script src="modules/js-libs/bootstrap.min.js"></script>
 
+	<!-- Translate -->
+	<script src="modules/translations.js"></script>
+	<script src="modules/js-libs/angular-sanitize.min.js"></script>
+	<script src="modules/js-libs/angular-translate.min.js"></script>
+
 	<!-- our angular stuff -->
 	<script src="modules/speakerApp.js"></script>
 
@@ -48,6 +53,7 @@
 	<script src="modules/statistics/statistics-factory.js"></script>
 
 	<!-- controllers -->
+	<script src="modules/index-controller.js"></script>
 	<script src="modules/speaker-list/speaker-list-controller.js"></script>
 	<script src="modules/admin-representatives/admin-representatives-controller.js"></script>
 	<script src="modules/statistics/statistics-controller.js"></script>
@@ -76,16 +82,19 @@
 			<div class="collapse navbar-collapse navHeaderCollapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li ng-class="{active: $state.includes('speaker-list')}">
-						<a ui-sref="speaker-list">Taleliste</a>
+						<a ui-sref="speaker-list" translate>{{ 'SPEAKER_LIST' }}</a>
 					</li>
 					<li ng-class="{active: $state.includes('admin-representatives')}">
-						<a ui-sref="admin-representatives">Administrer representanter</a>
+						<a ui-sref="admin-representatives" translate>{{ 'ADMIN_REPRESENTATIVES' }}</a>
 					</li>
 					<li ng-class="{active: $state.includes('lead-meeting')}">
-						<a ui-sref="lead-meeting">Styr ordet</a>
+						<a ui-sref="lead-meeting" translate>{{ 'LEAD_MEATING' }}</a>
 					</li>
 					<li ng-class="{active: $state.includes('statistics')}">
-						<a ui-sref="statistics">Dagens Statistikk</a>
+						<a ui-sref="statistics" translate>{{ 'STATISTICS' }}</a>
+					</li>
+					<li ng-controller="indexController as ctrl">
+						<select ng-options="language | translate for language in ctrl.languages" ng-model="ctrl.language" ng-change="ctrl.updateLanguage()"></select>
 					</li>
 				</ul>
 
