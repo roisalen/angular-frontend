@@ -38,7 +38,7 @@
 	<script src="modules/js-libs/bootstrap.min.js"></script>
 
 	<!-- Translate -->
-	<script src="modules/translations.js"></script>
+	<script src="modules/internationalization/translations.js"></script>
 	<script src="modules/js-libs/angular-sanitize.min.js"></script>
 	<script src="modules/js-libs/angular-translate.min.js"></script>
 
@@ -53,7 +53,7 @@
 	<script src="modules/statistics/statistics-factory.js"></script>
 
 	<!-- controllers -->
-	<script src="modules/index-controller.js"></script>
+	<script src="modules/internationalization/language-controller.js"></script>
 	<script src="modules/speaker-list/speaker-list-controller.js"></script>
 	<script src="modules/admin-representatives/admin-representatives-controller.js"></script>
 	<script src="modules/statistics/statistics-controller.js"></script>
@@ -88,12 +88,12 @@
 						<a ui-sref="admin-representatives" translate>{{ 'ADMIN_REPRESENTATIVES' }}</a>
 					</li>
 					<li ng-class="{active: $state.includes('lead-meeting')}">
-						<a ui-sref="lead-meeting" translate>{{ 'LEAD_MEATING' }}</a>
+						<a ui-sref="lead-meeting" translate>{{ 'LEAD_MEETING' }}</a>
 					</li>
 					<li ng-class="{active: $state.includes('statistics')}">
 						<a ui-sref="statistics" translate>{{ 'STATISTICS' }}</a>
 					</li>
-					<li ng-controller="indexController as ctrl">
+					<li class="menuDropdown" ng-controller="languageController as ctrl">
 						<select ng-options="language | translate for language in ctrl.languages" ng-model="ctrl.language" ng-change="ctrl.updateLanguage()"></select>
 					</li>
 				</ul>

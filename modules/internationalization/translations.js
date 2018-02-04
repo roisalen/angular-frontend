@@ -1,7 +1,7 @@
 var translationsNN = {
 	SPEAKER_LIST: 'Taleliste',
 	ADMIN_REPRESENTATIVES: 'Administrer representantar',
-	LEAD_MEATING: 'Styr ordet',
+	LEAD_MEETING: 'Styr ordet',
 	STATISTICS: 'Dagens Statistikk',
 	SUBJECT: 'Sakstittel',
 	SUBJECT_PLACEHOLDER: 'Skriv inn sakstittel..',
@@ -27,7 +27,6 @@ var translationsNN = {
 	NO_REPRESENTATIVES: 'Ingen registrerte representantar',
 	CHANGE: 'Endre',
 	DELETE: 'Slett?',
-	NO_REGISTERED_SPEACHERS: 'Ingen registrerte talarar', //Unødvendig?
 	REGISTER_REPRESENTATIVES: 'Registrer representantar',
 	UPLOAD_FILE: 'Last opp fil med representantar',
 	UPLOAD_FILE_HELPER: 'Fila må ende på .csv og ha følgjande format:',
@@ -35,7 +34,6 @@ var translationsNN = {
 	ADD_OR_CHANGE_REPRESENTATIVE_HELPER: 'Viss du brukar eit nummer som allereie eksisterar vil du overskrive all data for representanten',
 	NUMBER: 'Nummer',
 	LIST_OR_GROUP: 'Liste/gruppe',
-	NO_SPEACHERS_ON_LIST: 'Ingen talarar på lista :(',
 	TIME: 'Tid',
 	ORG_NAME: 'Namn på organisasjon',
 	ORG_SHORT_NAME: 'Kortnamn utan mellomrom og andre spesialteikn',
@@ -50,7 +48,7 @@ var translationsNN = {
 	ABOUT_LIST_4: 'Viser sakstittel og dele beskjedar med salen',
 	ABOUT_P_2: 'Ro<span class="name-i">i</span>salen er laga på fritida av tre aktive organisasjonsmennesker: Christian Strandenæs, Stian Lågstad og Torkil Vederhus. All kjeldekode er opent tilgjengeleg på <a href="http://github.com/roisalen">GitHub</a>, bidra gjerne sjølv! Ønske om funksjonalitet og spesialtilpasning kan sendast til torkilv(a)gmail.com',
 	LOG: 'Opprit',
-	ABOUT_HIGCHARTS: 'Denne sida brukar <a href="http://www.highcharts.com">Highcharts</a>, eit kommersielt produkt som kan brukast i ikkje-kommersielle produkt under CC-BY-NC 3.0',
+	ABOUT_HIGHCHARTS: 'Denne sida brukar <a href="http://www.highcharts.com">Highcharts</a>, eit kommersielt produkt som kan brukast i ikkje-kommersielle produkt under CC-BY-NC 3.0',
 	nn: 'Nynorsk',
 	nb: 'Bokmål'
 };
@@ -58,7 +56,7 @@ var translationsNN = {
 var translationsNB = {
 	SPEAKER_LIST: 'Taleliste',
 	ADMIN_REPRESENTATIVES: ' Administrer representanter',
-	LEAD_MEATING: 'Styr ordet',
+	LEAD_MEETING: 'Styr ordet',
 	STATISTICS: 'Dagens Statistikk',
 	SUBJECT: 'Sakstittel',
 	SUBJECT_PLACEHOLDER: 'Skriv inn sakstittel..',
@@ -76,7 +74,7 @@ var translationsNB = {
 	SEX: 'Kjønn',
 	MOVE: 'Flytt',
 	REMOVE: 'Fjern',
-	NO_SPEAKERS_ON_LIST: 'Ingen talere på lista',
+	NO_SPEAKERS_ON_LIST: 'Ingen talere på lista.',
 	GENERAL_INFO: 'Beskjeder og info',
 	GENERAL_INFO_INSTRUCTIONS: 'Dette feltet vises under talelista. Støttar <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a>', //FIKS!
 	UPDATE: 'Oppdatér',
@@ -84,7 +82,6 @@ var translationsNB = {
 	NO_REPRESENTATIVES: 'Ingen registrerte representanter',
 	CHANGE: 'Endre',
 	DELETE: 'Slett?',
-	NO_REGISTERED_SPEACHERS: 'Ingen registrerte talere', //Unødvendig?
 	REGISTER_REPRESENTATIVES: 'Registrer representanter',
 	UPLOAD_FILE: 'Last opp fil med representanter',
 	UPLOAD_FILE_HELPER: 'Fila må ende på .csv og ha følgaede format:',
@@ -92,7 +89,6 @@ var translationsNB = {
 	ADD_OR_CHANGE_REPRESENTATIVE_HELPER: 'Hvis du bruker et nummer som allerede eksisterer vil du overskrive all data for representanten',
 	NUMBER: 'Nummer',
 	LIST_OR_GROUP: 'Liste/gruppe',
-	NO_SPEACHERS_ON_LIST: 'Ingen talere på lista :(',
 	TIME: 'Tid',
 	ORG_NAME: 'Navn på organisasjon',
 	ORG_SHORT_NAME: 'Kortnavn uten mellomrom og andre spesialtegn',
@@ -107,7 +103,7 @@ var translationsNB = {
 	ABOUT_LIST_4: 'Viser sakstittel og dele beskjeder med salen',
 	ABOUT_P_2: 'Ro<span class="name-i">i</span>salen er laget på fritida av tre aktive organisasjonsmennesker: Christian Strandenæs, Stian Lågstad og Torkil Vederhus. All kildekode er åpent tilgjengelig på <a href="http://github.com/roisalen">GitHub</a>, bidra gjerne selv! Ønsker om funksjonalitet og spesialtilpasning kan sendes til torkilv(a)gmail.com',
 	LOG: 'Referat',
-	ABOUT_HIGCHARTS: 'Denne siden bruker <a href="http://www.highcharts.com">Highcharts</a>, et kommersielt produkt som kan brukes i ikke-kommersielle produkter under CC-BY-NC 3.0',
+	ABOUT_HIGHCHARTS: 'Denne siden bruker <a href="http://www.highcharts.com">Highcharts</a>, et kommersielt produkt som kan brukes i ikke-kommersielle produkter under CC-BY-NC 3.0',
 	nn: 'Nynorsk',
 	nb: 'Bokmål'
 };
