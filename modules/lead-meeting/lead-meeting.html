@@ -19,7 +19,7 @@
 </form>
 
 <form ng-submit="leadMeetingController.addSpeaker()" class="form-horizontal">
-
+	
 	<div class="form-group">
 		<label for="speakerNumber" class="control-label col-xs-2" translate>{{ 'ADD_NEXT_SPEAKER' }}</label>
 		<div class="col-xs-8">
@@ -36,6 +36,7 @@
 	</div>
 
 </form>
+<div id="helpText" class=" alignCenter" translate>{{ 'LEADER_HELP' }}</div>
 
 <div id="stopwatch" class="fontSizeDoubled alignCenter"></div>
 <div id="timeLeft">{{ 'TIME_LEFT'  | translate}} {{ leadMeetingController.doneEstimate.format("H:mm") }}
@@ -44,6 +45,7 @@
 	<a ng-show="leadMeetingController.showEstimateParameters" ng-click="leadMeetingController.toggleEstimateParameters()" translate>	{{ 'HIDE_INPUT' }}
 	</a>
 </div>
+<div id="helpText" class=" alignCenter" translate> {{ 'TIME_HELP' }}. </div>
 
 <div class="form-horizontal" ng-show="leadMeetingController.showEstimateParameters">
 	<div class="form-group">
