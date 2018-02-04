@@ -7,7 +7,7 @@
          vm.orgShortName = null;
          vm.addOrganisation = function () {
             console.log("in add organisation");
-            OrganisationFactory.add({name: vm.orgName, shortName: vm.orgShortName})
+            OrganisationFactory.add({name: vm.orgName, shortName: vm.orgShortName, email: vm.email})
             .success(function () {
                $state.go('organisation');
             })
