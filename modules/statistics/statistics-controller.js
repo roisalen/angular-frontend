@@ -1,9 +1,9 @@
 (function() {
-  function statisticsController( StatisticsFactory) {
-    var vm = this;
+  function statisticsController( StatisticsFactory, $scope) {
+    var vm = $scope;
 
          vm.getStatisticsByType = function(sortType, containerId, typeLabel, chartType) {
-            StatisticsFactory.getStatistics(sortType)
+            StatisticsFactory.getStatistics(sortType, createPythonDate(vm.startDate), createPythonDate(vm.endDate))
             .success(function(data) {
 
                var extractedValues = extractValues(data);
@@ -20,12 +20,41 @@
 
 
          };
+         
+         var today = new Date();
 
-         vm.getStatisticsByType('sex', ['firstSexChartContainer', 'secondSexChartContainer'], 'Kjønn', 'pie');
-         vm.getStatisticsByType('group', 'groupChartContainer', 'Fraksjon', 'column');
-         vm.getStatisticsByType('name', 'nameChartContainer', 'Representant', 'column');
+         vm.startDate = ""+ today.getFullYear() + "-" + lpad(""+ (today.getMonth() + 1), "0", 2) + "-" + lpad(""+ today.getDate(), "0", 2);
+         vm.endDate = ""+ today.getFullYear() + "-" + lpad(""+ (today.getMonth() + 1), "0", 2) + "-" + lpad(""+ (today.getDate()+1), "0", 2);
 
+
+         
+
+          
+         vm.getStatistics = function() {
+          vm.getStatisticsByType('sex', ['firstSexChartContainer', 'secondSexChartContainer'], 'Kjønn', 'pie');
+          vm.getStatisticsByType('group', 'groupChartContainer', 'Fraksjon', 'column');
+          vm.getStatisticsByType('name', 'nameChartContainer', 'Representant', 'column');
+         }
+
+         vm.getStatistics()
+
+    
+       
+        
          return vm;
+  }
+
+  function createPythonDate(dateString) {
+    var date = parseInt(dateString.slice(-2))
+    var year = dateString.slice(0, 4)
+    var month = parseInt(dateString.slice(5,-3))-1
+    return lpad(""+date, "0", 2)+"-"+lpad(""+month, "0",2)+"-"+year
+  }
+
+  function lpad(str, padString, length) {
+          while (str.length < length)
+            str = padString + str;
+          return str;
   }
 
   function createPieCharts(data, containerId, typeLabel) {

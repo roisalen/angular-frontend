@@ -1,5 +1,11 @@
 <h1 translate>{{ 'STATISTICS' }}</h1>
 
+<form ng-submit="statisticsController.getStatistics()">
+<input class="display-inline-quarter-width" type="date" ng-model="statisticsController.startDate" />
+<input class="display-inline-quarter-width" type="date" ng-model="statisticsController.endDate"  />
+<button type="submit" style="display: hidden" class="display-hidden" translate>Oppdater</button>
+</form>
+
 <div id="firstSexChartContainer" class="display-inline-half-width"></div>
 <div id="secondSexChartContainer" class="display-inline-half-width"></div>
 <div id="groupChartContainer"></div>
