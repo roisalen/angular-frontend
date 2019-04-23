@@ -1,0 +1,56 @@
+@import url("spuio.bootstrap.min.css");
+
+
+body, h1, h2, .navbar, a {
+  color:#ffffff;
+  background-color:#000000;
+}
+
+select {
+  color: #000;
+}
+
+a,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+  color:#ffffff;
+  text-decoration:none;
+  background-color:#000000;
+}
+
+a:hover,
+a:focus,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+  color:#ffffff;
+  background-color:#000000;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+  color: #ffffff;
+  background-color:#000000;
+}
+
+.btn-danger {
+  background-image: none;
+  background-color: #4F5151;
+  border: 1px solid #4F5151;
+}
+.btn-danger:hover {
+  background-image: none;
+  background-color: #000000;
+  border: 1px solid #fff;
+}
