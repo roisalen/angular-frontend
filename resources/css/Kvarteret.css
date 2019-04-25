@@ -1,7 +1,7 @@
 @import url("spuio.bootstrap.min.css");
 
 
-body, h1, h2, .navbar, a {
+body, h1, h2, .navbar, a, textarea, p {
   color:#ffffff;
   background-color:#000000;
 }
