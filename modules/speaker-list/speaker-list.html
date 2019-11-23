@@ -11,13 +11,13 @@
 				<th translate>{{ 'GROUP' }}</th>
 			</tr>
 		</thead>
-		<tbody ng-repeat="speaker in speakerListController.speakerList">
+		<tbody ng-repeat="speaker in speakerListController.speakerList track by $index">
 			<tr ng-class="{hightlightSpeaker: speaker.speaking}">
 				<td>{{ speaker.number }}</td>
 				<td>{{ speaker.name }}</td>
 				<td>{{ speaker.group }}</td>
 			</tr>
-			<tr ng-repeat="reply in speaker.replies" ng-class="{hightlightSpeaker: reply.speaking}">
+			<tr ng-repeat="reply in speaker.replies track by $index" ng-class="{hightlightSpeaker: reply.speaking}">
 				<td><span class="glyphicon glyphicon-arrow-right"></span> {{ reply.number }}</td>
 				<td>{{ reply.name }}</td>
 				<td>{{ reply.group }}</td>
