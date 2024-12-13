@@ -1,0 +1,346 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import { Container, Form, Button, Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
+import { Stopwatch } from './Stopwatch';
+import { Speaker, Representative } from '../../types/speaker.types';
+import { leadMeetingService } from './services/LeadMeetingService';
+import './LeadMeeting.css';
+
+const LeadMeeting: React.FC = () => {
+  const { t } = useTranslation();
+  const [subjectTitle, setSubjectTitle] = useState('');
+  const [speakerNumber, setSpeakerNumber] = useState('');
+  const [speakerList, setSpeakerList] = useState<Speaker[]>([]);
+  const [representatives, setRepresentatives] = useState<Representative[]>([]);
+  const [message, setMessage] = useState('');
+  const [showEstimateParams, setShowEstimateParams] = useState(false);
+  const [estimateParams, setEstimateParams] = useState({
+    speechLength: 3,
+    replyLength: 1,
+    numberOfReplies: 1
+  });
+  const [doneEstimate, setDoneEstimate] = useState(moment());
+
+  const estimateTime = useCallback(() => {
+    const newEstimate = moment();
+    if (speakerList.length > 0) {
+      newEstimate.add(speakerList.length * estimateParams.speechLength, 'minutes');
+      newEstimate.add(
+        speakerList.length * estimateParams.numberOfReplies * estimateParams.replyLength, 
+        'minutes'
+      );
+    }
+    setDoneEstimate(newEstimate);
+  }, [speakerList.length, estimateParams]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [speakerData, representativesData] = await Promise.all([
+          leadMeetingService.getSpeakerList(),
+          leadMeetingService.getRepresentatives()
+        ]);
+        setSpeakerList(speakerData);
+        setRepresentatives(representativesData);
+        estimateTime();
+      } catch (err) {
+        console.error('Failed to fetch data:', err);
+      }
+    };
+    
+    fetchData();
+    const intervalId = setInterval(fetchData, 1000);
+    
+    return () => clearInterval(intervalId);
+  }, [estimateTime]);
+
+  const handleSubmitSubject = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await leadMeetingService.setSubject(subjectTitle);
+    } catch (err) {
+      console.error('Failed to update subject:', err);
+    }
+  };
+
+  const handleAddSpeaker = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await leadMeetingService.addSpeaker(speakerNumber);
+      setSpeakerNumber('');
+    } catch (err) {
+      console.error('Failed to add speaker:', err);
+    }
+  };
+
+  const handleUpdateMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await leadMeetingService.setMessage(message);
+    } catch (err) {
+      console.error('Failed to update message:', err);
+    }
+  };
+
+  const handleRemoveSpeaker = async (index: number) => {
+    try {
+      await leadMeetingService.removeSpeaker(index);
+    } catch (err) {
+      console.error('Failed to remove speaker:', err);
+    }
+  };
+
+  const handleRemoveReply = async (index: number) => {
+    try {
+      await leadMeetingService.removeReply(index);
+    } catch (err) {
+      console.error('Failed to remove reply:', err);
+    }
+  };
+
+  const handleMoveUp = async (index: number) => {
+    try {
+      await leadMeetingService.moveSpeaker(index, index - 1);
+    } catch (err) {
+      console.error('Failed to move speaker:', err);
+    }
+  };
+
+  const handleMoveDown = async (index: number) => {
+    try {
+      await leadMeetingService.moveSpeaker(index, index + 1);
+    } catch (err) {
+      console.error('Failed to move speaker:', err);
+    }
+  };
+
+  return (
+    <Container>
+      <Form onSubmit={handleSubmitSubject} className="mb-4">
+        <Form.Group className="row">
+          <Form.Label className="col-xs-2">{t('SUBJECT')}</Form.Label>
+          <div className="col-xs-8">
+            <Form.Control
+              type="text"
+              placeholder={t('SUBJECT_PLACEHOLDER')}
+              value={subjectTitle}
+              onChange={(e) => setSubjectTitle(e.target.value)}
+            />
+          </div>
+          <div className="col-xs-2">
+            <Button type="submit">{t('SAVE')}</Button>
+          </div>
+        </Form.Group>
+      </Form>
+
+      <Form onSubmit={handleAddSpeaker} className="mb-4">
+        <Form.Group className="row">
+          <Form.Label className="col-xs-2">{t('ADD_NEXT_SPEAKER')}</Form.Label>
+          <div className="col-xs-8">
+            <Form.Control
+              type="text"
+              placeholder={t('ADD_NEXT_SPEAKER_PLACEHOLDER')}
+              value={speakerNumber}
+              onChange={(e) => setSpeakerNumber(e.target.value)}
+            />
+          </div>
+          <div className="col-xs-2">
+            <Button type="submit">{t('SUBMIT')}</Button>
+          </div>
+        </Form.Group>
+      </Form>
+
+      <div className="timer-container">
+        <div id="stopwatch" className="fontSizeDoubled alignCenter">
+          <Stopwatch delay={1000} />
+        </div>
+        <div id="timeLeft">
+          {t('TIME_LEFT')} {doneEstimate.format("H:mm")}
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              setShowEstimateParams(!showEstimateParams);
+            }}
+          >
+            {showEstimateParams ? t('HIDE_INPUT') : '⚙'}
+          </a>
+        </div>
+      </div>
+
+      {showEstimateParams && (
+        <div className="form-horizontal">
+          <div className="form-group">
+            <Form.Group className="row">
+              <Form.Label className="control-label col-xs-2">{t('SPEECH_LENGTH')}</Form.Label>
+              <div className="col-xs-1">
+                <Form.Control
+                  type="text"
+                  value={estimateParams.speechLength}
+                  onChange={(e) => setEstimateParams({
+                    ...estimateParams,
+                    speechLength: parseInt(e.target.value) || 0
+                  })}
+                />
+              </div>
+            </Form.Group>
+
+            <Form.Group className="row">
+              <Form.Label className="control-label col-xs-3">{t('NUMBER_OF_REPLIES')}</Form.Label>
+              <div className="col-xs-1">
+                <Form.Control
+                  type="text"
+                  value={estimateParams.numberOfReplies}
+                  onChange={(e) => setEstimateParams({
+                    ...estimateParams,
+                    numberOfReplies: parseInt(e.target.value) || 0
+                  })}
+                />
+              </div>
+            </Form.Group>
+
+            <Form.Group className="row">
+              <Form.Label className="control-label col-xs-3">{t('REPLY_LENGTH')}</Form.Label>
+              <div className="col-xs-1">
+                <Form.Control
+                  type="text"
+                  value={estimateParams.replyLength}
+                  onChange={(e) => setEstimateParams({
+                    ...estimateParams,
+                    replyLength: parseInt(e.target.value) || 0
+                  })}
+                />
+              </div>
+            </Form.Group>
+          </div>
+        </div>
+      )}
+
+      {speakerList && speakerList.length > 0 ? (
+        <Table className="borderless">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{t('NAME')}</th>
+              <th>{t('GROUP')}</th>
+              <th>{t('MOVE')}</th>
+              <th>{t('REMOVE')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {speakerList.map((speaker, index) => (
+              <React.Fragment key={speaker.id || index}>
+                <tr className={speaker.speaking ? 'hightlightSpeaker' : ''}>
+                  <td>{speaker.number}</td>
+                  <td>{speaker.name}</td>
+                  <td>{speaker.group}</td>
+                  <td>
+                    {!index && (
+                      <div 
+                        className="cursor-hover" 
+                        onClick={() => handleMoveUp(index)}
+                      >
+                        ↑
+                      </div>
+                    )}
+                    {index !== speakerList.length - 1 && (
+                      <div 
+                        className="cursor-hover" 
+                        onClick={() => handleMoveDown(index)}
+                      >
+                        ↓
+                      </div>
+                    )}
+                  </td>
+                  <td>
+                    <Button 
+                      variant="danger" 
+                      size="sm"
+                      onClick={() => handleRemoveSpeaker(index)}
+                    >
+                      X
+                    </Button>
+                  </td>
+                </tr>
+                {speaker.replies?.map((reply, replyIndex) => (
+                  <tr 
+                    key={`reply-${replyIndex}`}
+                    className={`reply-row ${reply.speaking ? 'hightlightSpeaker' : ''}`}
+                  >
+                    <td>
+                      <span className="glyphicon glyphicon-arrow-right"></span>
+                      {reply.number}
+                    </td>
+                    <td>{reply.name}</td>
+                    <td>{reply.group}</td>
+                    <td></td>
+                    <td>
+                      <Button 
+                        variant="danger" 
+                        size="sm"
+                        onClick={() => handleRemoveReply(replyIndex)}
+                      >
+                        X
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <p>{t('NO_SPEAKERS_ON_LIST')}</p>
+      )}
+
+      <Form onSubmit={handleUpdateMessage} className="form-horizontal">
+        <Form.Group className="row">
+          <Form.Label className="control-label col-xs-2">{t('GENERAL_INFO')}</Form.Label>
+          <div className="col-xs-8">
+            <Form.Control
+              as="textarea"
+              rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <p>{t('GENERAL_INFO_INSTRUCTIONS')}</p>
+          </div>
+          <div className="col-xs-2">
+            <Button type="submit">{t('UPDATE')}</Button>
+          </div>
+        </Form.Group>
+      </Form>
+
+      <p>{t('TERMS_ORGANISATION')}</p>
+
+      <h2>{t('REGISTERED_REPRESENTATIVES')}</h2>
+      {representatives && representatives.length > 0 ? (
+        <Table className="borderless">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{t('NAME')}</th>
+              <th>{t('GROUP')}</th>
+              <th>{t('SEX')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {representatives.map((representative, index) => (
+              <tr key={index}>
+                <td>{representative.number}</td>
+                <td>{representative.name}</td>
+                <td>{representative.group}</td>
+                <td>{representative.sex}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <p>{t('NO_REPRESENTATIVES')}</p>
+      )}
+    </Container>
+  );
+};
+
+export default LeadMeeting; 

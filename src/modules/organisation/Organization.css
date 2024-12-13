@@ -1,0 +1,54 @@
+.page-title {
+  font-size: 2.5rem;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.main-card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.search-input {
+  font-size: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+}
+
+.search-input:focus {
+  border-color: #666666;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.organization-item {
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  color: #000000;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+  background-color: #fff;
+}
+
+.organization-item:hover {
+  background-color: #f8f9fa;
+  color: #666666;
+}
+
+.no-results {
+  font-size: 1.5rem;
+  color: #666666;
+}
+
+/* Make sure buttons maintain the theme */
+.btn-primary {
+  background-color: #000000;
+  border-color: #000000;
+  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #666666;
+  border-color: #666666;
+} 

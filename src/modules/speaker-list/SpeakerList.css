@@ -1,0 +1,31 @@
+.biggerText {
+  padding: 20px;
+}
+
+.info-text {
+  color: black;
+}
+
+.info-text > h1 {
+  font-size: 300%;
+}
+
+.info-text > h2, h3, h4, h5, h6 {
+  font-size: 200%;
+}
+
+.hightlightSpeaker {
+  background-color: #f8f9fa;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.reply-row td:first-child {
+  padding-left: 2rem;
+}
+
+.glyphicon-arrow-right {
+  margin-right: 0.5rem;
+} 
