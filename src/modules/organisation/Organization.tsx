@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Card, ListGroup, Button, Form, Row, Col } from 'react-bootstrap';
+import { Container, Card, Button, Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useOrganization } from '../../context/OrganizationContext';
@@ -24,7 +24,7 @@ const Organization: React.FC = () => {
     const loadOrganizations = async () => {
       try {
         setLoading(true);
-        const data = await organizationService.getAllOrganizations();
+        const data = await organizationService.getOrganizations();
         setOrganizations(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load organizations');

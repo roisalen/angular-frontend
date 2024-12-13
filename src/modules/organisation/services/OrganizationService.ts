@@ -1,19 +1,9 @@
 import { BaseService } from '../../../services/BaseService';
-
-interface Organization {
-  name: string;
-  shortName: string;
-}
+import { Organization } from '../../../types/organization.types';
 
 class OrganizationService extends BaseService {
-  async getOrganization(shortName: string) {
-    const response = await fetch(`${this.baseUrl}/organisations/${shortName}`);
-    return this.handleResponse<Organization>(response);
-  }
-
-  async getAllOrganizations() {
-    const response = await fetch(`${this.baseUrl}/organisations`);
-    return this.handleResponse<Organization[]>(response);
+  async getOrganizations(): Promise<Organization[]> {
+    return this.get<Organization[]>('/organisations', true);
   }
 
   async addOrganization(organization: Organization) {

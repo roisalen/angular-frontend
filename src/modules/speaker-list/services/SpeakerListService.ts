@@ -1,68 +1,33 @@
-import config from '@/config/config';
 import { BaseService } from '../../../services/BaseService';
-import { Speaker } from '../types';
+import { Speaker } from '../../../types/speaker.types';
 
 class SpeakerListService extends BaseService {
-    async getSpeakerList(): Promise<Speaker[]> {
-        const response = await fetch(`${config.apiUrl}/speaker-list`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch speaker list');
-        }
-        return response.json();
-      }
-
-  async nextSpeaker() {
-    const response = await fetch(`${this.baseUrl}/speakerList/0`, {
-      method: 'POST'
-    });
-    return this.handleResponse(response);
+  async getSpeakerList(): Promise<Speaker[]> {
+    return this.get<Speaker[]>('/speakerList');
   }
 
-  async addReplyToFirstSpeaker(replicantNumber: string) {
-    const response = await fetch(`${this.baseUrl}/speakerList/0/replies`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ replicantNumber })
-    });
-    return this.handleResponse(response);
+  async nextSpeaker(): Promise<void> {
+    return this.post('/speakerList/0');
   }
 
-  async removeSpeaker(index: number) {
-    const response = await fetch(`${this.baseUrl}/speakerList/${index}`, {
-      method: 'DELETE'
-    });
-    return this.handleResponse(response);
+  async addReplyToFirstSpeaker(replicantNumber: string): Promise<void> {
+    return this.post('/speakerList/0/replies', { replicantNumber });
   }
 
-  async removeReplicant(index: number) {
-    const response = await fetch(`${this.baseUrl}/speakerList/0/replies/${index}`, {
-      method: 'DELETE'
-    });
-    return this.handleResponse(response);
+  async removeSpeaker(index: number): Promise<void> {
+    return this.delete(`/speakerList/${index}`);
   }
 
-  async addSpeakerToBottom(speakerNumber: string) {
-    const response = await fetch(`${this.baseUrl}/speakerList`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ speakerNumber })
-    });
-    return this.handleResponse(response);
+  async removeReply(index: number): Promise<void> {
+    return this.delete(`/speakerList/0/replies/${index}`);
   }
 
-  async moveSpeaker(start: number, end: number) {
-    const response = await fetch(`${this.baseUrl}/speakerlist/${start}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ newPlace: end })
-    });
-    return this.handleResponse(response);
+  async addSpeaker(speakerNumber: string): Promise<void> {
+    return this.post('/speakerList', { speakerNumber });
+  }
+
+  async moveSpeaker(start: number, end: number): Promise<void> {
+    return this.put(`/speakerList/${start}`, { newPlace: end });
   }
 }
 
