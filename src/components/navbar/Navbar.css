@@ -1,0 +1,70 @@
+/* Base navbar styles */
+.navbar {
+  background-color: #ffffff;
+  padding: 1rem 0;
+}
+
+/* Brand/logo */
+.navbar-brand,
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: #67962E;
+  text-decoration: none;
+  font-size: 1.25rem;
+  padding-right: 2rem;
+}
+
+/* Nav links container */
+.nav-links {
+  margin-left: 1rem;
+}
+
+/* Nav links */
+.nav-link,
+.dropdown-toggle,
+.dropdown-item {
+  color: #67962E !important;
+  text-decoration: none;
+  padding: 0.5rem 1rem !important;
+  font-size: 1.1rem;
+}
+
+/* Hover states */
+.nav-link:hover,
+.nav-link:focus,
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-item:hover,
+.dropdown-item:focus,
+.nav-link.active {
+  color: #A2B424 !important;
+  background-color: transparent;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  margin-top: 0.5rem;
+}
+
+/* Active states */
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #A2B424 !important;
+  background-color: transparent;
+}
+
+/* Toggle button for mobile */
+.navbar-toggler {
+  border-color: #67962E;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(103, 150, 46, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Language selector positioning */
+.navbar-collapse {
+  justify-content: space-between;
+} 

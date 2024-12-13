@@ -4,6 +4,9 @@
 
    function organisationController (OrganisationFactory, speakerAppSettings, $window, $rootScope, $scope, $http) {
    		var vm = $scope;
+         vm.selectedOrg = "name";
+         vm.orgNames = ["name", "torkil"];
+         vm.organisations = [];
 
 			// remove organisationspecific css if we returned from an organisation
 			if (document.getElementById("orgcss") != null) {
@@ -38,9 +41,9 @@
 
          function checkIfOrgsHaveLogoAndSetOnVM(data) {
             vm.organisations = data;
-            for (organisationIndex in data) {
+            /*for (organisationIndex in data) {
                checkIfOrgHasLogo(data[organisationIndex]);
-            }
+            }*/
             
          }
 

@@ -1,114 +1,21 @@
 <!DOCTYPE html>
-<html ng-app="speakerApp">
+<html lang="en">
 <head>
 	<title>Ro i salen</title>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- bootstrap and own our own css -->
-	<!-- default css -->
+	<!-- Existing CSS -->
 	<link href="resources/css/spuio.bootstrap.min.css" type="text/css" rel="stylesheet" />
 	<link href="resources/css/styles.css" type="text/css" rel="stylesheet" />
-	<link href="modules/organisation/organisation.css" rel="stylesheet" />
-	<link href="modules/speaker-list/speaker-list.css" rel="stylesheet" />
-	<link href="modules/lead-meeting/lead-meeting.css" rel="stylesheet" />
 	<link rel="shortcut icon" href="/favicon.ico">
-	
 
-	<script src="node_modules/marked/lib/marked.js"></script>
-	
-	<!-- angular with router -->
-	<script src="modules/js-libs/angular.min.js"></script>
-	<script src="modules/js-libs/angular-ui-router.min.js"></script>
-	<script src="node_modules/angular-md/dist/angular-md.min.js"></script>
-
-	<!-- csv to array -->
-	<script src="modules/admin-representatives/csvToArray.v2.1.js"></script>
-
-	<!-- stopwatch -->
-	<script src="modules/lead-meeting/stopwatch.js"></script>
-	<script src="modules/lead-meeting/moment.js"></script>
-
-	<!-- highcharts -->
-	<script src="modules/statistics/highcharts.js"></script>
-	
-	<!-- we'll need jquery -->
-	<script src="modules/js-libs/jquery.min.js"></script>
-	
-	<!-- aand the bootstrap js -->
-	<script src="modules/js-libs/bootstrap.min.js"></script>
-
-	<!-- Translate -->
-	<script src="modules/internationalization/translations.js"></script>
-	<script src="modules/js-libs/angular-sanitize.min.js"></script>
-	<script src="modules/js-libs/angular-translate.min.js"></script>
-
-	<!-- our angular stuff -->
-	<script src="modules/speakerApp.js"></script>
-
-	<!-- factories -->
-	<script src="modules/organisation/organisation-factory.js"></script>
-	<script src="modules/speaker-list/speaker-list-factory.js"></script>
-	<script src="modules/admin-representatives/admin-representatives-factory.js"></script>
-	<script src="modules/subject/subject-factory.js"></script>
-	<script src="modules/statistics/statistics-factory.js"></script>
-
-	<!-- controllers -->
-	<script src="modules/internationalization/language-controller.js"></script>
-	<script src="modules/speaker-list/speaker-list-controller.js"></script>
-	<script src="modules/admin-representatives/admin-representatives-controller.js"></script>
-	<script src="modules/statistics/statistics-controller.js"></script>
-	<script src="modules/organisation/organisation-controller.js"></script>
-	<script src="modules/organisation/add-organisation-controller.js"></script>
-	<script src="modules/lead-meeting/lead-meeting-controller.js"></script>
+	<!-- React will handle module-specific CSS through imports -->
 </head>
 <body>
+	<div id="root"></div>
 
-<div class="navbar navbar-default navbar-static-top">
-	<div class="navbar-inner">
-		<div class="container">
-			<div>
-				<a ui-sref="organisation" class="navbar-brand">
-					{{ organization_name }}
-					<span class="glyphicon glyphicon-bullhorn"></span>
-				</a>
-			</div>
-
-			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-
-			<div class="collapse navbar-collapse navHeaderCollapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li ng-class="{active: $state.includes('speaker-list')}">
-						<a ui-sref="speaker-list" translate>{{ 'SPEAKER_LIST' }}</a>
-					</li>
-					<li ng-class="{active: $state.includes('admin-representatives')}">
-						<a ui-sref="admin-representatives" translate>{{ 'ADMIN_REPRESENTATIVES' }}</a>
-					</li>
-					<li ng-class="{active: $state.includes('lead-meeting')}">
-						<a ui-sref="lead-meeting" translate>{{ 'LEAD_MEETING' }}</a>
-					</li>
-					<li ng-class="{active: $state.includes('statistics')}">
-						<a ui-sref="statistics" translate>{{ 'STATISTICS' }}</a>
-					</li>
-					<li class="menuDropdown" ng-controller="languageController as ctrl">
-						<select ng-options="language | translate for language in ctrl.languages" ng-model="ctrl.language" ng-change="ctrl.updateLanguage()"></select>
-					</li>
-				</ul>
-
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="container">
-
-	<!-- ui-router loads partials in this div -->
-	<div ui-view></div>
-
-</div>
-
+	<!-- Bundle will be injected here by your build tool -->
+	<script type="module" src="/src/index.tsx"></script>
 </body>
 </html>

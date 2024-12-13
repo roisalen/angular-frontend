@@ -11,7 +11,8 @@
 		'speakerAppFactories',
 		'yaru22.md',
 		'pascalprecht.translate',
-		'ngSanitize'
+		'ngSanitize',
+		'mgcrea.ngStrap'
 	]);
 
 	// add app constants

@@ -8,6 +8,7 @@
 	    function getSpeakerListAndSubject() {
 	    	SpeakerListFactory.getSpeakerListFromServer()
 		    .success(function(data) {
+				console.log(data)
 		    	vm.speakerList = data;
 		    })
 		    .error(function() {

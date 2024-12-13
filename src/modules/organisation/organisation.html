@@ -1,0 +1,21 @@
+<h1><span class="glyphicon glyphicon-bullhorn"></span> Ro <span class="name-i">i</span> salen</h1>
+
+<ul ng-controller="organisationController" class="organisations-chooser">
+	<input type="text" class="form-control" ng-model="organisationController.orgNames[0]" ng-options="org.name for org in organisationController.organisations" placeholder="Skriv organisasjon" data-onSelect="organisationController.chooseOrganisation(organisation)" bs-typeahead>
+	<li class="new-organisation" ui-sref='add-organisation' translate> <div class="add-icon">+</div> {{ 'ADD_ORGANISATION' }}</a></li>
+	<hr/>
+
+
+	<li class="organisation" ng-repeat="organisation in organisationController.organisations" ng-click="organisationController.chooseOrganisation(organisation)">{{organisation.name}}</li>
+	
+</ul>
+
+<h2 translate>{{ 'ABOUT_HEADER' }}</h2>
+<p translate>{{ 'ABOUT_P_1' }}</p>
+<ul>
+<li translate>{{ 'ABOUT_LIST_1' }}</li>
+<li translate>{{ 'ABOUT_LIST_2' }}</li>
+<li translate>{{ 'ABOUT_LIST_3' }}</li>
+<li translate>{{ 'ABOUT_LIST_4' }}</li>
+</ul> 
+<p translate>{{ 'ABOUT_P_2' }}</p>
