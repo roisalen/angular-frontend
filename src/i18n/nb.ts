@@ -24,5 +24,22 @@ export const translationsNB = {
   REPLIES: 'Replikker',
   ERROR_OCCURRED: 'En feil oppstod',
   ORGANIZATION_NOT_FOUND: 'Organisasjonen ble ikke funnet',
-  BACK_TO_HOME: 'Tilbake til forsiden'
+  BACK_TO_HOME: 'Tilbake til forsiden',
+  SUBJECT: 'Sakstittel',
+  SUBJECT_PLACEHOLDER: 'Skriv inn sakstittel..',
+  ADD_NEXT_SPEAKER: 'Legg til/Neste taler',
+  ADD_NEXT_SPEAKER_PLACEHOLDER: 'Ny taler: Skriv talenummer. Replikk: Skriv r+talenummer. Neste taler/replikk: Trykk enter i tomt felt',
+  SUBMIT: 'Legg til',
+  TIME_LEFT: 'Ferdig ca.',
+  HIDE_INPUT: 'Skjul inputt',
+  SPEECH_LENGTH: 'Snittlengde innlegg',
+  NUMBER_OF_REPLIES: 'Snitt antall replikker',
+  REPLY_LENGTH: 'Snittlengde replikk',
+  SEX: 'Kjønn',
+  MOVE: 'Flytt',
+  GENERAL_INFO: 'Beskjeder og info',
+  GENERAL_INFO_INSTRUCTIONS: 'Dette feltet vises under talelista. Støttar <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a>',
+  UPDATE: 'Oppdatér',
+  REGISTERED_REPRESENTATIVES: 'Registrerte representanter',
+  NO_REPRESENTATIVES: 'Ingen registrerte representanter'
 }; 

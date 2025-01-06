@@ -14,7 +14,7 @@ class SpeakerListService extends BaseService {
     return this.post('/speakerList/0/replies', { replicantNumber });
   }
 
-  async removeSpeaker(index: number): Promise<void> {
+  async removeSpeaker(index: number): Promise<Speaker[]> {
     return this.delete(`/speakerList/${index}`);
   }
 

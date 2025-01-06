@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Form, Button, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { Stopwatch } from './Stopwatch';
-import { Speaker, Representative } from '../../types/speaker.types';
+import { speakerListService } from '../speaker-list/services/SpeakerListService';
 import { leadMeetingService } from './services/LeadMeetingService';
-import './LeadMeeting.css';
+import { useOrganization } from '../../context/OrganizationContext';
+import { Speaker } from '../../types/speaker.types';
 
 const LeadMeeting: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { organizationName } = useOrganization();
   const [subjectTitle, setSubjectTitle] = useState('');
   const [speakerNumber, setSpeakerNumber] = useState('');
   const [speakerList, setSpeakerList] = useState<Speaker[]>([]);
@@ -21,6 +25,34 @@ const LeadMeeting: React.FC = () => {
     numberOfReplies: 1
   });
   const [doneEstimate, setDoneEstimate] = useState(moment());
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!organizationName) {
+      navigate('/');
+      return;
+    }
+
+    const loadInitialData = async () => {
+      try {
+        const [speakerData, subjectData, messageData] = await Promise.all([
+          speakerListService.getSpeakerList(),
+          leadMeetingService.getSubject(),
+          leadMeetingService.getMessage()
+        ]);
+
+        setSpeakerList(speakerData);
+        setSubjectTitle(subjectData);
+        setMessage(messageData);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load data');
+      }
+    };
+
+    loadInitialData();
+    const intervalId = setInterval(loadInitialData, 5000);
+    return () => clearInterval(intervalId);
+  }, [organizationName, navigate]);
 
   const estimateTime = useCallback(() => {
     const newEstimate = moment();
@@ -34,27 +66,6 @@ const LeadMeeting: React.FC = () => {
     setDoneEstimate(newEstimate);
   }, [speakerList.length, estimateParams]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [speakerData, representativesData] = await Promise.all([
-          leadMeetingService.getSpeakerList(),
-          leadMeetingService.getRepresentatives()
-        ]);
-        setSpeakerList(speakerData);
-        setRepresentatives(representativesData);
-        estimateTime();
-      } catch (err) {
-        console.error('Failed to fetch data:', err);
-      }
-    };
-    
-    fetchData();
-    const intervalId = setInterval(fetchData, 1000);
-    
-    return () => clearInterval(intervalId);
-  }, [estimateTime]);
-
   const handleSubmitSubject = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -67,10 +78,19 @@ const LeadMeeting: React.FC = () => {
   const handleAddSpeaker = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await leadMeetingService.addSpeaker(speakerNumber);
+      if (!speakerNumber) {
+        const updatedList = await speakerListService.nextSpeaker();
+        setSpeakerList(updatedList);
+      } else if (speakerNumber.charAt(0) === 'r') {
+        const updatedList = await speakerListService.addReply(speakerNumber.slice(1));
+        setSpeakerList(updatedList);
+      } else {
+        const updatedList = await speakerListService.addSpeaker(speakerNumber);
+        setSpeakerList(updatedList);
+      }
       setSpeakerNumber('');
     } catch (err) {
-      console.error('Failed to add speaker:', err);
+      setError(err instanceof Error ? err.message : 'Failed to add speaker');
     }
   };
 
@@ -85,33 +105,37 @@ const LeadMeeting: React.FC = () => {
 
   const handleRemoveSpeaker = async (index: number) => {
     try {
-      await leadMeetingService.removeSpeaker(index);
+      const updatedList = await speakerListService.removeSpeaker(index);
+      setSpeakerList(updatedList);
     } catch (err) {
-      console.error('Failed to remove speaker:', err);
+      setError(err instanceof Error ? err.message : 'Failed to remove speaker');
     }
   };
 
   const handleRemoveReply = async (index: number) => {
     try {
-      await leadMeetingService.removeReply(index);
+      const updatedList = await speakerListService.removeReply(index);
+      setSpeakerList(updatedList);
     } catch (err) {
-      console.error('Failed to remove reply:', err);
+      setError(err instanceof Error ? err.message : 'Failed to remove reply');
     }
   };
 
   const handleMoveUp = async (index: number) => {
     try {
-      await leadMeetingService.moveSpeaker(index, index - 1);
+      const updatedList = await speakerListService.moveSpeaker(index, index - 1);
+      setSpeakerList(updatedList);
     } catch (err) {
-      console.error('Failed to move speaker:', err);
+      setError(err instanceof Error ? err.message : 'Failed to move speaker');
     }
   };
 
   const handleMoveDown = async (index: number) => {
     try {
-      await leadMeetingService.moveSpeaker(index, index + 1);
+      const updatedList = await speakerListService.moveSpeaker(index, index + 1);
+      setSpeakerList(updatedList);
     } catch (err) {
-      console.error('Failed to move speaker:', err);
+      setError(err instanceof Error ? err.message : 'Failed to move speaker');
     }
   };
 

@@ -10,6 +10,7 @@ import LanguageSelector from './modules/internationalization/LanguageSelector';
 import ErrorPage from './components/error/ErrorPage';
 import config from './config/config';
 import './components/navbar/Navbar.css';
+import LeadMeeting from './modules/lead-meeting/LeadMeeting';
 
 const App: React.FC = () => {
   const { t } = useTranslation();
@@ -52,7 +53,7 @@ const App: React.FC = () => {
           <Route path="/:shortName" element={<OrganizationLoader />}>
             <Route path="speaker-list" element={<SpeakerList />} />
             <Route path="admin-representatives" element={<div>Admin Representatives</div>} />
-            <Route path="lead-meeting" element={<div>Lead Meeting</div>} />
+            <Route path="lead-meeting" element={<LeadMeeting />} />
             <Route path="statistics" element={<div>Statistics</div>} />
           </Route>
         </Routes>
