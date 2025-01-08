@@ -1,20 +1,13 @@
 import { BaseService } from '../../../services/BaseService';
-import { Organization } from '../../../types/organization.types';
+import { Organization } from '../types';
 
 class OrganizationService extends BaseService {
   async getOrganizations(): Promise<Organization[]> {
-    return this.get<Organization[]>('/organisations', true);
+    return this.get<Organization[]>('/organisations', false);
   }
 
-  async addOrganization(organization: Organization) {
-    const response = await fetch(`${this.baseUrl}/organisations`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(organization)
-    });
-    return this.handleResponse<Organization>(response);
+  async addOrganization(organization: Organization): Promise<Organization> {
+    return this.post<Organization>('/organisations', organization);
   }
 }
 

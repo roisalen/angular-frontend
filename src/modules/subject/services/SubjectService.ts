@@ -1,36 +1,24 @@
 import { BaseService } from '../../../services/BaseService';
+import DOMPurify from 'dompurify';
 
 class SubjectService extends BaseService {
-  async getSubjectTitle() {
-    const response = await fetch(`${this.baseUrl}/subject/title`);
-    return this.handleResponse<string>(response);
+  async getSubject() {
+    const response = await this.get<string>('/subject');
+    return DOMPurify.sanitize(response);
   }
 
   async getMessage() {
-    const response = await fetch(`${this.baseUrl}/subject/message`);
-    return this.handleResponse<string>(response);
+    const response = await this.get<string>('/message');
+    return DOMPurify.sanitize(response);
   }
 
-  async setSubjectTitle(title: string) {
-    const response = await fetch(`${this.baseUrl}/subject/title`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ title })
-    });
-    return this.handleResponse(response);
+  async setSubject(subject: string) {
+    return this.post('/subject', { subject });
   }
 
   async setMessage(message: string) {
-    const response = await fetch(`${this.baseUrl}/subject/message`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ message })
-    });
-    return this.handleResponse(response);
+    const sanitizedMessage = DOMPurify.sanitize(message);
+    return this.post('/message', { message: sanitizedMessage });
   }
 }
 

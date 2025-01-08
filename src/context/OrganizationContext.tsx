@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import { BaseService } from '../services/BaseService';
 
 interface OrganizationContextType {
   organizationName: string | null;
   shortName: string | null;
   setOrganization: (org: { name: string; shortName: string }) => void;
-  clearOrganization: () => void;
 }
 
 const OrganizationContext = createContext<OrganizationContextType | undefined>(undefined);
@@ -16,25 +16,11 @@ export const OrganizationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const setOrganization = (org: { name: string; shortName: string }) => {
     setOrganizationName(org.name);
     setShortName(org.shortName);
-    localStorage.setItem('organizationShortName', org.shortName);
+    BaseService.setOrganization(org.shortName);
   };
-
-  const clearOrganization = () => {
-    setOrganizationName(null);
-    setShortName(null);
-    localStorage.removeItem('organizationShortName');
-  };
-
-  useEffect(() => {
-    const storedShortName = localStorage.getItem('organizationShortName');
-    if (storedShortName) {
-      // Optionally: Fetch full organization details here
-      setShortName(storedShortName);
-    }
-  }, []);
 
   return (
-    <OrganizationContext.Provider value={{ organizationName, shortName, setOrganization, clearOrganization }}>
+    <OrganizationContext.Provider value={{ organizationName, shortName, setOrganization }}>
       {children}
     </OrganizationContext.Provider>
   );

@@ -3,9 +3,9 @@ import { Container, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useOrganization } from '../../context/OrganizationContext';
-import { Speaker } from '../../types/speaker.types';
+import { Speaker } from './types';
 import { speakerListService } from './services/SpeakerListService';
-import config from '../../config/config';
+import { subjectService } from '../subject/services/SubjectService';
 import './SpeakerList.css';
 
 const SpeakerList: React.FC = () => {
@@ -14,6 +14,7 @@ const SpeakerList: React.FC = () => {
   const { organizationName } = useOrganization();
   const [speakerList, setSpeakerList] = useState<Speaker[]>([]);
   const [message, setMessage] = useState<string>('');
+  const [subjectTitle, setSubjectTitle] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
 
   // Redirect if no organization is selected
@@ -28,27 +29,15 @@ const SpeakerList: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        const [speakerData, messageResponse] = await Promise.all([
+        const [speakerData, messageData, subjectData] = await Promise.all([
           speakerListService.getSpeakerList(),
-          fetch(`${config.apiUrl}/message`)
+          subjectService.getMessage(),
+          subjectService.getSubject()
         ]);
 
-        if (messageResponse.ok) {
-          const messageText = await messageResponse.text();
-          if (messageText) {
-            try {
-              const messageData = JSON.parse(messageText);
-              setMessage(messageData || '');
-            } catch (parseError) {
-              console.warn('Failed to parse message:', parseError);
-              setMessage('');
-            }
-          } else {
-            setMessage('');
-          }
-        }
-
-        setSpeakerList(speakerData as Speaker[]);
+        setSpeakerList(speakerData);
+        setMessage(messageData || '');
+        setSubjectTitle(subjectData || '');
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
         clearInterval(intervalId);
@@ -83,6 +72,8 @@ const SpeakerList: React.FC = () => {
 
   return (
     <div className="biggerText">
+      {subjectTitle && <h1>{subjectTitle}</h1>}
+      
       {speakerList && speakerList.length > 0 ? (
         <Table>
           <thead>

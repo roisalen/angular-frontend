@@ -1,64 +1,74 @@
 import config from '../config/config';
 
-export class BaseService {
+export abstract class BaseService {
   protected baseUrl: string;
+  private static organization: string | null = null;
 
   constructor() {
     this.baseUrl = config.apiUrl;
+  }
+
+  protected getOrganization(): string | null {
+    return BaseService.organization;
+  }
+
+  public static setOrganization(org: string | null) {
+    BaseService.organization = org;
+  }
+
+  protected getHeaders(contentType = true): HeadersInit {
+    const headers: HeadersInit = {
+      'X-organisation': this.getOrganization() || ''
+    };
+
+    if (contentType) {
+      headers['Content-Type'] = 'application/json';
+    }
+
+    return headers;
+  }
+
+  protected async get<T>(url: string, useHeaders = true): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${url}`, {
+      headers: useHeaders ? this.getHeaders(false) : undefined
+    });
+    return this.handleResponse<T>(response);
+  }
+
+  protected async post<T>(url: string, body: any): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${url}`, {
+      method: 'POST',
+      headers: this.getHeaders(),
+      body: JSON.stringify(body)
+    });
+    return this.handleResponse<T>(response);
+  }
+
+  protected async put<T>(url: string, body: any): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${url}`, {
+      method: 'PUT',
+      headers: this.getHeaders(),
+      body: JSON.stringify(body)
+    });
+    return this.handleResponse<T>(response);
+  }
+
+  protected async delete<T>(url: string): Promise<T> {
+    const response = await fetch(`${this.baseUrl}${url}`, {
+      method: 'DELETE',
+      headers: this.getHeaders(false)
+    });
+    return this.handleResponse<T>(response);
   }
 
   protected async handleResponse<T>(response: Response): Promise<T> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return response.json();
-  }
-
-  protected getHeaders(skipOrganization = false): HeadersInit {
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
-    };
-
-    if (!skipOrganization) {
-      const shortName = localStorage.getItem('organizationShortName');
-      if (shortName) {
-        headers['X-organisation'] = shortName;
-      }
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      return response.json();
     }
-
-    return headers;
-  }
-
-  protected async get<T>(endpoint: string, skipOrganization = false): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      headers: this.getHeaders(skipOrganization)
-    });
-    return this.handleResponse<T>(response);
-  }
-
-  protected async post<T>(endpoint: string, body?: any): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'POST',
-      headers: this.getHeaders(),
-      body: body ? JSON.stringify(body) : undefined
-    });
-    return this.handleResponse<T>(response);
-  }
-
-  protected async put<T>(endpoint: string, body?: any): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'PUT',
-      headers: this.getHeaders(),
-      body: body ? JSON.stringify(body) : undefined
-    });
-    return this.handleResponse<T>(response);
-  }
-
-  protected async delete<T>(endpoint: string): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'DELETE',
-      headers: this.getHeaders()
-    });
-    return this.handleResponse<T>(response);
+    return response.text() as unknown as T;
   }
 } 

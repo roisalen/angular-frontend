@@ -3,11 +3,13 @@ import { Container, Form, Button, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import parse from 'html-react-parser'; 
 import { Stopwatch } from './Stopwatch';
 import { speakerListService } from '../speaker-list/services/SpeakerListService';
-import { leadMeetingService } from './services/LeadMeetingService';
+import { subjectService } from '../subject/services/SubjectService';
 import { useOrganization } from '../../context/OrganizationContext';
 import { Speaker } from '../../types/speaker.types';
+import { representativeService } from '../admin-representatives/services/RepresentativeService';
 
 const LeadMeeting: React.FC = () => {
   const { t } = useTranslation();
@@ -35,15 +37,17 @@ const LeadMeeting: React.FC = () => {
 
     const loadInitialData = async () => {
       try {
-        const [speakerData, subjectData, messageData] = await Promise.all([
+        const [speakerData, subjectData, messageData, representativesData] = await Promise.all([
           speakerListService.getSpeakerList(),
-          leadMeetingService.getSubject(),
-          leadMeetingService.getMessage()
+          subjectService.getSubject(),
+          subjectService.getMessage(),
+          representativeService.getRepresentatives()
         ]);
 
         setSpeakerList(speakerData);
         setSubjectTitle(subjectData);
         setMessage(messageData);
+        setRepresentatives(representativesData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load data');
       }
@@ -53,6 +57,30 @@ const LeadMeeting: React.FC = () => {
     const intervalId = setInterval(loadInitialData, 5000);
     return () => clearInterval(intervalId);
   }, [organizationName, navigate]);
+
+  const loadSpeakerList = useCallback(async () => {
+    try {
+      const data = await speakerListService.getSpeakerList();
+      setSpeakerList(data);
+      estimateTime(); // Call estimate time when speaker list updates
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load speaker list');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!organizationName) {
+      navigate('/');
+      return;
+    }
+
+    // Initial load
+    loadSpeakerList();
+
+    // Set up polling
+    const intervalId = setInterval(loadSpeakerList, 5000);
+    return () => clearInterval(intervalId);
+  }, [organizationName, navigate, loadSpeakerList]);
 
   const estimateTime = useCallback(() => {
     const newEstimate = moment();
@@ -69,9 +97,9 @@ const LeadMeeting: React.FC = () => {
   const handleSubmitSubject = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await leadMeetingService.setSubject(subjectTitle);
+      await subjectService.setSubject(subjectTitle);
     } catch (err) {
-      console.error('Failed to update subject:', err);
+      setError(err instanceof Error ? err.message : 'Failed to update subject');
     }
   };
 
@@ -97,9 +125,9 @@ const LeadMeeting: React.FC = () => {
   const handleUpdateMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await leadMeetingService.setMessage(message);
+      await subjectService.setMessage(message);
     } catch (err) {
-      console.error('Failed to update message:', err);
+      setError(err instanceof Error ? err.message : 'Failed to update message');
     }
   };
 
@@ -137,6 +165,10 @@ const LeadMeeting: React.FC = () => {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to move speaker');
     }
+  };
+
+  const renderMessage = (text: string) => {
+    return parse(text);
   };
 
   return (
@@ -328,7 +360,7 @@ const LeadMeeting: React.FC = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <p>{t('GENERAL_INFO_INSTRUCTIONS')}</p>
+            <p>{renderMessage(t('GENERAL_INFO_INSTRUCTIONS'))}</p>
           </div>
           <div className="col-xs-2">
             <Button type="submit">{t('UPDATE')}</Button>
@@ -336,7 +368,7 @@ const LeadMeeting: React.FC = () => {
         </Form.Group>
       </Form>
 
-      <p>{t('TERMS_ORGANISATION')}</p>
+      <p>{renderMessage(t('TERMS_ORGANISATION'))}</p>
 
       <h2>{t('REGISTERED_REPRESENTATIVES')}</h2>
       {representatives && representatives.length > 0 ? (
