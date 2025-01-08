@@ -11,6 +11,8 @@ import ErrorPage from './components/error/ErrorPage';
 import config from './config/config';
 import './components/navbar/Navbar.css';
 import LeadMeeting from './modules/lead-meeting/LeadMeeting';
+import AdminRepresentatives from './modules/admin-representatives/AdminRepresentatives';
+import Statistics from './modules/statistics/Statistics';
 
 const App: React.FC = () => {
   const { t } = useTranslation();
@@ -52,9 +54,9 @@ const App: React.FC = () => {
           <Route path="/add-organisation" element={<AddOrganization />} />
           <Route path="/:shortName" element={<OrganizationLoader />}>
             <Route path="speaker-list" element={<SpeakerList />} />
-            <Route path="admin-representatives" element={<div>Admin Representatives</div>} />
+            <Route path="admin-representatives" element={<AdminRepresentatives />} />
             <Route path="lead-meeting" element={<LeadMeeting />} />
-            <Route path="statistics" element={<div>Statistics</div>} />
+            <Route path="statistics" element={<Statistics />} />
           </Route>
         </Routes>
       </Container>

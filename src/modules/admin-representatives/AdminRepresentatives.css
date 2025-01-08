@@ -1,0 +1,30 @@
+.help {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+pre {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.form-horizontal {
+  margin-top: 2rem;
+}
+
+.text-right {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.table td {
+  vertical-align: middle;
+} 

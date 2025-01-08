@@ -11,27 +11,25 @@ const LanguageSelector: React.FC = () => {
   };
 
   return (
-    <Dropdown>
+    <Dropdown align="end">
       <Dropdown.Toggle 
         variant="link" 
         id="language-selector"
-        className="navbar-nav nav-link"
+        className="nav-link"
       >
-        {i18n.language === 'nb' ? 'Bokmål' : 'Nynorsk'}
+        {i18n.language === 'nb' ? 'Bokmål' : 'Nynorsk'} ▼
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
         <Dropdown.Item 
           onClick={() => changeLanguage('nb')}
           active={i18n.language === 'nb'}
-          className="navbar-nav nav-link"
         >
           Bokmål
         </Dropdown.Item>
         <Dropdown.Item 
           onClick={() => changeLanguage('nn')}
           active={i18n.language === 'nn'}
-          className="navbar-nav nav-link"
         >
           Nynorsk
         </Dropdown.Item>
