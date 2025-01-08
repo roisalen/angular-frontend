@@ -8,8 +8,9 @@ import { Stopwatch } from './Stopwatch';
 import { speakerListService } from '../speaker-list/services/SpeakerListService';
 import { subjectService } from '../subject/services/SubjectService';
 import { useOrganization } from '../../context/OrganizationContext';
-import { Speaker } from '../../types/speaker.types';
 import { representativeService } from '../admin-representatives/services/RepresentativeService';
+import { Representative } from '../admin-representatives/types';
+import { Speaker } from '../speaker-list/types';  
 
 const LeadMeeting: React.FC = () => {
   const { t } = useTranslation();
@@ -170,6 +171,16 @@ const LeadMeeting: React.FC = () => {
   const renderMessage = (text: string) => {
     return parse(text);
   };
+
+  if (error) {
+    return (
+      <Container className="mt-5">
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      </Container>
+    );
+  }
 
   return (
     <Container>
